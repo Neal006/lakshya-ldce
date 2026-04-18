@@ -79,14 +79,26 @@ SESSION_TIMEOUT = int(os.getenv("SESSION_TIMEOUT_SECONDS", "300"))
 MAX_TURNS = int(os.getenv("MAX_TURNS", "4"))
 
 
+_internet_cache: dict = {"available": None, "checked_at": 0.0}
+
+
 async def is_internet_available() -> bool:
     if NETWORK_MODE == "offline":
         return False
     if NETWORK_MODE == "online":
         return True
+
+    import time
+    now = time.time()
+    if _internet_cache["checked_at"] + 30 > now and _internet_cache["available"] is not None:
+        return _internet_cache["available"]
+
     try:
         import httpx
-        response = await httpx.AsyncClient(timeout=2.0).get(f"{GROQ_BASE_URL}/models")
-        return response.status_code == 200
+        async with httpx.AsyncClient(timeout=2.0) as client:
+            response = await client.get(f"{GROQ_BASE_URL}/models")
+            _internet_cache["available"] = response.status_code == 200
     except Exception:
-        return False
+        _internet_cache["available"] = False
+    _internet_cache["checked_at"] = now
+    return _internet_cache["available"]

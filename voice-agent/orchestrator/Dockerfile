@@ -9,13 +9,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy piper voices directory if available
-COPY ../piper/voices /app/piper/voices 2>/dev/null || true
-
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
+
+# Piper voices are mounted as a volume in docker-compose.yml
 
 EXPOSE 8000
 

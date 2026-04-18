@@ -14,7 +14,7 @@ async def synthesize(text: str, voice: str = None) -> bytes:
         communicator = edge_tts.Communicate(text, voice_name)
         audio_buffer = bytearray()
         async for chunk in communicator.stream():
-            if chunk["type"] == edge_tts.AudioChunk:
+            if chunk["type"] == "audio":
                 audio_buffer.extend(chunk["data"])
         return bytes(audio_buffer)
     except Exception as e:

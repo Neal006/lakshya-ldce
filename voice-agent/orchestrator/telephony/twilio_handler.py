@@ -8,6 +8,7 @@ from fastapi.responses import Response
 from config import TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, PUBLIC_HOST, SESSION_TIMEOUT
 from pipeline.session import SessionManager, CallSession, SessionState
 from pipeline.coordinator import PipelineCoordinator
+from telephony.barge_in import BargeInDetector
 
 logger = logging.getLogger(__name__)
 
@@ -37,6 +38,8 @@ async def twilio_media_stream(websocket: WebSocket):
     call_sid = None
     session = None
     audio_buffer = bytearray()
+    barge_in = BargeInDetector()
+    is_sending_tts = False
 
     try:
         while True:
@@ -58,6 +61,17 @@ async def twilio_media_stream(websocket: WebSocket):
                 from telephony.audio_utils import decode_twilio_audio, encode_twilio_audio, pcm16_to_float32
 
                 inbound_audio = decode_twilio_audio(data["media"]["payload"])
+                inbound_float = pcm16_to_float32(inbound_audio)
+
+                # Check for barge-in: user speaking while TTS is playing
+                barge_in.set_tts_playing(is_sending_tts)
+                if barge_in.process_inbound(inbound_float):
+                    logger.info(f"Barge-in detected for {call_sid}")
+                    is_sending_tts = False
+                    audio_buffer.clear()
+                    # Don't process the interrupted audio — wait for next chunk
+                    continue
+
                 audio_buffer.extend(inbound_audio)
 
                 # Accumulate ~2 seconds of audio before processing
@@ -83,13 +97,16 @@ async def twilio_media_stream(websocket: WebSocket):
                                 from tts import synthesize_speech
                                 audio_pcm = await synthesize_speech(result["tts_text"])
                                 if audio_pcm:
+                                    is_sending_tts = True
                                     twilio_payload = encode_twilio_audio(audio_pcm)
                                     await websocket.send_text(json.dumps({
                                         "event": "media",
                                         "media": {"payload": twilio_payload}
                                     }))
+                                    is_sending_tts = False
                             except Exception as e:
                                 logger.error(f"TTS error: {e}")
+                                is_sending_tts = False
 
                     audio_buffer.clear()
 

@@ -1,7 +1,9 @@
 import httpx
 import json
+import time
 import logging
 from config import GROQ_API_KEY, GROQ_MODEL, GROQ_BASE_URL, OLLAMA_BASE_URL, OLLAMA_MODEL, PRIMARY_LLM, NETWORK_MODE
+from agents.http_pool import get_client
 
 logger = logging.getLogger(__name__)
 
@@ -13,17 +15,17 @@ async def is_groq_available() -> bool:
         return False
     if not GROQ_API_KEY:
         return False
-    import time
     now = time.time()
     if _llm_status["last_check"] + 60 > now and _llm_status["groq_available"] is not None:
         return _llm_status["groq_available"]
     try:
-        async with httpx.AsyncClient(timeout=3.0) as client:
-            r = await client.get(
-                f"{GROQ_BASE_URL}/models",
-                headers={"Authorization": f"Bearer {GROQ_API_KEY}"},
-            )
-            _llm_status["groq_available"] = r.status_code == 200
+        client = get_client()
+        r = await client.get(
+            f"{GROQ_BASE_URL}/models",
+            headers={"Authorization": f"Bearer {GROQ_API_KEY}"},
+            timeout=3.0,
+        )
+        _llm_status["groq_available"] = r.status_code == 200
     except Exception:
         _llm_status["groq_available"] = False
     _llm_status["last_check"] = now
@@ -54,15 +56,16 @@ async def _call_groq(system_prompt: str, user_prompt: str, json_mode: bool, max_
     if json_mode:
         body["response_format"] = {"type": "json_object"}
 
-    async with httpx.AsyncClient(timeout=15.0) as client:
-        response = await client.post(
-            f"{GROQ_BASE_URL}/chat/completions",
-            headers={"Authorization": f"Bearer {GROQ_API_KEY}", "Content-Type": "application/json"},
-            json=body,
-        )
-        response.raise_for_status()
-        content = response.json()["choices"][0]["message"]["content"]
-        return json.loads(content) if json_mode else {"text": content}
+    client = get_client()
+    response = await client.post(
+        f"{GROQ_BASE_URL}/chat/completions",
+        headers={"Authorization": f"Bearer {GROQ_API_KEY}", "Content-Type": "application/json"},
+        json=body,
+        timeout=15.0,
+    )
+    response.raise_for_status()
+    content = response.json()["choices"][0]["message"]["content"]
+    return json.loads(content) if json_mode else {"text": content}
 
 
 async def _call_ollama(system_prompt: str, user_prompt: str, json_mode: bool, max_tokens: int) -> dict:
@@ -78,11 +81,12 @@ async def _call_ollama(system_prompt: str, user_prompt: str, json_mode: bool, ma
     if json_mode:
         body["format"] = "json"
 
-    async with httpx.AsyncClient(timeout=30.0) as client:
-        response = await client.post(
-            f"{OLLAMA_BASE_URL}/api/chat",
-            json=body,
-        )
-        response.raise_for_status()
-        content = response.json()["message"]["content"]
-        return json.loads(content) if json_mode else {"text": content}
+    client = get_client()
+    response = await client.post(
+        f"{OLLAMA_BASE_URL}/api/chat",
+        json=body,
+        timeout=30.0,
+    )
+    response.raise_for_status()
+    content = response.json()["message"]["content"]
+    return json.loads(content) if json_mode else {"text": content}
