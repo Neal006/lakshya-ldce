@@ -1,10 +1,13 @@
 from datetime import datetime, timezone, timedelta
 from typing import Optional
 from fastapi import APIRouter, Depends, Query
+from fastapi.responses import StreamingResponse
 from sqlalchemy import func, case, extract
 from sqlalchemy.orm import Session
+import csv
+import io
 from app.database import get_db
-from app.models.models import Complaint, CategoryEnum, PriorityEnum, StatusEnum
+from app.models.models import Complaint, Customer, CategoryEnum, PriorityEnum, StatusEnum
 from app.middleware.auth import get_current_user, require_roles
 from app.middleware.exceptions import AppException
 from app.models.models import Profile
@@ -195,3 +198,88 @@ async def product_analytics(
         })
 
     return {"data": {"products": products}}
+
+
+@router.get("/export/csv")
+async def export_complaints_csv(
+    start_date: Optional[str] = None,
+    end_date: Optional[str] = None,
+    status: Optional[str] = None,
+    category: Optional[str] = None,
+    priority: Optional[str] = None,
+    db: Session = Depends(get_db),
+    current_user: Profile = Depends(require_roles("admin", "qa")),
+):
+    query = db.query(Complaint).join(Customer, Complaint.customer_id == Customer.id)
+
+    if start_date:
+        try:
+            start_dt = datetime.fromisoformat(start_date.replace("Z", "+00:00"))
+            query = query.filter(Complaint.created_at >= start_dt)
+        except (ValueError, TypeError):
+            raise AppException(status_code=400, code="VALIDATION_ERROR", message="Invalid start_date format")
+
+    if end_date:
+        try:
+            end_dt = datetime.fromisoformat(end_date.replace("Z", "+00:00"))
+            query = query.filter(Complaint.created_at <= end_dt)
+        except (ValueError, TypeError):
+            raise AppException(status_code=400, code="VALIDATION_ERROR", message="Invalid end_date format")
+
+    if status:
+        try:
+            query = query.filter(Complaint.status == StatusEnum(status))
+        except ValueError:
+            raise AppException(status_code=400, code="VALIDATION_ERROR", message=f"Invalid status: {status}")
+
+    if category:
+        try:
+            query = query.filter(Complaint.category == CategoryEnum(category))
+        except ValueError:
+            raise AppException(status_code=400, code="VALIDATION_ERROR", message=f"Invalid category: {category}")
+
+    if priority:
+        try:
+            query = query.filter(Complaint.priority == PriorityEnum(priority))
+        except ValueError:
+            raise AppException(status_code=400, code="VALIDATION_ERROR", message=f"Invalid priority: {priority}")
+
+    complaints = query.order_by(Complaint.created_at.desc()).all()
+
+    output = io.StringIO()
+    writer = csv.writer(output)
+    writer.writerow([
+        "ID", "Customer Name", "Customer Email", "Customer Phone",
+        "Raw Text", "Category", "Priority", "Status", "Submitted Via",
+        "Sentiment Score", "SLA Deadline", "SLA Breached",
+        "Escalation Reason", "Created At", "Resolved At",
+    ])
+
+    for c in complaints:
+        writer.writerow([
+            c.id,
+            c.customer.name if c.customer else "",
+            c.customer.email if c.customer else "",
+            c.customer.phone if c.customer else "",
+            c.raw_text.replace("\n", " ").replace("\r", ""),
+            c.category.value if c.category else "",
+            c.priority.value if c.priority else "",
+            c.status.value,
+            c.submitted_via.value,
+            c.sentiment_score if c.sentiment_score is not None else "",
+            c.sla_deadline.isoformat() if c.sla_deadline else "",
+            c.sla_breached,
+            c.escalation_reason or "",
+            c.created_at.isoformat() if c.created_at else "",
+            c.resolved_at.isoformat() if c.resolved_at else "",
+        ])
+
+    output.seek(0)
+    filename = f"complaints_export_{datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%S')}.csv"
+    headers = {"Content-Disposition": f"attachment; filename={filename}"}
+
+    return StreamingResponse(
+        iter([output.getvalue()]),
+        media_type="text/csv",
+        headers=headers,
+    )
