@@ -1,6 +1,6 @@
 import uuid
 import enum
-from datetime import datetime
+from datetime import datetime, timezone
 from sqlalchemy import (
     Column, String, Text, Float, Integer, ForeignKey, Enum, DateTime, Boolean
 )
@@ -48,8 +48,8 @@ class Profile(Base):
     role = Column(Enum(RoleEnum), nullable=False, default=RoleEnum.call_attender)
     hashed_password = Column(String(255), nullable=False)
     is_active = Column(Boolean, default=True)
-    created_at = Column(DateTime, default=datetime.utcnow)
-    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+    updated_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
 
     complaints = relationship("Complaint", back_populates="created_by_profile", foreign_keys="Complaint.created_by")
     timeline_entries = relationship("ComplaintTimeline", back_populates="performed_by_profile")
@@ -62,8 +62,8 @@ class Customer(Base):
     name = Column(String(255), nullable=False)
     email = Column(String(255), unique=True, nullable=False, index=True)
     phone = Column(String(50), nullable=True)
-    created_at = Column(DateTime, default=datetime.utcnow)
-    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+    updated_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
 
     complaints = relationship("Complaint", back_populates="customer")
 
@@ -86,8 +86,8 @@ class Complaint(Base):
     created_by = Column(String(36), ForeignKey("profiles.id"), nullable=True)
     resolved_at = Column(DateTime, nullable=True)
     escalated_at = Column(DateTime, nullable=True)
-    created_at = Column(DateTime, default=datetime.utcnow, index=True)
-    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), index=True)
+    updated_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
 
     customer = relationship("Customer", back_populates="complaints")
     created_by_profile = relationship("Profile", back_populates="complaints", foreign_keys=[created_by])
@@ -102,7 +102,7 @@ class ComplaintTimeline(Base):
     action = Column(String(100), nullable=False)
     performed_by = Column(String(36), ForeignKey("profiles.id"), nullable=True)
     notes = Column(Text, nullable=True)
-    created_at = Column(DateTime, default=datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
 
     complaint = relationship("Complaint", back_populates="timeline")
     performed_by_profile = relationship("Profile", back_populates="timeline_entries")
@@ -114,8 +114,8 @@ class SLAConfig(Base):
     id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     priority = Column(Enum(PriorityEnum), unique=True, nullable=False)
     deadline_hours = Column(Integer, nullable=False)
-    created_at = Column(DateTime, default=datetime.utcnow)
-    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+    updated_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
 
 
 class DailyMetrics(Base):
@@ -129,4 +129,4 @@ class DailyMetrics(Base):
     escalated_complaints = Column(Integer, default=0)
     avg_resolution_time_hours = Column(Float, nullable=True)
     sla_compliance_rate = Column(Float, nullable=True)
-    created_at = Column(DateTime, default=datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
