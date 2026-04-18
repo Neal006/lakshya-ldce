@@ -6,6 +6,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import relationship
 from app.database import Base
+from app.services.utils import generate_uuid7
 
 
 class RoleEnum(str, enum.Enum):
@@ -42,7 +43,7 @@ class SubmittedViaEnum(str, enum.Enum):
 class Profile(Base):
     __tablename__ = "profiles"
 
-    id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
+    id = Column(String(36), primary_key=True, default=lambda: generate_uuid7())
     email = Column(String(255), unique=True, nullable=False, index=True)
     name = Column(String(255), nullable=False)
     role = Column(Enum(RoleEnum), nullable=False, default=RoleEnum.call_attender)
@@ -58,7 +59,7 @@ class Profile(Base):
 class Customer(Base):
     __tablename__ = "customers"
 
-    id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
+    id = Column(String(36), primary_key=True, default=lambda: generate_uuid7())
     name = Column(String(255), nullable=False)
     email = Column(String(255), unique=True, nullable=False, index=True)
     phone = Column(String(50), nullable=True)
@@ -71,7 +72,7 @@ class Customer(Base):
 class Complaint(Base):
     __tablename__ = "complaints"
 
-    id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
+    id = Column(String(36), primary_key=True, default=lambda: generate_uuid7())
     customer_id = Column(String(36), ForeignKey("customers.id"), nullable=False, index=True)
     raw_text = Column(Text, nullable=False)
     category = Column(Enum(CategoryEnum), nullable=True)
@@ -97,7 +98,7 @@ class Complaint(Base):
 class ComplaintTimeline(Base):
     __tablename__ = "complaint_timeline"
 
-    id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
+    id = Column(String(36), primary_key=True, default=lambda: generate_uuid7())
     complaint_id = Column(String(36), ForeignKey("complaints.id"), nullable=False, index=True)
     action = Column(String(100), nullable=False)
     performed_by = Column(String(36), ForeignKey("profiles.id"), nullable=True)
@@ -111,7 +112,7 @@ class ComplaintTimeline(Base):
 class SLAConfig(Base):
     __tablename__ = "sla_config"
 
-    id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
+    id = Column(String(36), primary_key=True, default=lambda: generate_uuid7())
     priority = Column(Enum(PriorityEnum), unique=True, nullable=False)
     deadline_hours = Column(Integer, nullable=False)
     created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
@@ -121,7 +122,7 @@ class SLAConfig(Base):
 class DailyMetrics(Base):
     __tablename__ = "daily_metrics"
 
-    id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
+    id = Column(String(36), primary_key=True, default=lambda: generate_uuid7())
     date = Column(DateTime, nullable=False, index=True)
     total_complaints = Column(Integer, default=0)
     open_complaints = Column(Integer, default=0)

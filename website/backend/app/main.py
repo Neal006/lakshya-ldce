@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.exceptions import RequestValidationError
 from starlette.exceptions import HTTPException as StarletteHTTPException
 from app.config import CORS_ORIGINS, ENVIRONMENT
-from app.routes import auth, complaints, analytics, sse, webhooks, demo, health
+from app.routes import auth, complaints, analytics, sse, webhooks, demo, health, users
 from app.middleware.exceptions import (
     AppException, app_exception_handler, http_exception_handler,
     validation_exception_handler,
@@ -35,6 +35,7 @@ app.include_router(sse.router, prefix="/complaints", tags=["Real-Time SSE"])
 app.include_router(webhooks.router, prefix="/webhooks", tags=["Webhooks"])
 app.include_router(demo.router, prefix="/demo", tags=["Demo Mode"])
 app.include_router(health.router, prefix="/health", tags=["Health"])
+app.include_router(users.router, prefix="/users", tags=["User Management"])
 
 
 @app.on_event("startup")
@@ -42,3 +43,5 @@ async def startup():
     from app.database import Base, engine
     from app.models import models  # noqa: F401 — ensure tables are registered
     Base.metadata.create_all(bind=engine)
+    from app.services.scheduler import start_background_tasks
+    start_background_tasks()

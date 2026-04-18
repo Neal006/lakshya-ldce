@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 5%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 5%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 18 100% 50%;
+    --primary-foreground: 0 0% 0%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 60%;
+    --accent: 18 100% 50%;
+    --accent-foreground: 0 0% 0%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 20%;
+    --input: 0 0% 15%;
+    --ring: 18 100% 50%;
+    --radius: 0.75rem;
+    --saffron: #FF6B35;
+    --saffron-dark: #E55A2B;
+    --saffron-light: #FF8C5A;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-black text-white;
+    font-family: var(--font-inter), system-ui, sans-serif;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Valorant-style tall headings */
+.font-valorant {
+  font-family: var(--font-oswald), Impact, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
+
+/* Skeuomorphic button styles */
+.btn-skeuo {
+  @apply relative font-semibold uppercase tracking-wider;
+  background: linear-gradient(145deg, #FF6B35 0%, #E55A2B 100%);
+  box-shadow: 
+    0 4px 0 #B8441F,
+    0 6px 20px rgba(255, 107, 53, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transition: all 0.15s ease;
+}
+
+.btn-skeuo:hover {
+  transform: translateY(2px);
+  box-shadow: 
+    0 2px 0 #B8441F,
+    0 4px 10px rgba(255, 107, 53, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.btn-skeuo:active {
+  transform: translateY(4px);
+  box-shadow: 
+    0 0 0 #B8441F,
+    inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Skeuomorphic card styles */
+.card-skeuo {
+  background: linear-gradient(145deg, #1a1a1a 0%, #0d0d0d 100%);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.6),
+    0 2px 8px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 107, 53, 0.2);
+}
+
+.card-skeuo:hover {
+  border-color: rgba(255, 107, 53, 0.4);
+  box-shadow: 
+    0 12px 40px rgba(255, 107, 53, 0.15),
+    0 4px 12px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* Text gradient */
+.text-saffron-gradient {
+  background: linear-gradient(135deg, #FF6B35 0%, #FF8C5A 50%, #FF6B35 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0d0d0d;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #FF6B35;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #FF8C5A;
+}
