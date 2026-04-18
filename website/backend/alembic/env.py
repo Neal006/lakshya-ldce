@@ -1,10 +1,23 @@
 from logging.config import fileConfig
+import os
+import sys
+from logging.config import fileConfig
 from sqlalchemy import engine_from_config, pool
 from alembic import context
+from dotenv import load_dotenv
+from pathlib import Path
+
+backend_dir = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(backend_dir))
+load_dotenv(backend_dir / ".env")
+
 from app.database import Base
 from app.models import models
 
 config = context.config
+
+database_url = os.getenv("DATABASE_URL", "sqlite:///./ts14.db")
+config.set_main_option("sqlalchemy.url", database_url)
 
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
