@@ -42,3 +42,5 @@ async def startup():
     from app.database import Base, engine
     from app.models import models  # noqa: F401 — ensure tables are registered
     Base.metadata.create_all(bind=engine)
+    from app.services.scheduler import start_sla_background_task
+    start_sla_background_task()
