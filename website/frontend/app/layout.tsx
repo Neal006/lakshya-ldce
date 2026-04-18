@@ -1,9 +1,17 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Oswald, Inter } from 'next/font/google'
 import './globals.css'
-import { SmoothScroll } from '@/components/ui/SmoothScroll'
 
-const inter = Inter({ subsets: ['latin'] })
+const oswald = Oswald({ 
+  subsets: ['latin'],
+  variable: '--font-oswald',
+  weight: ['400', '500', '600', '700'],
+})
+
+const inter = Inter({ 
+  subsets: ['latin'],
+  variable: '--font-inter',
+})
 
 export const metadata: Metadata = {
   title: 'TS-14 | AI Complaint Resolution Engine',
@@ -16,11 +24,9 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="dark">
-      <body className={inter.className}>
-        <SmoothScroll>
-          {children}
-        </SmoothScroll>
+    <html lang="en">
+      <body className={`${oswald.variable} ${inter.variable} bg-black text-white antialiased`}>
+        {children}
       </body>
     </html>
   )

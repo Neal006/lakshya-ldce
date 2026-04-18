@@ -9,7 +9,7 @@ import { Footer } from '@/components/landing/Footer'
 
 export default function Home() {
   return (
-    <main className="relative overflow-hidden bg-slate-950">
+    <main className="relative overflow-hidden bg-black">
       <HeroSection />
       <StatsSection />
       <HowItWorksSection />
