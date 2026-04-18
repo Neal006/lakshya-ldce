@@ -22,6 +22,7 @@ from app.schemas.complaint import (
 from app.services.ml import classify_complaint
 from app.services.sla import calculate_sla_deadline
 from app.services.sse_events import broadcast_new_complaint, broadcast_status_change
+from app.services.email import send_resolution_notification, send_escalation_notification
 from app.middleware.auth import get_current_user, require_roles
 from app.middleware.exceptions import AppException
 
@@ -292,6 +293,21 @@ async def update_complaint_status(
 
     await broadcast_status_change(complaint.id, complaint.status.value)
 
+    if new_status == StatusEnum.resolved and complaint.customer:
+        steps = complaint.resolution_steps
+        if isinstance(steps, str):
+            try:
+                steps = json.loads(steps)
+            except (json.JSONDecodeError, TypeError):
+                steps = []
+        await send_resolution_notification(
+            customer_name=complaint.customer.name,
+            customer_email=complaint.customer.email,
+            complaint_id=complaint.id,
+            category=complaint.category.value if complaint.category else "General",
+            resolution_steps=steps or [],
+        )
+
     timeline = []
     for entry in complaint.timeline[-5:]:
         performer = {"name": entry.performed_by_profile.name} if entry.performed_by_profile else None
@@ -344,6 +360,14 @@ async def escalate_complaint(
     db.refresh(complaint)
 
     await broadcast_status_change(complaint.id, "escalated")
+
+    if complaint.customer:
+        await send_escalation_notification(
+            customer_name=complaint.customer.name,
+            customer_email=complaint.customer.email,
+            complaint_id=complaint.id,
+            reason=request.reason,
+        )
 
     return DataWrapperEscalate(data={"complaint": EscalateResponse(
         id=complaint.id,
