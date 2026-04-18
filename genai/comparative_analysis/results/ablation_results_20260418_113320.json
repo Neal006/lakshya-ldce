@@ -1,0 +1,3867 @@
+{
+  "glm_5": {
+    "display_name": "GLM 5 (Zhipu)",
+    "provider": "openrouter",
+    "model_id": "glm-5",
+    "results": [
+      {
+        "task": "classify",
+        "scenario_name": "allergic_reaction",
+        "category": "Product",
+        "priority": "High",
+        "response": "{\n  \"category\": \"Product\",\n  \"priority\": \"High\",\n  \"justification\": \"The customer experienced a severe allergic reaction requiring emergency medical treatment, indicating a significant safety risk and potential legal liability due to a suspected undisclosed allergen.\",\n  \"keywords\": [\"allergic reaction\", \"safety concern\", \"undisclosed allergen\", \"emergency room\", \"difficulty breathing\"],\n  \"sla_hours\": 4,\n  \"confidence\": \"High\"\n}",
+        "latency_seconds": 14.027,
+        "input_tokens": 642,
+        "output_tokens": 875,
+        "error": null,
+        "evaluation": {
+          "overall_score": 1.0,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "product",
+            "expected": "product",
+            "details": "Correct: 'product'"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "high",
+            "expected": "high",
+            "details": "Correct: 'high'"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {},
+            "details": "Not evaluated for classify task"
+          },
+          "format_compliance": {
+            "score": 1.0,
+            "valid_json": true,
+            "has_required_fields": true,
+            "details": "All required fields present"
+          },
+          "response_quality": {
+            "score": 1.0,
+            "word_count": 48,
+            "details": "Good quality"
+          },
+          "latency_seconds": 14.027
+        }
+      },
+      {
+        "task": "resolve",
+        "scenario_name": "allergic_reaction",
+        "category": "Product",
+        "priority": "High",
+        "response": "",
+        "latency_seconds": 23.051,
+        "input_tokens": 529,
+        "output_tokens": 1024,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.55,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Product",
+            "details": "Not evaluated for resolve task"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "High",
+            "details": "Not evaluated for resolve task"
+          },
+          "resolution_quality": {
+            "score": 0.0,
+            "checks": {},
+            "details": "Empty response"
+          },
+          "format_compliance": {
+            "score": 0.0,
+            "valid_json": false,
+            "has_required_fields": false,
+            "details": "Empty response"
+          },
+          "response_quality": {
+            "score": 0.0,
+            "word_count": 0,
+            "details": "Empty response"
+          },
+          "latency_seconds": 23.051
+        }
+      },
+      {
+        "task": "ticket",
+        "scenario_name": "allergic_reaction",
+        "category": "Product",
+        "priority": "High",
+        "response": "",
+        "latency_seconds": 12.445,
+        "input_tokens": 435,
+        "output_tokens": 1024,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.0,
+          "classification_accuracy": {
+            "score": 0.0,
+            "predicted": null,
+            "expected": "Product",
+            "details": "Could not parse JSON"
+          },
+          "priority_accuracy": {
+            "score": 0.0,
+            "predicted": null,
+            "expected": "High",
+            "details": "Could not parse JSON"
+          },
+          "resolution_quality": {
+            "score": 0.0,
+            "checks": {},
+            "details": "Empty response"
+          },
+          "format_compliance": {
+            "score": 0.0,
+            "valid_json": false,
+            "has_required_fields": false,
+            "details": "Empty response"
+          },
+          "response_quality": {
+            "score": 0.0,
+            "word_count": 0,
+            "details": "Empty response"
+          },
+          "latency_seconds": 12.445
+        }
+      },
+      {
+        "task": "classify",
+        "scenario_name": "product_quality",
+        "category": "Product",
+        "priority": "Medium",
+        "response": "{\n  \"category\": \"Product\",\n  \"priority\": \"Medium\",\n  \"justification\": \"The customer reports a suspected formulation change and efficacy failure of the wellness product, which affects its usability but poses no immediate safety risk.\",\n  \"keywords\": [\n    \"efficacy\",\n    \"formulation\",\n    \"paler tablets\",\n    \"quality\"\n  ],\n  \"sla_hours\": 24,\n  \"confidence\": \"High\"\n}",
+        "latency_seconds": 27.596,
+        "input_tokens": 627,
+        "output_tokens": 919,
+        "error": null,
+        "evaluation": {
+          "overall_score": 1.0,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "product",
+            "expected": "product",
+            "details": "Correct: 'product'"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "medium",
+            "expected": "medium",
+            "details": "Correct: 'medium'"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {},
+            "details": "Not evaluated for classify task"
+          },
+          "format_compliance": {
+            "score": 1.0,
+            "valid_json": true,
+            "has_required_fields": true,
+            "details": "All required fields present"
+          },
+          "response_quality": {
+            "score": 1.0,
+            "word_count": 43,
+            "details": "Good quality"
+          },
+          "latency_seconds": 27.596
+        }
+      },
+      {
+        "task": "resolve",
+        "scenario_name": "product_quality",
+        "category": "Product",
+        "priority": "Medium",
+        "response": "",
+        "latency_seconds": 21.808,
+        "input_tokens": 514,
+        "output_tokens": 1024,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.55,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Product",
+            "details": "Not evaluated for resolve task"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Medium",
+            "details": "Not evaluated for resolve task"
+          },
+          "resolution_quality": {
+            "score": 0.0,
+            "checks": {},
+            "details": "Empty response"
+          },
+          "format_compliance": {
+            "score": 0.0,
+            "valid_json": false,
+            "has_required_fields": false,
+            "details": "Empty response"
+          },
+          "response_quality": {
+            "score": 0.0,
+            "word_count": 0,
+            "details": "Empty response"
+          },
+          "latency_seconds": 21.808
+        }
+      },
+      {
+        "task": "ticket",
+        "scenario_name": "product_quality",
+        "category": "Product",
+        "priority": "Medium",
+        "response": "{\n  \"title\": \"ImmunoBoost",
+        "latency_seconds": 18.823,
+        "input_tokens": 420,
+        "output_tokens": 1024,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.065,
+          "classification_accuracy": {
+            "score": 0.0,
+            "predicted": null,
+            "expected": "Product",
+            "details": "Could not parse JSON"
+          },
+          "priority_accuracy": {
+            "score": 0.0,
+            "predicted": null,
+            "expected": "Medium",
+            "details": "Could not parse JSON"
+          },
+          "resolution_quality": {
+            "score": 0.0,
+            "checks": {
+              "has_title": false,
+              "has_description": false,
+              "has_root_cause": false,
+              "has_2plus_actions": false,
+              "actions_actionable": false,
+              "has_assigned_team": false,
+              "has_sla_deadline": false
+            },
+            "details": "0/7 checks passed"
+          },
+          "format_compliance": {
+            "score": 0.0,
+            "valid_json": false,
+            "has_required_fields": false,
+            "details": "Not valid JSON"
+          },
+          "response_quality": {
+            "score": 0.65,
+            "word_count": 3,
+            "details": "Too short (3 words)"
+          },
+          "latency_seconds": 18.823
+        }
+      },
+      {
+        "task": "classify",
+        "scenario_name": "packaging_damage",
+        "category": "Packaging",
+        "priority": "Medium",
+        "response": "{\n  \"category\": \"Product\",\n  \"priority\": \"High\",\n  \"justification\": \"The customer suspects potential contamination and compromised safety of the softgels due to the torn tamper-evident seal, which classifies this as a safety risk requiring high priority.\",\n  \"keywords\": [\"contamination\", \"safety\", \"torn seal\", \"shrink-wrap\", \"potency\"],\n  \"sla_hours\": 4,\n  \"confidence\": \"High\"\n}",
+        "latency_seconds": 29.388,
+        "input_tokens": 639,
+        "output_tokens": 970,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.575,
+          "classification_accuracy": {
+            "score": 0.0,
+            "predicted": "product",
+            "expected": "packaging",
+            "details": "Wrong category: 'product' (expected 'packaging')"
+          },
+          "priority_accuracy": {
+            "score": 0.5,
+            "predicted": "high",
+            "expected": "medium",
+            "details": "Adjacent level: 'high' (expected 'medium') \u2013 partial credit"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {},
+            "details": "Not evaluated for classify task"
+          },
+          "format_compliance": {
+            "score": 1.0,
+            "valid_json": true,
+            "has_required_fields": true,
+            "details": "All required fields present"
+          },
+          "response_quality": {
+            "score": 1.0,
+            "word_count": 45,
+            "details": "Good quality"
+          },
+          "latency_seconds": 29.388
+        }
+      },
+      {
+        "task": "resolve",
+        "scenario_name": "packaging_damage",
+        "category": "Packaging",
+        "priority": "Medium",
+        "response": "",
+        "latency_seconds": 15.801,
+        "input_tokens": 526,
+        "output_tokens": 1024,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.55,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Packaging",
+            "details": "Not evaluated for resolve task"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Medium",
+            "details": "Not evaluated for resolve task"
+          },
+          "resolution_quality": {
+            "score": 0.0,
+            "checks": {},
+            "details": "Empty response"
+          },
+          "format_compliance": {
+            "score": 0.0,
+            "valid_json": false,
+            "has_required_fields": false,
+            "details": "Empty response"
+          },
+          "response_quality": {
+            "score": 0.0,
+            "word_count": 0,
+            "details": "Empty response"
+          },
+          "latency_seconds": 15.801
+        }
+      },
+      {
+        "task": "ticket",
+        "scenario_name": "packaging_damage",
+        "category": "Packaging",
+        "priority": "Medium",
+        "response": "",
+        "latency_seconds": 17.134,
+        "input_tokens": 432,
+        "output_tokens": 1024,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.0,
+          "classification_accuracy": {
+            "score": 0.0,
+            "predicted": null,
+            "expected": "Packaging",
+            "details": "Could not parse JSON"
+          },
+          "priority_accuracy": {
+            "score": 0.0,
+            "predicted": null,
+            "expected": "Medium",
+            "details": "Could not parse JSON"
+          },
+          "resolution_quality": {
+            "score": 0.0,
+            "checks": {},
+            "details": "Empty response"
+          },
+          "format_compliance": {
+            "score": 0.0,
+            "valid_json": false,
+            "has_required_fields": false,
+            "details": "Empty response"
+          },
+          "response_quality": {
+            "score": 0.0,
+            "word_count": 0,
+            "details": "Empty response"
+          },
+          "latency_seconds": 17.134
+        }
+      },
+      {
+        "task": "classify",
+        "scenario_name": "trade_inquiry",
+        "category": "Trade",
+        "priority": "Low",
+        "response": "{\n  \"category\": \"Trade\",\n  \"priority\": \"Low\",\n  \"justification\": \"The message is a business inquiry from a retailer seeking bulk pricing, exclusive distribution rights, marketing support, and stock availability for new product lines.\",\n  \"keywords\": [\"bulk pricing\", \"distribution rights\", \"stock availability\", \"commercial terms\", \"marketing support\"],\n  \"sla_hours\": 72,\n  \"confidence\": \"High\"\n}",
+        "latency_seconds": 18.261,
+        "input_tokens": 674,
+        "output_tokens": 837,
+        "error": null,
+        "evaluation": {
+          "overall_score": 1.0,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "trade",
+            "expected": "trade",
+            "details": "Correct: 'trade'"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "low",
+            "expected": "low",
+            "details": "Correct: 'low'"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {},
+            "details": "Not evaluated for classify task"
+          },
+          "format_compliance": {
+            "score": 1.0,
+            "valid_json": true,
+            "has_required_fields": true,
+            "details": "All required fields present"
+          },
+          "response_quality": {
+            "score": 1.0,
+            "word_count": 46,
+            "details": "Good quality"
+          },
+          "latency_seconds": 18.261
+        }
+      },
+      {
+        "task": "resolve",
+        "scenario_name": "trade_inquiry",
+        "category": "Trade",
+        "priority": "Low",
+        "response": "",
+        "latency_seconds": 18.67,
+        "input_tokens": 561,
+        "output_tokens": 1024,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.55,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Trade",
+            "details": "Not evaluated for resolve task"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Low",
+            "details": "Not evaluated for resolve task"
+          },
+          "resolution_quality": {
+            "score": 0.0,
+            "checks": {},
+            "details": "Empty response"
+          },
+          "format_compliance": {
+            "score": 0.0,
+            "valid_json": false,
+            "has_required_fields": false,
+            "details": "Empty response"
+          },
+          "response_quality": {
+            "score": 0.0,
+            "word_count": 0,
+            "details": "Empty response"
+          },
+          "latency_seconds": 18.67
+        }
+      },
+      {
+        "task": "ticket",
+        "scenario_name": "trade_inquiry",
+        "category": "Trade",
+        "priority": "Low",
+        "response": "{\n  \"title\": \"Commercial Terms Inquiry - HealthPlus Pharmacy\",\n  \"category\": \"Trade\",\n",
+        "latency_seconds": 12.732,
+        "input_tokens": 467,
+        "output_tokens": 1024,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.065,
+          "classification_accuracy": {
+            "score": 0.0,
+            "predicted": null,
+            "expected": "Trade",
+            "details": "Could not parse JSON"
+          },
+          "priority_accuracy": {
+            "score": 0.0,
+            "predicted": null,
+            "expected": "Low",
+            "details": "Could not parse JSON"
+          },
+          "resolution_quality": {
+            "score": 0.0,
+            "checks": {
+              "has_title": false,
+              "has_description": false,
+              "has_root_cause": false,
+              "has_2plus_actions": false,
+              "actions_actionable": false,
+              "has_assigned_team": false,
+              "has_sla_deadline": false
+            },
+            "details": "0/7 checks passed"
+          },
+          "format_compliance": {
+            "score": 0.0,
+            "valid_json": false,
+            "has_required_fields": false,
+            "details": "Not valid JSON"
+          },
+          "response_quality": {
+            "score": 0.65,
+            "word_count": 10,
+            "details": "Too short (10 words)"
+          },
+          "latency_seconds": 12.732
+        }
+      }
+    ]
+  },
+  "glm_5_1": {
+    "display_name": "GLM 5.1 (Zhipu)",
+    "provider": "openrouter",
+    "model_id": "glm-5.1",
+    "results": [
+      {
+        "task": "classify",
+        "scenario_name": "allergic_reaction",
+        "category": "Product",
+        "priority": "High",
+        "response": "{\n  \"category\": \"Product\",\n  \"priority\": \"High\",\n  \"justification\": \"The customer experienced a severe allergic reaction requiring emergency medical treatment, indicating a significant safety risk and potential product recall trigger due to a suspected undisclosed allergen.\",\n  \"keywords\": [\"allergic reaction\", \"safety risk\", \"undisclosed ingredient\", \"emergency room\", \"difficulty breathing\"],\n  \"sla_hours\": 4,\n  \"confidence\": \"High\"\n}",
+        "latency_seconds": 13.006,
+        "input_tokens": 642,
+        "output_tokens": 775,
+        "error": null,
+        "evaluation": {
+          "overall_score": 1.0,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "product",
+            "expected": "product",
+            "details": "Correct: 'product'"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "high",
+            "expected": "high",
+            "details": "Correct: 'high'"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {},
+            "details": "Not evaluated for classify task"
+          },
+          "format_compliance": {
+            "score": 1.0,
+            "valid_json": true,
+            "has_required_fields": true,
+            "details": "All required fields present"
+          },
+          "response_quality": {
+            "score": 1.0,
+            "word_count": 49,
+            "details": "Good quality"
+          },
+          "latency_seconds": 13.006
+        }
+      },
+      {
+        "task": "resolve",
+        "scenario_name": "allergic_reaction",
+        "category": "Product",
+        "priority": "High",
+        "response": "",
+        "latency_seconds": 10.578,
+        "input_tokens": 529,
+        "output_tokens": 1024,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.55,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Product",
+            "details": "Not evaluated for resolve task"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "High",
+            "details": "Not evaluated for resolve task"
+          },
+          "resolution_quality": {
+            "score": 0.0,
+            "checks": {},
+            "details": "Empty response"
+          },
+          "format_compliance": {
+            "score": 0.0,
+            "valid_json": false,
+            "has_required_fields": false,
+            "details": "Empty response"
+          },
+          "response_quality": {
+            "score": 0.0,
+            "word_count": 0,
+            "details": "Empty response"
+          },
+          "latency_seconds": 10.578
+        }
+      },
+      {
+        "task": "ticket",
+        "scenario_name": "allergic_reaction",
+        "category": "Product",
+        "priority": "High",
+        "response": "",
+        "latency_seconds": 13.448,
+        "input_tokens": 435,
+        "output_tokens": 1024,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.0,
+          "classification_accuracy": {
+            "score": 0.0,
+            "predicted": null,
+            "expected": "Product",
+            "details": "Could not parse JSON"
+          },
+          "priority_accuracy": {
+            "score": 0.0,
+            "predicted": null,
+            "expected": "High",
+            "details": "Could not parse JSON"
+          },
+          "resolution_quality": {
+            "score": 0.0,
+            "checks": {},
+            "details": "Empty response"
+          },
+          "format_compliance": {
+            "score": 0.0,
+            "valid_json": false,
+            "has_required_fields": false,
+            "details": "Empty response"
+          },
+          "response_quality": {
+            "score": 0.0,
+            "word_count": 0,
+            "details": "Empty response"
+          },
+          "latency_seconds": 13.448
+        }
+      },
+      {
+        "task": "classify",
+        "scenario_name": "product_quality",
+        "category": "Product",
+        "priority": "Medium",
+        "response": "{\n  \"category\": \"Product\",\n  \"priority\": \"Medium\",\n  \"justification\": \"The customer reports an efficacy failure and suspects a change in product formulation or manufacturing quality based on the tablets' altered appearance, which constitutes a product defect affecting usability.\",\n  \"keywords\": [\"efficacy failure\", \"pale tablets\", \"formulation change\", \"quality\", \"refund\"],\n  \"sla_hours\": 24,\n  \"confidence\": \"High\"\n}",
+        "latency_seconds": 19.389,
+        "input_tokens": 627,
+        "output_tokens": 938,
+        "error": null,
+        "evaluation": {
+          "overall_score": 1.0,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "product",
+            "expected": "product",
+            "details": "Correct: 'product'"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "medium",
+            "expected": "medium",
+            "details": "Correct: 'medium'"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {},
+            "details": "Not evaluated for classify task"
+          },
+          "format_compliance": {
+            "score": 1.0,
+            "valid_json": true,
+            "has_required_fields": true,
+            "details": "All required fields present"
+          },
+          "response_quality": {
+            "score": 1.0,
+            "word_count": 49,
+            "details": "Good quality"
+          },
+          "latency_seconds": 19.389
+        }
+      },
+      {
+        "task": "resolve",
+        "scenario_name": "product_quality",
+        "category": "Product",
+        "priority": "Medium",
+        "response": "",
+        "latency_seconds": 16.158,
+        "input_tokens": 514,
+        "output_tokens": 1024,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.55,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Product",
+            "details": "Not evaluated for resolve task"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Medium",
+            "details": "Not evaluated for resolve task"
+          },
+          "resolution_quality": {
+            "score": 0.0,
+            "checks": {},
+            "details": "Empty response"
+          },
+          "format_compliance": {
+            "score": 0.0,
+            "valid_json": false,
+            "has_required_fields": false,
+            "details": "Empty response"
+          },
+          "response_quality": {
+            "score": 0.0,
+            "word_count": 0,
+            "details": "Empty response"
+          },
+          "latency_seconds": 16.158
+        }
+      },
+      {
+        "task": "ticket",
+        "scenario_name": "product_quality",
+        "category": "Product",
+        "priority": "Medium",
+        "response": "",
+        "latency_seconds": 14.216,
+        "input_tokens": 420,
+        "output_tokens": 1024,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.0,
+          "classification_accuracy": {
+            "score": 0.0,
+            "predicted": null,
+            "expected": "Product",
+            "details": "Could not parse JSON"
+          },
+          "priority_accuracy": {
+            "score": 0.0,
+            "predicted": null,
+            "expected": "Medium",
+            "details": "Could not parse JSON"
+          },
+          "resolution_quality": {
+            "score": 0.0,
+            "checks": {},
+            "details": "Empty response"
+          },
+          "format_compliance": {
+            "score": 0.0,
+            "valid_json": false,
+            "has_required_fields": false,
+            "details": "Empty response"
+          },
+          "response_quality": {
+            "score": 0.0,
+            "word_count": 0,
+            "details": "Empty response"
+          },
+          "latency_seconds": 14.216
+        }
+      },
+      {
+        "task": "classify",
+        "scenario_name": "packaging_damage",
+        "category": "Packaging",
+        "priority": "Medium",
+        "response": "",
+        "latency_seconds": 14.063,
+        "input_tokens": 639,
+        "output_tokens": 1024,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.25,
+          "classification_accuracy": {
+            "score": 0.0,
+            "predicted": null,
+            "expected": "Packaging",
+            "details": "Could not parse JSON"
+          },
+          "priority_accuracy": {
+            "score": 0.0,
+            "predicted": null,
+            "expected": "Medium",
+            "details": "Could not parse JSON"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {},
+            "details": "Not evaluated for classify task"
+          },
+          "format_compliance": {
+            "score": 0.0,
+            "valid_json": false,
+            "has_required_fields": false,
+            "details": "Empty response"
+          },
+          "response_quality": {
+            "score": 0.0,
+            "word_count": 0,
+            "details": "Empty response"
+          },
+          "latency_seconds": 14.063
+        }
+      },
+      {
+        "task": "resolve",
+        "scenario_name": "packaging_damage",
+        "category": "Packaging",
+        "priority": "Medium",
+        "response": "",
+        "latency_seconds": 20.726,
+        "input_tokens": 526,
+        "output_tokens": 1024,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.55,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Packaging",
+            "details": "Not evaluated for resolve task"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Medium",
+            "details": "Not evaluated for resolve task"
+          },
+          "resolution_quality": {
+            "score": 0.0,
+            "checks": {},
+            "details": "Empty response"
+          },
+          "format_compliance": {
+            "score": 0.0,
+            "valid_json": false,
+            "has_required_fields": false,
+            "details": "Empty response"
+          },
+          "response_quality": {
+            "score": 0.0,
+            "word_count": 0,
+            "details": "Empty response"
+          },
+          "latency_seconds": 20.726
+        }
+      },
+      {
+        "task": "ticket",
+        "scenario_name": "packaging_damage",
+        "category": "Packaging",
+        "priority": "Medium",
+        "response": "",
+        "latency_seconds": 16.365,
+        "input_tokens": 432,
+        "output_tokens": 1024,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.0,
+          "classification_accuracy": {
+            "score": 0.0,
+            "predicted": null,
+            "expected": "Packaging",
+            "details": "Could not parse JSON"
+          },
+          "priority_accuracy": {
+            "score": 0.0,
+            "predicted": null,
+            "expected": "Medium",
+            "details": "Could not parse JSON"
+          },
+          "resolution_quality": {
+            "score": 0.0,
+            "checks": {},
+            "details": "Empty response"
+          },
+          "format_compliance": {
+            "score": 0.0,
+            "valid_json": false,
+            "has_required_fields": false,
+            "details": "Empty response"
+          },
+          "response_quality": {
+            "score": 0.0,
+            "word_count": 0,
+            "details": "Empty response"
+          },
+          "latency_seconds": 16.365
+        }
+      },
+      {
+        "task": "classify",
+        "scenario_name": "trade_inquiry",
+        "category": "Trade",
+        "priority": "Low",
+        "response": "{\n  \"category\": \"Trade\",\n  \"priority\": \"Low\",\n  \"justification\": \"The message is a business inquiry from a retailer requesting bulk pricing, exclusive distribution rights, marketing support, and stock availability for new product lines.\",\n  \"keywords\": [\"bulk pricing\", \"distribution rights\", \"marketing support\", \"stock availability\"],\n  \"sla_hours\": 72,\n  \"confidence\": \"High\"\n}",
+        "latency_seconds": 10.235,
+        "input_tokens": 674,
+        "output_tokens": 761,
+        "error": null,
+        "evaluation": {
+          "overall_score": 1.0,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "trade",
+            "expected": "trade",
+            "details": "Correct: 'trade'"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "low",
+            "expected": "low",
+            "details": "Correct: 'low'"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {},
+            "details": "Not evaluated for classify task"
+          },
+          "format_compliance": {
+            "score": 1.0,
+            "valid_json": true,
+            "has_required_fields": true,
+            "details": "All required fields present"
+          },
+          "response_quality": {
+            "score": 1.0,
+            "word_count": 44,
+            "details": "Good quality"
+          },
+          "latency_seconds": 10.235
+        }
+      },
+      {
+        "task": "resolve",
+        "scenario_name": "trade_inquiry",
+        "category": "Trade",
+        "priority": "Low",
+        "response": "",
+        "latency_seconds": 16.598,
+        "input_tokens": 561,
+        "output_tokens": 1024,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.55,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Trade",
+            "details": "Not evaluated for resolve task"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Low",
+            "details": "Not evaluated for resolve task"
+          },
+          "resolution_quality": {
+            "score": 0.0,
+            "checks": {},
+            "details": "Empty response"
+          },
+          "format_compliance": {
+            "score": 0.0,
+            "valid_json": false,
+            "has_required_fields": false,
+            "details": "Empty response"
+          },
+          "response_quality": {
+            "score": 0.0,
+            "word_count": 0,
+            "details": "Empty response"
+          },
+          "latency_seconds": 16.598
+        }
+      },
+      {
+        "task": "ticket",
+        "scenario_name": "trade_inquiry",
+        "category": "Trade",
+        "priority": "Low",
+        "response": "",
+        "latency_seconds": 14.472,
+        "input_tokens": 467,
+        "output_tokens": 1024,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.0,
+          "classification_accuracy": {
+            "score": 0.0,
+            "predicted": null,
+            "expected": "Trade",
+            "details": "Could not parse JSON"
+          },
+          "priority_accuracy": {
+            "score": 0.0,
+            "predicted": null,
+            "expected": "Low",
+            "details": "Could not parse JSON"
+          },
+          "resolution_quality": {
+            "score": 0.0,
+            "checks": {},
+            "details": "Empty response"
+          },
+          "format_compliance": {
+            "score": 0.0,
+            "valid_json": false,
+            "has_required_fields": false,
+            "details": "Empty response"
+          },
+          "response_quality": {
+            "score": 0.0,
+            "word_count": 0,
+            "details": "Empty response"
+          },
+          "latency_seconds": 14.472
+        }
+      }
+    ]
+  },
+  "mimo_v2_omni": {
+    "display_name": "MiMo V2 Omni (Xiaomi)",
+    "provider": "openrouter",
+    "model_id": "mimo-v2-omni",
+    "results": [
+      {
+        "task": "classify",
+        "scenario_name": "allergic_reaction",
+        "category": "Product",
+        "priority": "High",
+        "response": "{\n  \"category\": \"Product\",\n  \"priority\": \"High\",\n  \"justification\": \"Customer reported severe allergic reaction requiring emergency medical care, indicating a potential safety risk from undisclosed ingredients in the product.\",\n  \"keywords\": [\"allergic reaction\", \"safety concern\", \"undisclosed ingredient\", \"emergency room\"],\n  \"",
+        "latency_seconds": 10.544,
+        "input_tokens": 665,
+        "output_tokens": 1024,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.35,
+          "classification_accuracy": {
+            "score": 0.0,
+            "predicted": null,
+            "expected": "Product",
+            "details": "Could not parse JSON"
+          },
+          "priority_accuracy": {
+            "score": 0.0,
+            "predicted": null,
+            "expected": "High",
+            "details": "Could not parse JSON"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {},
+            "details": "Not evaluated for classify task"
+          },
+          "format_compliance": {
+            "score": 0.0,
+            "valid_json": false,
+            "has_required_fields": false,
+            "details": "Not valid JSON"
+          },
+          "response_quality": {
+            "score": 1.0,
+            "word_count": 36,
+            "details": "Good quality"
+          },
+          "latency_seconds": 10.544
+        }
+      },
+      {
+        "task": "resolve",
+        "scenario_name": "allergic_reaction",
+        "category": "Product",
+        "priority": "High",
+        "response": "",
+        "latency_seconds": 12.424,
+        "input_tokens": 542,
+        "output_tokens": 1024,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.55,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Product",
+            "details": "Not evaluated for resolve task"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "High",
+            "details": "Not evaluated for resolve task"
+          },
+          "resolution_quality": {
+            "score": 0.0,
+            "checks": {},
+            "details": "Empty response"
+          },
+          "format_compliance": {
+            "score": 0.0,
+            "valid_json": false,
+            "has_required_fields": false,
+            "details": "Empty response"
+          },
+          "response_quality": {
+            "score": 0.0,
+            "word_count": 0,
+            "details": "Empty response"
+          },
+          "latency_seconds": 12.424
+        }
+      },
+      {
+        "task": "ticket",
+        "scenario_name": "allergic_reaction",
+        "category": "Product",
+        "priority": "High",
+        "response": "{\n  \"title\": \"Severe Allergic Reaction to Collagen Supplement\",\n  \"category\": \"Product\",\n  \"priority\": \"High\",\n  \"description\": \"Customer Priya Sharma reported a severe allergic reaction after consuming ProWellness Collagen Peptide Supplement, including hives, lip swelling, and difficulty breathing, requiring emergency medical attention. The physician suspects an undisclosed ingredient, as the label only lists 'contains fish collagen' without a full allergen panel. Customer is concerned about safety for others and has retained the product for investigation.\",\n  \"root_cause_hypothesis\": \"Hypothesis: Allergic reaction triggered by an undisclosed allergen or contaminant in the product, possibly due to incomplete labeling or cross-contamination during manufacturing.\",\n  \"recommended_actions\": [\"Initiate immediate investigation of batch PW-COL-2024-03 for allergen content and contamination.\", \"Contact customer Priya Sharma to gather more details, provide support, and arrange for product return for analysis.\", \"Review product labeling and",
+        "latency_seconds": 36.854,
+        "input_tokens": 457,
+        "output_tokens": 1024,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.136,
+          "classification_accuracy": {
+            "score": 0.0,
+            "predicted": null,
+            "expected": "Product",
+            "details": "Could not parse JSON"
+          },
+          "priority_accuracy": {
+            "score": 0.0,
+            "predicted": null,
+            "expected": "High",
+            "details": "Could not parse JSON"
+          },
+          "resolution_quality": {
+            "score": 0.143,
+            "checks": {
+              "has_title": false,
+              "has_description": false,
+              "has_root_cause": false,
+              "has_2plus_actions": false,
+              "actions_actionable": true,
+              "has_assigned_team": false,
+              "has_sla_deadline": false
+            },
+            "details": "1/7 checks passed"
+          },
+          "format_compliance": {
+            "score": 0.0,
+            "valid_json": false,
+            "has_required_fields": false,
+            "details": "Not valid JSON"
+          },
+          "response_quality": {
+            "score": 1.0,
+            "word_count": 127,
+            "details": "Good quality"
+          },
+          "latency_seconds": 36.854
+        }
+      },
+      {
+        "task": "classify",
+        "scenario_name": "product_quality",
+        "category": "Product",
+        "priority": "Medium",
+        "response": "{\n  \"category\": \"Product\",\n  \"priority\": \"Medium\",\n  \"justification",
+        "latency_seconds": 10.52,
+        "input_tokens": 649,
+        "output_tokens": 1024,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.315,
+          "classification_accuracy": {
+            "score": 0.0,
+            "predicted": null,
+            "expected": "Product",
+            "details": "Could not parse JSON"
+          },
+          "priority_accuracy": {
+            "score": 0.0,
+            "predicted": null,
+            "expected": "Medium",
+            "details": "Could not parse JSON"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {},
+            "details": "Not evaluated for classify task"
+          },
+          "format_compliance": {
+            "score": 0.0,
+            "valid_json": false,
+            "has_required_fields": false,
+            "details": "Not valid JSON"
+          },
+          "response_quality": {
+            "score": 0.65,
+            "word_count": 6,
+            "details": "Too short (6 words)"
+          },
+          "latency_seconds": 10.52
+        }
+      },
+      {
+        "task": "resolve",
+        "scenario_name": "product_quality",
+        "category": "Product",
+        "priority": "Medium",
+        "response": "",
+        "latency_seconds": 13.653,
+        "input_tokens": 526,
+        "output_tokens": 1024,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.55,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Product",
+            "details": "Not evaluated for resolve task"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Medium",
+            "details": "Not evaluated for resolve task"
+          },
+          "resolution_quality": {
+            "score": 0.0,
+            "checks": {},
+            "details": "Empty response"
+          },
+          "format_compliance": {
+            "score": 0.0,
+            "valid_json": false,
+            "has_required_fields": false,
+            "details": "Empty response"
+          },
+          "response_quality": {
+            "score": 0.0,
+            "word_count": 0,
+            "details": "Empty response"
+          },
+          "latency_seconds": 13.653
+        }
+      },
+      {
+        "task": "ticket",
+        "scenario_name": "product_quality",
+        "category": "Product",
+        "priority": "Medium",
+        "response": "",
+        "latency_seconds": 10.681,
+        "input_tokens": 441,
+        "output_tokens": 1024,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.0,
+          "classification_accuracy": {
+            "score": 0.0,
+            "predicted": null,
+            "expected": "Product",
+            "details": "Could not parse JSON"
+          },
+          "priority_accuracy": {
+            "score": 0.0,
+            "predicted": null,
+            "expected": "Medium",
+            "details": "Could not parse JSON"
+          },
+          "resolution_quality": {
+            "score": 0.0,
+            "checks": {},
+            "details": "Empty response"
+          },
+          "format_compliance": {
+            "score": 0.0,
+            "valid_json": false,
+            "has_required_fields": false,
+            "details": "Empty response"
+          },
+          "response_quality": {
+            "score": 0.0,
+            "word_count": 0,
+            "details": "Empty response"
+          },
+          "latency_seconds": 10.681
+        }
+      },
+      {
+        "task": "classify",
+        "scenario_name": "packaging_damage",
+        "category": "Packaging",
+        "priority": "Medium",
+        "response": "{\n  \"category\": \"Product\",\n  \"priority\": \"High\",\n  \"justification\": \"The torn tamper-evident seal raises credible concerns about product contamination and safety, indicating a high-priority issue.\",\n  \"keywords\": [\"tamper seal torn\", \"contamination risk\", \"product safety\"],\n  \"sla_hours\": 4,\n  \"confidence\": \"High\"\n}",
+        "latency_seconds": 7.612,
+        "input_tokens": 664,
+        "output_tokens": 753,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.575,
+          "classification_accuracy": {
+            "score": 0.0,
+            "predicted": "product",
+            "expected": "packaging",
+            "details": "Wrong category: 'product' (expected 'packaging')"
+          },
+          "priority_accuracy": {
+            "score": 0.5,
+            "predicted": "high",
+            "expected": "medium",
+            "details": "Adjacent level: 'high' (expected 'medium') \u2013 partial credit"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {},
+            "details": "Not evaluated for classify task"
+          },
+          "format_compliance": {
+            "score": 1.0,
+            "valid_json": true,
+            "has_required_fields": true,
+            "details": "All required fields present"
+          },
+          "response_quality": {
+            "score": 1.0,
+            "word_count": 35,
+            "details": "Good quality"
+          },
+          "latency_seconds": 7.612
+        }
+      },
+      {
+        "task": "resolve",
+        "scenario_name": "packaging_damage",
+        "category": "Packaging",
+        "priority": "Medium",
+        "response": "",
+        "latency_seconds": 10.783,
+        "input_tokens": 541,
+        "output_tokens": 1024,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.55,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Packaging",
+            "details": "Not evaluated for resolve task"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Medium",
+            "details": "Not evaluated for resolve task"
+          },
+          "resolution_quality": {
+            "score": 0.0,
+            "checks": {},
+            "details": "Empty response"
+          },
+          "format_compliance": {
+            "score": 0.0,
+            "valid_json": false,
+            "has_required_fields": false,
+            "details": "Empty response"
+          },
+          "response_quality": {
+            "score": 0.0,
+            "word_count": 0,
+            "details": "Empty response"
+          },
+          "latency_seconds": 10.783
+        }
+      },
+      {
+        "task": "ticket",
+        "scenario_name": "packaging_damage",
+        "category": "Packaging",
+        "priority": "Medium",
+        "response": "",
+        "latency_seconds": 10.27,
+        "input_tokens": 456,
+        "output_tokens": 1024,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.0,
+          "classification_accuracy": {
+            "score": 0.0,
+            "predicted": null,
+            "expected": "Packaging",
+            "details": "Could not parse JSON"
+          },
+          "priority_accuracy": {
+            "score": 0.0,
+            "predicted": null,
+            "expected": "Medium",
+            "details": "Could not parse JSON"
+          },
+          "resolution_quality": {
+            "score": 0.0,
+            "checks": {},
+            "details": "Empty response"
+          },
+          "format_compliance": {
+            "score": 0.0,
+            "valid_json": false,
+            "has_required_fields": false,
+            "details": "Empty response"
+          },
+          "response_quality": {
+            "score": 0.0,
+            "word_count": 0,
+            "details": "Empty response"
+          },
+          "latency_seconds": 10.27
+        }
+      },
+      {
+        "task": "classify",
+        "scenario_name": "trade_inquiry",
+        "category": "Trade",
+        "priority": "Low",
+        "response": "{\n  \"category\": \"Trade",
+        "latency_seconds": 10.491,
+        "input_tokens": 699,
+        "output_tokens": 1024,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.315,
+          "classification_accuracy": {
+            "score": 0.0,
+            "predicted": null,
+            "expected": "Trade",
+            "details": "Could not parse JSON"
+          },
+          "priority_accuracy": {
+            "score": 0.0,
+            "predicted": null,
+            "expected": "Low",
+            "details": "Could not parse JSON"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {},
+            "details": "Not evaluated for classify task"
+          },
+          "format_compliance": {
+            "score": 0.0,
+            "valid_json": false,
+            "has_required_fields": false,
+            "details": "Not valid JSON"
+          },
+          "response_quality": {
+            "score": 0.65,
+            "word_count": 3,
+            "details": "Too short (3 words)"
+          },
+          "latency_seconds": 10.491
+        }
+      },
+      {
+        "task": "resolve",
+        "scenario_name": "trade_inquiry",
+        "category": "Trade",
+        "priority": "Low",
+        "response": "",
+        "latency_seconds": 11.285,
+        "input_tokens": 576,
+        "output_tokens": 1024,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.55,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Trade",
+            "details": "Not evaluated for resolve task"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Low",
+            "details": "Not evaluated for resolve task"
+          },
+          "resolution_quality": {
+            "score": 0.0,
+            "checks": {},
+            "details": "Empty response"
+          },
+          "format_compliance": {
+            "score": 0.0,
+            "valid_json": false,
+            "has_required_fields": false,
+            "details": "Empty response"
+          },
+          "response_quality": {
+            "score": 0.0,
+            "word_count": 0,
+            "details": "Empty response"
+          },
+          "latency_seconds": 11.285
+        }
+      },
+      {
+        "task": "ticket",
+        "scenario_name": "trade_inquiry",
+        "category": "Trade",
+        "priority": "Low",
+        "response": "",
+        "latency_seconds": 10.889,
+        "input_tokens": 491,
+        "output_tokens": 1024,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.0,
+          "classification_accuracy": {
+            "score": 0.0,
+            "predicted": null,
+            "expected": "Trade",
+            "details": "Could not parse JSON"
+          },
+          "priority_accuracy": {
+            "score": 0.0,
+            "predicted": null,
+            "expected": "Low",
+            "details": "Could not parse JSON"
+          },
+          "resolution_quality": {
+            "score": 0.0,
+            "checks": {},
+            "details": "Empty response"
+          },
+          "format_compliance": {
+            "score": 0.0,
+            "valid_json": false,
+            "has_required_fields": false,
+            "details": "Empty response"
+          },
+          "response_quality": {
+            "score": 0.0,
+            "word_count": 0,
+            "details": "Empty response"
+          },
+          "latency_seconds": 10.889
+        }
+      }
+    ]
+  },
+  "mimo_v2_pro": {
+    "display_name": "MiMo V2 Pro (Xiaomi)",
+    "provider": "openrouter",
+    "model_id": "mimo-v2-pro",
+    "results": [
+      {
+        "task": "classify",
+        "scenario_name": "allergic_reaction",
+        "category": "Product",
+        "priority": "High",
+        "response": "{\n  \"category\": \"Product\",\n  \"priority\": \"High\",\n  \"justification\": \"Severe allergic reaction reported with symptoms requiring emergency care, indicating a product safety risk due to potential undisclosed allergens.\",\n  \"keywords\": [\"allergic reaction\", \"hives\", \"lip swelling\", \"difficulty breathing\", \"undisclosed ingredient\", \"fish collagen\", \"allergen panel\"],\n  \"sla_hours\": 4,\n  \"confidence\": \"High\"\n}",
+        "latency_seconds": 12.695,
+        "input_tokens": 665,
+        "output_tokens": 800,
+        "error": null,
+        "evaluation": {
+          "overall_score": 1.0,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "product",
+            "expected": "product",
+            "details": "Correct: 'product'"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "high",
+            "expected": "high",
+            "details": "Correct: 'high'"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {},
+            "details": "Not evaluated for classify task"
+          },
+          "format_compliance": {
+            "score": 1.0,
+            "valid_json": true,
+            "has_required_fields": true,
+            "details": "All required fields present"
+          },
+          "response_quality": {
+            "score": 1.0,
+            "word_count": 44,
+            "details": "Good quality"
+          },
+          "latency_seconds": 12.695
+        }
+      },
+      {
+        "task": "resolve",
+        "scenario_name": "allergic_reaction",
+        "category": "Product",
+        "priority": "High",
+        "response": "",
+        "latency_seconds": 16.408,
+        "input_tokens": 542,
+        "output_tokens": 1024,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.55,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Product",
+            "details": "Not evaluated for resolve task"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "High",
+            "details": "Not evaluated for resolve task"
+          },
+          "resolution_quality": {
+            "score": 0.0,
+            "checks": {},
+            "details": "Empty response"
+          },
+          "format_compliance": {
+            "score": 0.0,
+            "valid_json": false,
+            "has_required_fields": false,
+            "details": "Empty response"
+          },
+          "response_quality": {
+            "score": 0.0,
+            "word_count": 0,
+            "details": "Empty response"
+          },
+          "latency_seconds": 16.408
+        }
+      },
+      {
+        "task": "ticket",
+        "scenario_name": "allergic_reaction",
+        "category": "Product",
+        "priority": "High",
+        "response": "",
+        "latency_seconds": 15.934,
+        "input_tokens": 457,
+        "output_tokens": 1024,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.0,
+          "classification_accuracy": {
+            "score": 0.0,
+            "predicted": null,
+            "expected": "Product",
+            "details": "Could not parse JSON"
+          },
+          "priority_accuracy": {
+            "score": 0.0,
+            "predicted": null,
+            "expected": "High",
+            "details": "Could not parse JSON"
+          },
+          "resolution_quality": {
+            "score": 0.0,
+            "checks": {},
+            "details": "Empty response"
+          },
+          "format_compliance": {
+            "score": 0.0,
+            "valid_json": false,
+            "has_required_fields": false,
+            "details": "Empty response"
+          },
+          "response_quality": {
+            "score": 0.0,
+            "word_count": 0,
+            "details": "Empty response"
+          },
+          "latency_seconds": 15.934
+        }
+      },
+      {
+        "task": "classify",
+        "scenario_name": "product_quality",
+        "category": "Product",
+        "priority": "Medium",
+        "response": "{\n  \"category\": \"Product\",\n  \"priority\": \"Medium\",\n  \"justification\": \"Customer reports efficacy failure and noticeable color change in tablets, indicating a potential quality defect affecting product performance.\",\n  \"keywords\": [\"efficacy failure\", \"color change\", \"quality defect\"],\n  \"sla_hours\": 24,\n  \"confidence\": \"High\"\n}",
+        "latency_seconds": 14.651,
+        "input_tokens": 649,
+        "output_tokens": 888,
+        "error": null,
+        "evaluation": {
+          "overall_score": 1.0,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "product",
+            "expected": "product",
+            "details": "Correct: 'product'"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "medium",
+            "expected": "medium",
+            "details": "Correct: 'medium'"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {},
+            "details": "Not evaluated for classify task"
+          },
+          "format_compliance": {
+            "score": 1.0,
+            "valid_json": true,
+            "has_required_fields": true,
+            "details": "All required fields present"
+          },
+          "response_quality": {
+            "score": 1.0,
+            "word_count": 36,
+            "details": "Good quality"
+          },
+          "latency_seconds": 14.651
+        }
+      },
+      {
+        "task": "resolve",
+        "scenario_name": "product_quality",
+        "category": "Product",
+        "priority": "Medium",
+        "response": "",
+        "latency_seconds": 17.039,
+        "input_tokens": 526,
+        "output_tokens": 1024,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.55,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Product",
+            "details": "Not evaluated for resolve task"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Medium",
+            "details": "Not evaluated for resolve task"
+          },
+          "resolution_quality": {
+            "score": 0.0,
+            "checks": {},
+            "details": "Empty response"
+          },
+          "format_compliance": {
+            "score": 0.0,
+            "valid_json": false,
+            "has_required_fields": false,
+            "details": "Empty response"
+          },
+          "response_quality": {
+            "score": 0.0,
+            "word_count": 0,
+            "details": "Empty response"
+          },
+          "latency_seconds": 17.039
+        }
+      },
+      {
+        "task": "ticket",
+        "scenario_name": "product_quality",
+        "category": "Product",
+        "priority": "Medium",
+        "response": "",
+        "latency_seconds": 16.21,
+        "input_tokens": 441,
+        "output_tokens": 1024,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.0,
+          "classification_accuracy": {
+            "score": 0.0,
+            "predicted": null,
+            "expected": "Product",
+            "details": "Could not parse JSON"
+          },
+          "priority_accuracy": {
+            "score": 0.0,
+            "predicted": null,
+            "expected": "Medium",
+            "details": "Could not parse JSON"
+          },
+          "resolution_quality": {
+            "score": 0.0,
+            "checks": {},
+            "details": "Empty response"
+          },
+          "format_compliance": {
+            "score": 0.0,
+            "valid_json": false,
+            "has_required_fields": false,
+            "details": "Empty response"
+          },
+          "response_quality": {
+            "score": 0.0,
+            "word_count": 0,
+            "details": "Empty response"
+          },
+          "latency_seconds": 16.21
+        }
+      },
+      {
+        "task": "classify",
+        "scenario_name": "packaging_damage",
+        "category": "Packaging",
+        "priority": "Medium",
+        "response": "",
+        "latency_seconds": 15.29,
+        "input_tokens": 664,
+        "output_tokens": 1024,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.25,
+          "classification_accuracy": {
+            "score": 0.0,
+            "predicted": null,
+            "expected": "Packaging",
+            "details": "Could not parse JSON"
+          },
+          "priority_accuracy": {
+            "score": 0.0,
+            "predicted": null,
+            "expected": "Medium",
+            "details": "Could not parse JSON"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {},
+            "details": "Not evaluated for classify task"
+          },
+          "format_compliance": {
+            "score": 0.0,
+            "valid_json": false,
+            "has_required_fields": false,
+            "details": "Empty response"
+          },
+          "response_quality": {
+            "score": 0.0,
+            "word_count": 0,
+            "details": "Empty response"
+          },
+          "latency_seconds": 15.29
+        }
+      },
+      {
+        "task": "resolve",
+        "scenario_name": "packaging_damage",
+        "category": "Packaging",
+        "priority": "Medium",
+        "response": "",
+        "latency_seconds": 15.089,
+        "input_tokens": 541,
+        "output_tokens": 1024,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.55,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Packaging",
+            "details": "Not evaluated for resolve task"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Medium",
+            "details": "Not evaluated for resolve task"
+          },
+          "resolution_quality": {
+            "score": 0.0,
+            "checks": {},
+            "details": "Empty response"
+          },
+          "format_compliance": {
+            "score": 0.0,
+            "valid_json": false,
+            "has_required_fields": false,
+            "details": "Empty response"
+          },
+          "response_quality": {
+            "score": 0.0,
+            "word_count": 0,
+            "details": "Empty response"
+          },
+          "latency_seconds": 15.089
+        }
+      },
+      {
+        "task": "ticket",
+        "scenario_name": "packaging_damage",
+        "category": "Packaging",
+        "priority": "Medium",
+        "response": "",
+        "latency_seconds": 15.7,
+        "input_tokens": 456,
+        "output_tokens": 1024,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.0,
+          "classification_accuracy": {
+            "score": 0.0,
+            "predicted": null,
+            "expected": "Packaging",
+            "details": "Could not parse JSON"
+          },
+          "priority_accuracy": {
+            "score": 0.0,
+            "predicted": null,
+            "expected": "Medium",
+            "details": "Could not parse JSON"
+          },
+          "resolution_quality": {
+            "score": 0.0,
+            "checks": {},
+            "details": "Empty response"
+          },
+          "format_compliance": {
+            "score": 0.0,
+            "valid_json": false,
+            "has_required_fields": false,
+            "details": "Empty response"
+          },
+          "response_quality": {
+            "score": 0.0,
+            "word_count": 0,
+            "details": "Empty response"
+          },
+          "latency_seconds": 15.7
+        }
+      },
+      {
+        "task": "classify",
+        "scenario_name": "trade_inquiry",
+        "category": "Trade",
+        "priority": "Low",
+        "response": "{\n  \"category\": \"Trade\",\n  \"priority\": \"Low\",\n  \"justification\": \"This is a standard business inquiry from a retailer regarding commercial terms and product expansion, not a product or packaging complaint.\",\n  \"keywords\": [\"bulk pricing\", \"distribution rights\", \"stock availability\"],\n  \"sla_hours\": 72,\n  \"confidence\": \"High\"\n}",
+        "latency_seconds": 8.901,
+        "input_tokens": 699,
+        "output_tokens": 534,
+        "error": null,
+        "evaluation": {
+          "overall_score": 1.0,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "trade",
+            "expected": "trade",
+            "details": "Correct: 'trade'"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "low",
+            "expected": "low",
+            "details": "Correct: 'low'"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {},
+            "details": "Not evaluated for classify task"
+          },
+          "format_compliance": {
+            "score": 1.0,
+            "valid_json": true,
+            "has_required_fields": true,
+            "details": "All required fields present"
+          },
+          "response_quality": {
+            "score": 1.0,
+            "word_count": 39,
+            "details": "Good quality"
+          },
+          "latency_seconds": 8.901
+        }
+      },
+      {
+        "task": "resolve",
+        "scenario_name": "trade_inquiry",
+        "category": "Trade",
+        "priority": "Low",
+        "response": "",
+        "latency_seconds": 15.602,
+        "input_tokens": 576,
+        "output_tokens": 1024,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.55,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Trade",
+            "details": "Not evaluated for resolve task"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Low",
+            "details": "Not evaluated for resolve task"
+          },
+          "resolution_quality": {
+            "score": 0.0,
+            "checks": {},
+            "details": "Empty response"
+          },
+          "format_compliance": {
+            "score": 0.0,
+            "valid_json": false,
+            "has_required_fields": false,
+            "details": "Empty response"
+          },
+          "response_quality": {
+            "score": 0.0,
+            "word_count": 0,
+            "details": "Empty response"
+          },
+          "latency_seconds": 15.602
+        }
+      },
+      {
+        "task": "ticket",
+        "scenario_name": "trade_inquiry",
+        "category": "Trade",
+        "priority": "Low",
+        "response": "",
+        "latency_seconds": 16.549,
+        "input_tokens": 491,
+        "output_tokens": 1024,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.0,
+          "classification_accuracy": {
+            "score": 0.0,
+            "predicted": null,
+            "expected": "Trade",
+            "details": "Could not parse JSON"
+          },
+          "priority_accuracy": {
+            "score": 0.0,
+            "predicted": null,
+            "expected": "Low",
+            "details": "Could not parse JSON"
+          },
+          "resolution_quality": {
+            "score": 0.0,
+            "checks": {},
+            "details": "Empty response"
+          },
+          "format_compliance": {
+            "score": 0.0,
+            "valid_json": false,
+            "has_required_fields": false,
+            "details": "Empty response"
+          },
+          "response_quality": {
+            "score": 0.0,
+            "word_count": 0,
+            "details": "Empty response"
+          },
+          "latency_seconds": 16.549
+        }
+      }
+    ]
+  },
+  "minimax_m2_5": {
+    "display_name": "MiniMax M2.5",
+    "provider": "openrouter",
+    "model_id": "minimax-m2.5",
+    "results": [
+      {
+        "task": "classify",
+        "scenario_name": "allergic_reaction",
+        "category": "Product",
+        "priority": "High",
+        "response": "{\"category\":\"Product\",\"priority\":\"High\",\"justification\":\"Severe allergic reaction requiring emergency medical care indicates undisclosed allergen in product causing immediate safety risk to consumer and potentially other customers\",\"keywords\":[\"allergic reaction\",\"undisclosed ingredient\",\"emergency\",\"safety risk\",\"hives\",\"lip swelling\",\"labeling\",\"anaphylaxis\",\"batch PW-COL-2024-03\"],\"sla_hours\":4,\"confidence\":\"High\"}",
+        "latency_seconds": 5.293,
+        "input_tokens": 643,
+        "output_tokens": 431,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.965,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "product",
+            "expected": "product",
+            "details": "Correct: 'product'"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "high",
+            "expected": "high",
+            "details": "Correct: 'high'"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {},
+            "details": "Not evaluated for classify task"
+          },
+          "format_compliance": {
+            "score": 1.0,
+            "valid_json": true,
+            "has_required_fields": true,
+            "details": "All required fields present"
+          },
+          "response_quality": {
+            "score": 0.65,
+            "word_count": 27,
+            "details": "Too short (27 words)"
+          },
+          "latency_seconds": 5.293
+        }
+      },
+      {
+        "task": "resolve",
+        "scenario_name": "allergic_reaction",
+        "category": "Product",
+        "priority": "High",
+        "response": "{\"immediate_action\":\"Immediately escalate to QA Manager and Senior Management. Contact the customer by phone within 1 hour to acknowledge receipt and assure immediate investigation. Document all details in incident report.\",\"resolution_steps\":[\"[Support Executive] Contact customer by phone within 1 hour to express empathy and confirm investigation has begun; request photos of product batch and remaining sachets if not yet received\",\"[Quality Assurance] Secure batch PW-COL-2024-03 from warehouse forTesting; review manufacturing records, allergen statement compliance, and raw material sourcing for fish collagen component; check for cross-contamination risks\",\"[QA Manager] Engage third-party lab to test product for undisclosed allergens; review complete label against regulatory requirements (FSSAI/USDA if applicable); determine if voluntary recall is warranted\",\"[Regulatory Affairs] If undisclosed allergen confirmed, prepare regulatory notification within 4 hours; coordinate with legal on consumer safety alert and potential recallnotice\",\"[Senior Management] Review incident; approve customer compensation and medical expense reimbursement if warranted; authorize proactive consumer notification\"],\"assigned_team\":\"Quality Assurance\",\"escalation_required\":true,\"follow_up_required\":true,\"follow_up_timeline\":\"24 hours\",\"customer_communication\":\"Dear Ms. Sharma, thank you for contacting us and I am deeply sorry to learn of your frightening experience. Your safety is our highest priority, and I want to assure you that we have immediately escalated this to our senior quality team for a thorough investigation. We are treating this matter with the utmost seriousness. Our team will be reviewing batch PW-COL-2024-03 and willcontact you within 24 hours with an initial findings report. We are also requesting any additional product samples you retained for our investigation. In the meantime, please send us copies of your medical reports for our records. We appreciate your vigilance and will keep you updated every step of the way.\",\"estimated_resolution_time\":\"4 hours\"}",
+        "latency_seconds": 9.278,
+        "input_tokens": 527,
+        "output_tokens": 819,
+        "error": null,
+        "evaluation": {
+          "overall_score": 1.0,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Product",
+            "details": "Not evaluated for resolve task"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "High",
+            "details": "Not evaluated for resolve task"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {
+              "has_immediate_action": true,
+              "has_3plus_steps": true,
+              "steps_use_action_verbs": true,
+              "has_customer_message": true,
+              "has_resolution_timeline": true,
+              "escalation_logic_correct": true
+            },
+            "details": "6/6 checks passed"
+          },
+          "format_compliance": {
+            "score": 1.0,
+            "valid_json": true,
+            "has_required_fields": true,
+            "details": "All required fields present"
+          },
+          "response_quality": {
+            "score": 1.0,
+            "word_count": 260,
+            "details": "Good quality"
+          },
+          "latency_seconds": 9.278
+        }
+      },
+      {
+        "task": "ticket",
+        "scenario_name": "allergic_reaction",
+        "category": "Product",
+        "priority": "High",
+        "response": "\n{\"title\":\"Severe Allergic Reaction to ProWellness Collagen Supplement - ER Visit\",\"category\":\"Product\",\"priority\":\"High\",\"description\":\"Customer Priya Sharma experienced severe allergic reaction (hives, lip swelling, difficulty breathing) within 30 minutes of consuming ProWellness Collagen Peptide Supplement Batch PW-COL-2024-03. Required emergency room treatment with IV antihistamines. Physician suspects undisclosed allergen. Product label only lists 'contains fish collagen' with no full allergen panel. Customer demands immediate response and assurance of consumer safety.\",\"root_cause_hypothesis\":\"Likely undisclosed allergen in collagen supplement formulation causing severe anaphylactic-type reaction. Potential undeclared ingredients (e.g., additional fish/seaweed derivatives, fillers, or additives) not disclosed on label. Incomplete allergen labeling may have prevented consumer with known sensitivities from avoiding product.\",\"recommended_actions\":[\"Immediately escalate to Quality Assurance for batch investigation and allergen audit\",\"Contact customer within 4 hours to acknowledge complaint and gather additional details\",\"Review product labeling compliance against allergen disclosure regulations\",\"Quarantine remaining stock of Batch PW-COL-2024-03 pending investigation\",\"Assess if recall or customer notification is required for consumer safety\",\"Document incident in product safety database and report to regulatory authorities if required\"],\"assigned_team\":\"Quality Assurance\",\"sla_deadline_hours\":4,\"tags\":[\"allergic-reaction\",\"safety-critical\",\"medical-attention\",\"labeling-issue\",\"urgent\",\"batch-PW-COL-2024-03\",\"product-safety\",\"consumer-protection\"],\"status\":\"Open\"}",
+        "latency_seconds": 33.003,
+        "input_tokens": 439,
+        "output_tokens": 819,
+        "error": null,
+        "evaluation": {
+          "overall_score": 1.0,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "product",
+            "expected": "product",
+            "details": "Correct: 'product'"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "high",
+            "expected": "high",
+            "details": "Correct: 'high'"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {
+              "has_title": true,
+              "has_description": true,
+              "has_root_cause": true,
+              "has_2plus_actions": true,
+              "actions_actionable": true,
+              "has_assigned_team": true,
+              "has_sla_deadline": true
+            },
+            "details": "7/7 checks passed"
+          },
+          "format_compliance": {
+            "score": 1.0,
+            "valid_json": true,
+            "has_required_fields": true,
+            "details": "All required fields present"
+          },
+          "response_quality": {
+            "score": 1.0,
+            "word_count": 159,
+            "details": "Good quality"
+          },
+          "latency_seconds": 33.003
+        }
+      },
+      {
+        "task": "classify",
+        "scenario_name": "product_quality",
+        "category": "Product",
+        "priority": "Medium",
+        "response": "{\"category\":\"Product\",\"priority\":\"Medium\",\"justification\":\"Customer reports product not delivering promised immunity benefits and notices tablets appear paler suggesting possible quality/formulation change, without any safety issue involved\",\"keywords\":[\"efficacy failure\",\"color variation\",\"quality concern\",\"refund request\",\"formulation change\",\"immunity claim\"],\"sla_hours\":24,\"confidence\":\"Medium\"}",
+        "latency_seconds": 5.35,
+        "input_tokens": 220,
+        "output_tokens": 585,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.965,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "product",
+            "expected": "product",
+            "details": "Correct: 'product'"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "medium",
+            "expected": "medium",
+            "details": "Correct: 'medium'"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {},
+            "details": "Not evaluated for classify task"
+          },
+          "format_compliance": {
+            "score": 1.0,
+            "valid_json": true,
+            "has_required_fields": true,
+            "details": "All required fields present"
+          },
+          "response_quality": {
+            "score": 0.65,
+            "word_count": 28,
+            "details": "Too short (28 words)"
+          },
+          "latency_seconds": 5.35
+        }
+      },
+      {
+        "task": "resolve",
+        "scenario_name": "product_quality",
+        "category": "Product",
+        "priority": "Medium",
+        "response": "{\"immediate_action\": \"Log the complaint in the system and arrange a prepaid courier pickup for the unused tablets to sent for quality analysis. Acknowledge customer frustration and assure investigation.\", \"resolution_steps\": [\"[Support Executive] Log complaint in CRM, create return merchandise authorization (RMA), and schedule courier pickup for the unused tablets to send for quality testing\", \"[Quality Assurance] Receive and inspect the returned tablets for color, hardness, and active ingredient content. Compare against batch manufacturing records and previous batch samples\", \"[QA Team] Investigate if any formulation or raw material source changes occurred in the production batch. Document findings in a quality report\", \"[Support Executive] Based on QA report, process full refund for both packs and communicate final resolution to customer\"], \"assigned_team\": \"Quality Assurance\", \"escalation_required\": false, \"follow_up_required\": true, \"follow_up_timeline\": \"24 hours\", \"customer_communication\": \"Dear Mr. Kumar, thank you for bringing this to our attention. We take product quality seriously and appreciate you taking the time to report this. I have arranged a courier to collect the unused tablets for our quality team to investigate. Your concern about the tablet color change and product efficacy is important to us, and we will conduct a thorough analysis. Once we receive the tablets and complete our investigation, we will contact you with our findings and discuss the next steps including your refund request. We apologize for the frustration this has caused and thank you for your patience.\", \"estimated_resolution_time\": \"24 hours\"}",
+        "latency_seconds": 18.19,
+        "input_tokens": 200,
+        "output_tokens": 655,
+        "error": null,
+        "evaluation": {
+          "overall_score": 1.0,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Product",
+            "details": "Not evaluated for resolve task"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Medium",
+            "details": "Not evaluated for resolve task"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {
+              "has_immediate_action": true,
+              "has_3plus_steps": true,
+              "steps_use_action_verbs": true,
+              "has_customer_message": true,
+              "has_resolution_timeline": true,
+              "escalation_logic_correct": true
+            },
+            "details": "6/6 checks passed"
+          },
+          "format_compliance": {
+            "score": 1.0,
+            "valid_json": true,
+            "has_required_fields": true,
+            "details": "All required fields present"
+          },
+          "response_quality": {
+            "score": 1.0,
+            "word_count": 232,
+            "details": "Good quality"
+          },
+          "latency_seconds": 18.19
+        }
+      },
+      {
+        "task": "ticket",
+        "scenario_name": "product_quality",
+        "category": "Product",
+        "priority": "Medium",
+        "response": "{\"title\":\"Customer Reports Product Ineffectiveness & Tablet Color Change\",\"category\":\"Product\",\"priority\":\"Medium\",\"description\":\"Mr. Rajesh Kumar reports that after three months of consistent use of ImmunoBoost Vitamin C + Zinc Tablets at recommended dosage, he experienced two colds during this period - something that never occurred with his previous competitor brand. Upon opening a new pack today, he noticed the tablets appear noticeably paler than earlier packs of the same product. He suspects a formulation or manufacturing quality change and requests a full refund for both packs, offering to courier unused tablets back for quality testing.\",\"root_cause_hypothesis\":\"The paler tablet appearance suggests a possible manufacturing batch variation or raw material quality change. The reported product ineffectiveness may be related to a formulation modification or could indicate a defective batch requiring quality investigation.\",\"recommended_actions\":[\"Process refund request as per customer loyalty policy while investigation is underway\",\"Initiate quality investigation of the batch referenced by customer (check batch number if provided)\",\"Coordinate with Quality Assurance team to test returned sample tablets for active ingredient concentration and uniformity\"],\"assigned_team\":\"Customer Support\",\"sla_deadline_hours\":72,\"tags\":[\"product-quality\",\"refund-request\",\"ineffective-product\"],\"status\":\"Open\"}",
+        "latency_seconds": 6.744,
+        "input_tokens": 432,
+        "output_tokens": 669,
+        "error": null,
+        "evaluation": {
+          "overall_score": 1.0,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "product",
+            "expected": "product",
+            "details": "Correct: 'product'"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "medium",
+            "expected": "medium",
+            "details": "Correct: 'medium'"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {
+              "has_title": true,
+              "has_description": true,
+              "has_root_cause": true,
+              "has_2plus_actions": true,
+              "actions_actionable": true,
+              "has_assigned_team": true,
+              "has_sla_deadline": true
+            },
+            "details": "7/7 checks passed"
+          },
+          "format_compliance": {
+            "score": 1.0,
+            "valid_json": true,
+            "has_required_fields": true,
+            "details": "All required fields present"
+          },
+          "response_quality": {
+            "score": 1.0,
+            "word_count": 164,
+            "details": "Good quality"
+          },
+          "latency_seconds": 6.744
+        }
+      },
+      {
+        "task": "classify",
+        "scenario_name": "packaging_damage",
+        "category": "Packaging",
+        "priority": "Medium",
+        "response": "{\"category\":\"Packaging\",\"priority\":\"Medium\",\"justification\":\"Shipping damage resulted in a torn tamper-evident shrink-wrap seal, creating a credible concern for potential product contamination or oxidation even though no actual compromise is confirmed.\",\"keywords\":[\"tamper seal\",\"shipping damage\",\"crushed box\",\"replacement\",\"logistics\",\"shrink-wrap\"],\"sla_hours\":24,\"confidence\":\"High\"}",
+        "latency_seconds": 13.26,
+        "input_tokens": 209,
+        "output_tokens": 634,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.965,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "packaging",
+            "expected": "packaging",
+            "details": "Correct: 'packaging'"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "medium",
+            "expected": "medium",
+            "details": "Correct: 'medium'"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {},
+            "details": "Not evaluated for classify task"
+          },
+          "format_compliance": {
+            "score": 1.0,
+            "valid_json": true,
+            "has_required_fields": true,
+            "details": "All required fields present"
+          },
+          "response_quality": {
+            "score": 0.65,
+            "word_count": 29,
+            "details": "Too short (29 words)"
+          },
+          "latency_seconds": 13.26
+        }
+      },
+      {
+        "task": "resolve",
+        "scenario_name": "packaging_damage",
+        "category": "Packaging",
+        "priority": "Medium",
+        "response": "{\"immediate_action\":\"Acknowledge the serious nature of the tampered seal concern. Immediately initiate a replacement order for expedited dispatch. Request the customer to email photographs for Quality Assurance review. Log this as a Quality Alert in the system.\",\"resolution_steps\":[\"[Support Executive] Call customer to empathetically acknowledge the safety concern, apologize for the distress, and confirm replacement is being processed with enhanced protective packaging (double-boxed with additional cushioning). Note customer request to inform logistics partner.\",\"[Quality Assurance] Review customer photos if provided. Assess whether the product should be returned/destroyed or can be safely used. Investigate the shrink-wrap seal failure - coordinate with packaging team to verify tamper-evident seal integrity on current inventory.\",\"[Logistics] Ship replacement using reinforced packaging (outer box with bubble wrap, inner carton with padding). File a formal complaint with the delivery carrier regarding the damaged package and torn tamper seal. Request carrier to investigate the handling failure at their distribution center.\",\"[Sales] Ensure replacement order is flagged for priority handling and tracked for delivery confirmation.\"],\"assigned_team\":\"Quality Assurance\",\"escalation_required\":true,\"follow_up_required\":true,\"follow_up_timeline\":\"24 hours after replacement ships - confirm delivery and product condition\",\"customer_communication\":\"Dear Sneha, Thank you for bringing this to our urgent attention. We sincerely apologize for the distress caused by the damaged package and compromised tamper seal on your OmegaCare Fish Oil order. Your safety concern is completely valid, and we take this very seriously. We are immediately processing a replacement shipment for you with enhanced protective packaging to ensure safe delivery. Our Quality Assurance team is reviewing your reported issue and will coordinate with our logistics partner to address the handling failures. Please reply with your photographs if available, and we will keep you updated on your replacement shipment status. We appreciate your patience and are committed to resolving this promptly. Kind regards, OmegaCare Support Team\",\"estimated_resolution_time\":\"24 hours\"}",
+        "latency_seconds": 17.382,
+        "input_tokens": 221,
+        "output_tokens": 855,
+        "error": null,
+        "evaluation": {
+          "overall_score": 1.0,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Packaging",
+            "details": "Not evaluated for resolve task"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Medium",
+            "details": "Not evaluated for resolve task"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {
+              "has_immediate_action": true,
+              "has_3plus_steps": true,
+              "steps_use_action_verbs": true,
+              "has_customer_message": true,
+              "has_resolution_timeline": true,
+              "escalation_logic_correct": true
+            },
+            "details": "6/6 checks passed"
+          },
+          "format_compliance": {
+            "score": 1.0,
+            "valid_json": true,
+            "has_required_fields": true,
+            "details": "All required fields present"
+          },
+          "response_quality": {
+            "score": 1.0,
+            "word_count": 287,
+            "details": "Good quality"
+          },
+          "latency_seconds": 17.382
+        }
+      },
+      {
+        "task": "ticket",
+        "scenario_name": "packaging_damage",
+        "category": "Packaging",
+        "priority": "Medium",
+        "response": "{\"title\": \"Damaged Package with Torn Tamper Seal - OmegaCare Fish Oil\",\"category\": \"Packaging\",\"priority\": \"High\",\"description\": \"Customer Sneha Patel received her OmegaCare Fish Oil 1000 mg Softgels order placed on 12 April 2026 in damaged condition. The outer delivery box was crushed at one corner, the product carton had a deep dent, and critically the tamper-evident shrink-wrap seal was completely torn open, raising concerns about exposure to air, humidity, and external contaminants that could compromise product potency and safety. Customer has photographic documentation and requests urgent replacement with protective packaging and assurance that logistics partner has been notified.\",\"root_cause_hypothesis\": \"Rough handling during shipping and transit caused physical damage to the package, resulting in crushed corners and compromised tamper-evident seal. Current packaging may be inadequate for protecting product integrity during standard logistics handling.\",\"recommended_actions\":[\"Acknowledge complaint immediately and arrange urgent replacement shipment with enhanced protective packaging\",\"Escalate to logistics partner regarding handling failures and package damage during transit\",\"Involve Quality Assurance to assess product safety and potential contamination risk\",\"Document incident with photographic evidence for quality records and potential claim\"],\"assigned_team\": \"Customer Support\",\"sla_deadline_hours\": 24,\"tags\": [\"damaged-package\",\"tamper-seal-compromised\",\"product-safety\",\"replacement-request\",\"logistics-issue\",\"urgent\"],\"status\": \"Open\"}",
+        "latency_seconds": 24.281,
+        "input_tokens": 229,
+        "output_tokens": 745,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.875,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "packaging",
+            "expected": "packaging",
+            "details": "Correct: 'packaging'"
+          },
+          "priority_accuracy": {
+            "score": 0.5,
+            "predicted": "high",
+            "expected": "medium",
+            "details": "Adjacent level: 'high' (expected 'medium') \u2013 partial credit"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {
+              "has_title": true,
+              "has_description": true,
+              "has_root_cause": true,
+              "has_2plus_actions": true,
+              "actions_actionable": true,
+              "has_assigned_team": true,
+              "has_sla_deadline": true
+            },
+            "details": "7/7 checks passed"
+          },
+          "format_compliance": {
+            "score": 1.0,
+            "valid_json": true,
+            "has_required_fields": true,
+            "details": "All required fields present"
+          },
+          "response_quality": {
+            "score": 1.0,
+            "word_count": 175,
+            "details": "Good quality"
+          },
+          "latency_seconds": 24.281
+        }
+      },
+      {
+        "task": "classify",
+        "scenario_name": "trade_inquiry",
+        "category": "Trade",
+        "priority": "Low",
+        "response": "{\"category\":\"Trade\",\"priority\":\"Low\",\"justification\":\"Retail partner requesting commercial terms discussion for bulk pricing, distribution rights, POS materials, and stock availability \u2013 standard business inquiry with no safety or product concerns\",\"keywords\":[\"bulk pricing\",\"distribution rights\",\"POS materials\",\"stock availability\",\"business expansion\"],\"sla_hours\":72,\"confidence\":\"High\"}",
+        "latency_seconds": 5.742,
+        "input_tokens": 677,
+        "output_tokens": 483,
+        "error": null,
+        "evaluation": {
+          "overall_score": 1.0,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "trade",
+            "expected": "trade",
+            "details": "Correct: 'trade'"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "low",
+            "expected": "low",
+            "details": "Correct: 'low'"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {},
+            "details": "Not evaluated for classify task"
+          },
+          "format_compliance": {
+            "score": 1.0,
+            "valid_json": true,
+            "has_required_fields": true,
+            "details": "All required fields present"
+          },
+          "response_quality": {
+            "score": 1.0,
+            "word_count": 31,
+            "details": "Good quality"
+          },
+          "latency_seconds": 5.742
+        }
+      },
+      {
+        "task": "resolve",
+        "scenario_name": "trade_inquiry",
+        "category": "Trade",
+        "priority": "Low",
+        "response": "{\"immediate_action\":\"Forward the inquiry email to the Regional Sales Manager for Gujarat territory with a priority flag for same-day review. Log the inquiry in the CRM as a new business development opportunity for HealthPlus Pharmacy.\",\"resolution_steps\":[\"[Sales] Review customer account history and prepare preliminary commercial terms for bulk pricing (500+ units/SKU) and Surat district exclusivity options\",\"[Sales] Coordinate with Product Marketing team to confirm OmegaCare SKU availability, current stock levels, and lead times\",\"[Sales] Compile POS materials inventory and schedule options for pharmacist training sessions\",\"[Sales] Contact Mr. Arvind Mehta within 24 hours to discuss all four commercial points raised in the inquiry\"],\"assigned_team\":\"Sales\",\"escalation_required\":false,\"follow_up_required\":true,\"follow_up_timeline\":\"24 hours\",\"customer_communication\":\"Dear Mr. Mehta, Thank you for your interest in expanding your partnership with us. We are pleased to hear about the strong sell-through performance of ProWellness and ImmunoBoost ranges across your 18 Gujarat outlets. We have forwarded your inquiry to our regional sales team, and your dedicated account manager will reach out within 24 hours to discuss bulk pricing, exclusive distribution terms for Surat, POS material availability, and OmegaCare lead times. We look forward to growing this relationship together. Best regards, Customer Support Team\",\"estimated_resolution_time\":\"48 hours\"}",
+        "latency_seconds": 14.042,
+        "input_tokens": 258,
+        "output_tokens": 519,
+        "error": null,
+        "evaluation": {
+          "overall_score": 1.0,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Trade",
+            "details": "Not evaluated for resolve task"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Low",
+            "details": "Not evaluated for resolve task"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {
+              "has_immediate_action": true,
+              "has_3plus_steps": true,
+              "steps_use_action_verbs": true,
+              "has_customer_message": true,
+              "has_resolution_timeline": true,
+              "escalation_logic_correct": true
+            },
+            "details": "6/6 checks passed"
+          },
+          "format_compliance": {
+            "score": 1.0,
+            "valid_json": true,
+            "has_required_fields": true,
+            "details": "All required fields present"
+          },
+          "response_quality": {
+            "score": 1.0,
+            "word_count": 182,
+            "details": "Good quality"
+          },
+          "latency_seconds": 14.042
+        }
+      },
+      {
+        "task": "ticket",
+        "scenario_name": "trade_inquiry",
+        "category": "Trade",
+        "priority": "Low",
+        "response": "{\"title\":\"B2B Commercial Inquiry - Bulk Pricing & Distribution Rights for OmegaCare Range\",\"category\":\"Trade\",\"priority\":\"High\",\"description\":\"HealthPlus Pharmacy (18 retail outlets across Gujarat), an existing retailer of ProWellness and ImmunoBoost ranges, requests commercial discussion for expanding to full OmegaCare softgel range. Key inquiries include bulk purchase pricing (>500 units/SKU/month), exclusive distribution rights for Surat metropolitan district, POS materials availability, product training sessions, and current OmegaCare stock levels with lead times.\",\"root_cause_hypothesis\":\"Established B2B customer seeking to deepen partnership by expanding product assortment and negotiating favorable commercial terms. Intentional commercial inquiry rather than product complaint.\",\"recommended_actions\":[\"Forward inquiry to regional sales representative for immediate outreach within SLA\",\"Prepare bulk purchase pricing proposal based on customer's volume requirements\",\"Draft exclusive distribution rights proposal for Surat metropolitan district\",\"Verify OmegaCare inventory levels and confirm lead times for new SKUs\",\"Compile POS materials catalog and training session scheduling options\"],\"assigned_team\":\"Sales\",\"sla_deadline_hours\":24,\"tags\":[\"B2B\",\"Commercial Inquiry\",\"Bulk Order\",\"Exclusive Distribution\",\"POS Materials\",\"Training Request\",\"OmegaCare Expansion\",\"HealthPlus Pharmacy\"],\"status\":\"Open\"}",
+        "latency_seconds": 9.658,
+        "input_tokens": 474,
+        "output_tokens": 715,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.75,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "trade",
+            "expected": "trade",
+            "details": "Correct: 'trade'"
+          },
+          "priority_accuracy": {
+            "score": 0.0,
+            "predicted": "high",
+            "expected": "low",
+            "details": "Adjacent level: 'high' (expected 'low') \u2013 partial credit"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {
+              "has_title": true,
+              "has_description": true,
+              "has_root_cause": true,
+              "has_2plus_actions": true,
+              "actions_actionable": true,
+              "has_assigned_team": true,
+              "has_sla_deadline": true
+            },
+            "details": "7/7 checks passed"
+          },
+          "format_compliance": {
+            "score": 1.0,
+            "valid_json": true,
+            "has_required_fields": true,
+            "details": "All required fields present"
+          },
+          "response_quality": {
+            "score": 1.0,
+            "word_count": 139,
+            "details": "Good quality"
+          },
+          "latency_seconds": 9.658
+        }
+      }
+    ]
+  },
+  "minimax_m2_7": {
+    "display_name": "MiniMax M2.7",
+    "provider": "openrouter",
+    "model_id": "minimax-m2.7",
+    "results": [
+      {
+        "task": "classify",
+        "scenario_name": "allergic_reaction",
+        "category": "Product",
+        "priority": "High",
+        "response": "{\n  \"category\": \"Product\",\n  \"priority\": \"High\",\n  \"justification\": \"Customer experienced severe anaphylaxis-like symptoms (hives, lip swelling, breathing difficulty) requiring ER treatment, with physician suspecting an undisclosed allergen in the product\u2014this poses immediate safety risk to other consumers and may trigger a recall.\",\n  \"keywords\": [\n    \"allergic reaction\",\n    \"undisclosed allergen\",\n    \"anaphylaxis\",\n    \"breathing difficulty\",\n    \"emergency room\",\n    \"fish collagen\",\n    \"labeling omission\",\n    \"safety concern\"\n  ],\n  \"sla_hours\": 4,\n  \"confidence\": \"High\"\n}",
+        "latency_seconds": 30.142,
+        "input_tokens": 641,
+        "output_tokens": 486,
+        "error": null,
+        "evaluation": {
+          "overall_score": 1.0,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "product",
+            "expected": "product",
+            "details": "Correct: 'product'"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "high",
+            "expected": "high",
+            "details": "Correct: 'high'"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {},
+            "details": "Not evaluated for classify task"
+          },
+          "format_compliance": {
+            "score": 1.0,
+            "valid_json": true,
+            "has_required_fields": true,
+            "details": "All required fields present"
+          },
+          "response_quality": {
+            "score": 1.0,
+            "word_count": 63,
+            "details": "Good quality"
+          },
+          "latency_seconds": 30.142
+        }
+      },
+      {
+        "task": "resolve",
+        "scenario_name": "allergic_reaction",
+        "category": "Product",
+        "priority": "High",
+        "response": "{\n  \"immediate_action\": \"Acknowledge the complaint immediately via email with urgent priority flag. Express deep empathy and concern. Confirm receipt of retained product details. Assure customer that this is being treated as a critical safety incident. Escalate to Senior QA Manager and Compliance Officer within 15 minutes.\",\n  \"resolution_steps\": [\n    \"[Support Executive] Send urgent acknowledgment email within 15 minutes, expressing sincere concern and confirming immediate escalation to quality and safety teams. Request batch number confirmation and pharmacy details for distribution tracking.\",\n    \"[Quality Assurance] Immediately place Batch PW-COL-2024-03 on internal hold. Initiate full label audit against FSSAI allergen labeling regulations. Request retained sachets for laboratory analysis to identify all ingredients and potential undisclosed allergens.\",\n    \"[Regulatory/Compliance] File mandatory incident report with FSSAI (Food Safety and Standards Authority of India) within 4 hours per recall and adverse event reporting guidelines. Engage legal counsel to assess recall liability and regulatory obligations.\",\n    \"[Logistics] Trace full distribution chain for Batch PW-COL-2024-03 to identify all retail outlets. Prepare for potential rapid recall if laboratory findings confirm allergen risk. Identify and notify pharmacies holding affected batch stock.\",\n    \"[QA Team] Conduct parallel investigation: review supplier allergen declarations, verify fish collagen source species, check for cross-contamination risks in manufacturing. Share preliminary findings with senior management within 4 hours.\",\n    \"[Medical/Safety] Engage independent toxicologist to assess reaction severity and causality. Document customer symptoms timeline against product ingredients for FSSAI submission.\",\n    \"[Senior Management] Review QA and regulatory findings. Make determination on voluntary recall scope. Prepare public safety communication if recall is initiated.\",\n    \"[Support Executive] Follow up with customer within 4 hours to provide investigation status, confirm product hold, and outline protective measures being implemented for other consumers.\"\n  ],\n  \"assigned_team\": \"Quality Assurance\",\n  \"escalation_required\": true,\n  \"follow_up_required\": true,\n  \"follow_up_timeline\": \"4 hours\",\n  \"customer_communication\": \"Dear Priya, We are deeply concerned to learn of your experience and are taking this matter with the utmost seriousness as a critical product safety incident. First and foremost, we sincerely hope you are recovering well and we are grateful you sought emergency care. Your health and safety are our absolute priority. We have immediately escalated your complaint to our Senior Quality Assurance and Regulatory teams. We are placing Batch PW-COL-2024-03 on immediate hold and are conducting a thorough investigation, including laboratory analysis of your retained product. We are also reporting this incident to FSSAI as required under adverse event protocols. We will provide you with a detailed update within 4 hours. In the meantime, please discontinue use of the product. We would like to arrange collection of the remaining sachets for our investigation. We are committed to full transparency and will keep you informed at every stage. Please accept our sincere apologies for this distressing experience.\",\n  \"estimated_resolution_time\": \"4 hours\"\n}",
+        "latency_seconds": 28.66,
+        "input_tokens": 525,
+        "output_tokens": 940,
+        "error": null,
+        "evaluation": {
+          "overall_score": 1.0,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Product",
+            "details": "Not evaluated for resolve task"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "High",
+            "details": "Not evaluated for resolve task"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {
+              "has_immediate_action": true,
+              "has_3plus_steps": true,
+              "steps_use_action_verbs": true,
+              "has_customer_message": true,
+              "has_resolution_timeline": true,
+              "escalation_logic_correct": true
+            },
+            "details": "6/6 checks passed"
+          },
+          "format_compliance": {
+            "score": 1.0,
+            "valid_json": true,
+            "has_required_fields": true,
+            "details": "All required fields present"
+          },
+          "response_quality": {
+            "score": 1.0,
+            "word_count": 445,
+            "details": "Good quality"
+          },
+          "latency_seconds": 28.66
+        }
+      },
+      {
+        "task": "ticket",
+        "scenario_name": "allergic_reaction",
+        "category": "Product",
+        "priority": "High",
+        "response": "{\n  \"title\": \"Severe Allergic Reaction - ProWellness Collagen Peptide Supplement (Batch PW-COL-2024-03)\",\n  \"category\": \"Product\",\n  \"priority\": \"High\",\n  \"description\": \"Customer Priya Sharma experienced severe allergic reaction including hives, lip swelling, and difficulty breathing within 30 minutes of consuming ProWellness Collagen Peptide Supplement. The reaction required emergency room treatment with IV antihistamines. The attending physician suspects an undisclosed allergen in the product. The product label only lists 'contains fish collagen' without a full allergen panel. Customer has retained the product and packaging and demands immediate action to protect other consumers.\",\n  \"root_cause_hypothesis\": \"Allergic reaction likely triggered by an undisclosed allergen in the collagen peptide supplement. The product labeling lacks a complete allergen disclosure panel, potentially missing cross-reactive allergens from fish/shellfish sources or other hidden ingredients that the customer may have been sensitive to without knowing.\",\n  \"recommended_actions\": [\n    \"Initiate immediate contact with customer within 4 hours to acknowledge complaint and express concern\",\n    \"Advise customer to discontinue product use immediately and retain product for laboratory testing\",\n    \"Escalate to Quality Assurance for batch PW-COL-2024-03 investigation and full ingredient/allergen verification\",\n    \"Review product labeling for regulatory compliance with allergen disclosure requirements\",\n    \"Assess whether regulatory notification is required based on the severity of the adverse event\",\n    \"Prepare consumer safety communication if batch recall or warning is warranted\"\n  ],\n  \"assigned_team\": \"Quality Assurance\",\n  \"sla_deadline_hours\": 4,\n  \"tags\": [\n    \"allergic-reaction\",\n    \"adverse-event\",\n    \"product-safety\",\n    \"allergen-labeling\",\n    \"collagen-supplement\",\n    \"batch-investigation\",\n    \"emergency-complaint\",\n    \"fish-collagen\"\n  ],\n  \"status\": \"Open\"\n}",
+        "latency_seconds": 24.96,
+        "input_tokens": 437,
+        "output_tokens": 924,
+        "error": null,
+        "evaluation": {
+          "overall_score": 1.0,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "product",
+            "expected": "product",
+            "details": "Correct: 'product'"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "high",
+            "expected": "high",
+            "details": "Correct: 'high'"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {
+              "has_title": true,
+              "has_description": true,
+              "has_root_cause": true,
+              "has_2plus_actions": true,
+              "actions_actionable": true,
+              "has_assigned_team": true,
+              "has_sla_deadline": true
+            },
+            "details": "7/7 checks passed"
+          },
+          "format_compliance": {
+            "score": 1.0,
+            "valid_json": true,
+            "has_required_fields": true,
+            "details": "All required fields present"
+          },
+          "response_quality": {
+            "score": 1.0,
+            "word_count": 227,
+            "details": "Good quality"
+          },
+          "latency_seconds": 24.96
+        }
+      },
+      {
+        "task": "classify",
+        "scenario_name": "product_quality",
+        "category": "Product",
+        "priority": "Medium",
+        "response": "{\n  \"category\": \"Product\",\n  \"priority\": \"Medium\",\n  \"justification\": \"Customer reports efficacy failure (product not delivering promised immunity benefits after 3 months of consistent use) combined with visible physical difference (paler tablets) suggesting potential formulation or manufacturing quality change.\",\n  \"keywords\": [\n    \"efficacy failure\",\n    \"quality concern\",\n    \"formulation change\",\n    \"tablet discoloration\",\n    \"refund request\",\n    \"manufacturing defect\"\n  ],\n  \"sla_hours\": 24,\n  \"confidence\": \"Medium\"\n}",
+        "latency_seconds": 5.358,
+        "input_tokens": 635,
+        "output_tokens": 568,
+        "error": null,
+        "evaluation": {
+          "overall_score": 1.0,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "product",
+            "expected": "product",
+            "details": "Correct: 'product'"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "medium",
+            "expected": "medium",
+            "details": "Correct: 'medium'"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {},
+            "details": "Not evaluated for classify task"
+          },
+          "format_compliance": {
+            "score": 1.0,
+            "valid_json": true,
+            "has_required_fields": true,
+            "details": "All required fields present"
+          },
+          "response_quality": {
+            "score": 1.0,
+            "word_count": 56,
+            "details": "Good quality"
+          },
+          "latency_seconds": 5.358
+        }
+      },
+      {
+        "task": "resolve",
+        "scenario_name": "product_quality",
+        "category": "Product",
+        "priority": "Medium",
+        "response": "{\n  \"immediate_action\": \"Log the complaint with full details (customer name, batch numbers, purchase dates, description of tablet color difference, cold incidents timeline). Create a product quality incident ticket. Initiate a return courier arrangement for the unused tablets at no cost to the customer. Send an acknowledgement message to the customer confirming their concern has been registered and that a quality investigation is being initiated.\",\n  \"resolution_steps\": [\n    \"[Support Executive] Create detailed quality complaint ticket with batch/lot numbers from both packs if available. Obtain purchase receipts and approximate dates when color change was first noticed. Document all complaint details including the two cold incidents and comparison to competitor brand usage.\",\n    \"[Customer Support] Acknowledge the customer's concern with empathy. Confirm that a product quality investigation has been initiated. Provide the customer with a prepaid return courier label and clear instructions for sending back the unused tablets for laboratory testing. Set expectation of 48-72 hours for initial investigation update.\",\n    \"[Quality Assurance Team] Upon receipt of returned tablets, conduct comparative analysis between the current pack and historical quality specifications for ImmunoBoost Vitamin C + Zinc Tablets. Check for batch-to-batch variation, changes in active ingredient color (Vitamin C can oxidize and appear paler), and verify if a reformulation or manufacturing change occurred recently. Pull retention samples from the same batch for parallel testing.\",\n    \"[Quality Assurance Team] If batch variance or formulation change is confirmed, escalate to Regulatory Affairs for compliance review. Review whether any manufacturing SOP changes require regulatory notification. Document root cause analysis.\",\n    \"[Customer Support] Based on QA investigation findings, communicate final resolution to the customer. If product quality issue is confirmed, process full refund for both packs as requested. If no quality deviation is found, provide scientific explanation (e.g., color variation is within acceptable range, or paler tablets may indicate lower oxidation state without efficacy impact) with supporting documentation.\",\n    \"[Sales / Product Team] Review customer feedback regarding competitor comparison. If a pattern of similar complaints emerges, flag for product team review and potential reformulation consideration for future batches.\"\n  ],\n  \"assigned_team\": \"Quality Assurance\",\n  \"escalation_required\": false,\n  \"follow_up_required\": true,\n  \"follow_up_timeline\": \"48 hours after tablet return confirmation; final resolution within 5 business days\",\n  \"customer_communication\": \"Dear Mr. Kumar, thank you for bringing this matter to our attention. We take product quality concerns very seriously. We have initiated a formal investigation into your complaint and have arranged for a prepaid courier to collect the unused tablets from your location at no cost to you. Our Quality Assurance team will conduct a detailed laboratory analysis comparing the current tablets with our standard specifications, including the color variation you observed. We understand your frustration after three months of consistent use and will keep you",
+        "latency_seconds": 9.352,
+        "input_tokens": 519,
+        "output_tokens": 1024,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.692,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Product",
+            "details": "Not evaluated for resolve task"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Medium",
+            "details": "Not evaluated for resolve task"
+          },
+          "resolution_quality": {
+            "score": 0.167,
+            "checks": {
+              "has_immediate_action": false,
+              "has_3plus_steps": false,
+              "steps_use_action_verbs": true,
+              "has_customer_message": false,
+              "has_resolution_timeline": false,
+              "escalation_logic_correct": false
+            },
+            "details": "1/6 checks passed"
+          },
+          "format_compliance": {
+            "score": 0.0,
+            "valid_json": false,
+            "has_required_fields": false,
+            "details": "Not valid JSON"
+          },
+          "response_quality": {
+            "score": 1.0,
+            "word_count": 442,
+            "details": "Good quality"
+          },
+          "latency_seconds": 9.352
+        }
+      },
+      {
+        "task": "ticket",
+        "scenario_name": "product_quality",
+        "category": "Product",
+        "priority": "Medium",
+        "response": "{\"title\":\"Customer reports product ineffectiveness and paler tablets - refund requested\",\"category\":\"Product\",\"priority\":\"Medium\",\"description\":\"Mr. Rajesh Kumar, a 3-month consistent user of ImmunoBoost Vitamin C + Zinc Tablets at recommended dosage, reports experiencing two colds during this period - something he states never occurred with a competitor brand. Upon opening a new pack today, he observed the tablets appear noticeably paler compared to earlier packs of the same product. He suspects a possible formulation or manufacturing quality change and is requesting a full refund for both packs. Customer has offered to courier unused tablets for quality testing and expressed frustration over the product not delivering promised immunity benefits.\",\"root_cause_hypothesis\":\"The noticeably paler tablet appearance suggests a potential formulation change, manufacturing inconsistency, or batch quality variation. The product may have undergone ingredient sourcing changes, processing modifications, or there may be stability issues affecting the tablets. The reported ineffectiveness combined with visual change raises concerns about product consistency and quality across batches.\",\"recommended_actions\":[\"Acknowledge customer complaint via phone, express empathy for the experience, and log all details including batch/lot numbers from current and previous packs\",\"Initiate quality investigation by requesting batch information and triggering internal product quality review for potential formulation or manufacturing changes\",\"Arrange product return logistics per customer's offer for quality testing; forward samples to QA team for analysis\",\"Process refund request per company policy and ensure proactive communication on resolution timeline\"],\"assigned_team\":\"Quality Assurance\",\"sla_deadline_hours\":72,\"tags\":[\"product-quality\",\"discoloration\",\"ineffective\",\"refund-request\",\"batch-investigation\",\"formulation-change\"],\"status\":\"Open\"}",
+        "latency_seconds": 9.862,
+        "input_tokens": 432,
+        "output_tokens": 787,
+        "error": null,
+        "evaluation": {
+          "overall_score": 1.0,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "product",
+            "expected": "product",
+            "details": "Correct: 'product'"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "medium",
+            "expected": "medium",
+            "details": "Correct: 'medium'"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {
+              "has_title": true,
+              "has_description": true,
+              "has_root_cause": true,
+              "has_2plus_actions": true,
+              "actions_actionable": true,
+              "has_assigned_team": true,
+              "has_sla_deadline": true
+            },
+            "details": "7/7 checks passed"
+          },
+          "format_compliance": {
+            "score": 1.0,
+            "valid_json": true,
+            "has_required_fields": true,
+            "details": "All required fields present"
+          },
+          "response_quality": {
+            "score": 1.0,
+            "word_count": 221,
+            "details": "Good quality"
+          },
+          "latency_seconds": 9.862
+        }
+      },
+      {
+        "task": "classify",
+        "scenario_name": "packaging_damage",
+        "category": "Packaging",
+        "priority": "Medium",
+        "response": "{\"category\":\"Product\",\"priority\":\"High\",\"justification\":\"Torn tamper-evident shrink-wrap seal raises a credible contamination and product safety concern, as the customer suspects the softgels may have been exposed to air, humidity, or external contaminants.\",\"keywords\":[\"tamper seal broken\",\"shrink-wrap torn\",\"contamination concern\",\"safety risk\",\"damaged package\",\"fish oil softgels\",\"exposure concern\"],\"sla_hours\":4,\"confidence\":\"High\"}",
+        "latency_seconds": 7.712,
+        "input_tokens": 641,
+        "output_tokens": 718,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.575,
+          "classification_accuracy": {
+            "score": 0.0,
+            "predicted": "product",
+            "expected": "packaging",
+            "details": "Wrong category: 'product' (expected 'packaging')"
+          },
+          "priority_accuracy": {
+            "score": 0.5,
+            "predicted": "high",
+            "expected": "medium",
+            "details": "Adjacent level: 'high' (expected 'medium') \u2013 partial credit"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {},
+            "details": "Not evaluated for classify task"
+          },
+          "format_compliance": {
+            "score": 1.0,
+            "valid_json": true,
+            "has_required_fields": true,
+            "details": "All required fields present"
+          },
+          "response_quality": {
+            "score": 1.0,
+            "word_count": 37,
+            "details": "Good quality"
+          },
+          "latency_seconds": 7.712
+        }
+      },
+      {
+        "task": "resolve",
+        "scenario_name": "packaging_damage",
+        "category": "Packaging",
+        "priority": "Medium",
+        "response": "```json\n{\n  \"immediate_action\": \"Acknowledge receipt of complaint and express empathy. Immediately flag the torn tamper-evident seal as a product safety concern. Instruct customer not to consume the softgels until replacement is confirmed. Advise retention of product and photographs for documentation.\",\n  \"resolution_steps\": [\n    \"[Support Executive] Log the complaint with full details including order #, delivery date (12 April 2026), and specific damage description (crushed box, dented carton, torn shrink-wrap). Tag as 'Product Safety \u2014 Tamper Concern' for immediate QA visibility.\",\n    \"[Support Executive] Initiate cross-shipping replacement order for OmegaCare Fish Oil 1000 mg Softgels 90-count using expedited shipping. Flag warehouse to include upgraded protective packaging (e.g., double-wall corrugated box, inflatable cushioning).\",\n    \"[Quality Assurance] Review the existing delivery packaging specification for this product SKU and verify current logistics handling protocols. Coordinate with packaging team to identify failure points (inadequate void fill, poor corner protection, insufficient tamper barrier packaging).\",\n    \"[Logistics] Contact the logistics carrier immediately to report the incident. Provide delivery tracking #, date, and nature of damage. Request formal incident report and corrective action plan for handling failures on this route.\",\n    \"[Quality Assurance] Upon receipt of returned product (if applicable), initiate quarantine hold and perform visual inspection for oxidation indicators (rancid odor, discoloration, softgel texture changes) before any disposition decision.\",\n    \"[Support Executive] Once replacement is dispatched, send tracking confirmation to customer. Provide reassurance that logistics partner has been formally notified and corrective steps are being implemented.\"\n  ],\n  \"assigned_team\": \"Customer Support | Quality Assurance | Logistics\",\n  \"escalation_required\": false,\n  \"follow_up_required\": true,\n  \"follow_up_timeline\": \"72 hours\",\n  \"customer_communication\": \"Dear Sneha, thank you for bringing this to our attention \u2014 I completely understand your concern, especially regarding the torn tamper-evident seal, as product integrity and your safety are our absolute priority. We are arranging an urgent replacement shipment for you with enhanced protective packaging, which will be dispatched within 24 hours. In the meantime, please do not consume the softgels from the current bottle. We have also formally notified our logistics partner about this handling incident and requested a full investigation. You will receive your replacement tracking details shortly. Please retain the product and photographs for reference. We sincerely apologize for this experience and appreciate your patience.\",\n  \"estimated_resolution_time\": \"24 hours\"\n}\n```",
+        "latency_seconds": 8.122,
+        "input_tokens": 525,
+        "output_tokens": 822,
+        "error": null,
+        "evaluation": {
+          "overall_score": 1.0,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Packaging",
+            "details": "Not evaluated for resolve task"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Medium",
+            "details": "Not evaluated for resolve task"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {
+              "has_immediate_action": true,
+              "has_3plus_steps": true,
+              "steps_use_action_verbs": true,
+              "has_customer_message": true,
+              "has_resolution_timeline": true,
+              "escalation_logic_correct": true
+            },
+            "details": "6/6 checks passed"
+          },
+          "format_compliance": {
+            "score": 1.0,
+            "valid_json": true,
+            "has_required_fields": true,
+            "details": "All required fields present"
+          },
+          "response_quality": {
+            "score": 1.0,
+            "word_count": 363,
+            "details": "Good quality"
+          },
+          "latency_seconds": 8.122
+        }
+      },
+      {
+        "task": "ticket",
+        "scenario_name": "packaging_damage",
+        "category": "Packaging",
+        "priority": "Medium",
+        "response": "{\"title\": \"Damaged Packaging & Torn Tamper Seal - Urgent Replacement Request\",\"category\": \"Packaging\",\"priority\": \"High\",\"description\": \"Customer Sneha Patel received her online order of OmegaCare Deep Sea Fish Oil 1000 mg Softgels (90-count) on 17 April 2026 and reported that the outer delivery box was visibly crushed at one corner with the inner product carton dented. Most critically, the tamper-evident shrink-wrap seal on the bottle was completely torn, though the cap remained on. The customer is concerned that the softgels may have been compromised due to exposure to air, humidity, or external contaminants. She has photographic evidence and is requesting an urgent replacement with protective packaging and confirmation that the logistics partner has been contacted regarding the handling failures.\",\"root_cause_hypothesis\": \"The damaged packaging and torn tamper seal likely resulted from rough handling during transit, possibly due to inadequate protective packaging or improper handling procedures by the logistics partner. The torn tamper seal is a critical quality and safety concern requiring immediate investigation.\",\"recommended_actions\":[\"Contact customer within 4 hours to acknowledge the complaint and reassure them about safety concerns\",\"Initiate urgent replacement shipment using enhanced protective packaging (e.g., bubble wrap, double-boxing, foam inserts)\",\"Escalate to logistics partner regarding documented handling failures and request investigation\",\"Review and audit current packaging specifications for the Fish Oil 90-count product line\",\"Request customer to submit photographic evidence for quality and claims records\"],\"assigned_team\":\"Quality Assurance\",\"sla_deadline_hours\":24,\"tags\":[\"damaged-packaging\",\"torn-seal\",\"tamper-evidence\",\"safety-concern\",\"urgent-replacement\",\"logistics-complaint\",\"fish-oil\",\"photographic-evidence\"],\"status\":\"Open\"}",
+        "latency_seconds": 12.88,
+        "input_tokens": 437,
+        "output_tokens": 826,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.875,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "packaging",
+            "expected": "packaging",
+            "details": "Correct: 'packaging'"
+          },
+          "priority_accuracy": {
+            "score": 0.5,
+            "predicted": "high",
+            "expected": "medium",
+            "details": "Adjacent level: 'high' (expected 'medium') \u2013 partial credit"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {
+              "has_title": true,
+              "has_description": true,
+              "has_root_cause": true,
+              "has_2plus_actions": true,
+              "actions_actionable": true,
+              "has_assigned_team": true,
+              "has_sla_deadline": true
+            },
+            "details": "7/7 checks passed"
+          },
+          "format_compliance": {
+            "score": 1.0,
+            "valid_json": true,
+            "has_required_fields": true,
+            "details": "All required fields present"
+          },
+          "response_quality": {
+            "score": 1.0,
+            "word_count": 218,
+            "details": "Good quality"
+          },
+          "latency_seconds": 12.88
+        }
+      },
+      {
+        "task": "classify",
+        "scenario_name": "trade_inquiry",
+        "category": "Trade",
+        "priority": "Low",
+        "response": "{\n  \"category\": \"Trade\",\n  \"priority\": \"Low\",\n  \"justification\": \"This is a business development inquiry from an existing retailer seeking to expand product assortment and negotiate commercial terms including bulk pricing, distribution rights, marketing support, and stock availability\u2014no product or packaging issue is present.\",\n  \"keywords\": [\"bulk pricing\", \"distribution rights\", \"exclusive territory\", \"stock availability\", \"marketing materials\", \"trade terms\"],\n  \"sla_hours\": 72,\n  \"confidence\": \"High\"\n}",
+        "latency_seconds": 4.69,
+        "input_tokens": 677,
+        "output_tokens": 563,
+        "error": null,
+        "evaluation": {
+          "overall_score": 1.0,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "trade",
+            "expected": "trade",
+            "details": "Correct: 'trade'"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "low",
+            "expected": "low",
+            "details": "Correct: 'low'"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {},
+            "details": "Not evaluated for classify task"
+          },
+          "format_compliance": {
+            "score": 1.0,
+            "valid_json": true,
+            "has_required_fields": true,
+            "details": "All required fields present"
+          },
+          "response_quality": {
+            "score": 1.0,
+            "word_count": 59,
+            "details": "Good quality"
+          },
+          "latency_seconds": 4.69
+        }
+      },
+      {
+        "task": "resolve",
+        "scenario_name": "trade_inquiry",
+        "category": "Trade",
+        "priority": "Low",
+        "response": "{\n  \"immediate_action\": \"Acknowledge receipt of the business inquiry email and log the request in the CRM as a Trade Expansion Opportunity for HealthPlus Pharmacy, Gujarat region.\",\n  \"resolution_steps\": [\n    \"[Sales Team] Review the inquiry details and assign the regional sales representative for Gujarat to handle the request.\",\n    \"[Sales Team] Prepare a preliminary pricing proposal for bulk orders (500+ units per SKU) across OmegaCare softgel SKUs and draft a response confirming the representative's contact.\",\n    \"[Sales Team] Coordinate with the Marketing team to compile available POS materials (shelf talkers, brochures) and pharmacist training session options.\",\n    \"[Sales Team] Contact Mr. Arvind Mehta within 24 hours to schedule a call during the preferred window (Mon-Fri, 10:00 AM - 5:00 PM IST) to discuss exclusive distribution rights for Surat metropolitan district.\",\n    \"[Logistics] Provide current stock levels and lead time estimates for OmegaCare SKUs to the assigned sales representative.\",\n    \"[Sales Team] Conduct the call with HealthPlus Pharmacy to finalize commercial terms and provide formal proposals for bulk pricing, distribution rights, and support materials.\"\n  ],\n  \"assigned_team\": \"Sales\",\n  \"escalation_required\": false,\n  \"follow_up_required\": true,\n  \"follow_up_timeline\": \"48 hours - initial sales rep contact; 5 business days - commercial proposal delivery\",\n  \"customer_communication\": \"Dear Mr. Mehta, Thank you for your detailed inquiry and for your continued partnership with our ProWellness and ImmunoBoost ranges. We are pleased to hear of your success and are excited about your interest in expanding with the OmegaCare softgel range. Our regional sales representative for Gujarat will be in touch with you shortly to discuss bulk pricing, distribution rights for Surat, POS materials, and training options. We aim to respond to all your queries within 24-48 hours. Please do not hesitate to reach out if you need any immediate assistance. Best regards, Customer Support Team\",\n  \"estimated_resolution_time\": \"72 hours (for initial contact and preliminary information); 5-7 business days (for full commercial proposal)\"\n}",
+        "latency_seconds": 21.333,
+        "input_tokens": 560,
+        "output_tokens": 750,
+        "error": null,
+        "evaluation": {
+          "overall_score": 1.0,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Trade",
+            "details": "Not evaluated for resolve task"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Low",
+            "details": "Not evaluated for resolve task"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {
+              "has_immediate_action": true,
+              "has_3plus_steps": true,
+              "steps_use_action_verbs": true,
+              "has_customer_message": true,
+              "has_resolution_timeline": true,
+              "escalation_logic_correct": true
+            },
+            "details": "6/6 checks passed"
+          },
+          "format_compliance": {
+            "score": 1.0,
+            "valid_json": true,
+            "has_required_fields": true,
+            "details": "All required fields present"
+          },
+          "response_quality": {
+            "score": 1.0,
+            "word_count": 302,
+            "details": "Good quality"
+          },
+          "latency_seconds": 21.333
+        }
+      },
+      {
+        "task": "ticket",
+        "scenario_name": "trade_inquiry",
+        "category": "Trade",
+        "priority": "Low",
+        "response": "{\n  \"title\": \"HealthPlus Pharmacy \u2013 Business Expansion Inquiry for OmegaCare Range\",\n  \"category\": \"Sales\",\n  \"priority\": \"Medium\",\n  \"description\": \"HealthPlus Pharmacy, operating 18 retail outlets across Gujarat and currently retailing ProWellness and ImmunoBoost ranges, has requested to expand their assortment to include the full OmegaCare softgel range. They have requested discussions on bulk purchase pricing for orders exceeding 500 units per SKU per month, exclusive distribution rights for the Surat metropolitan district, branded point-of-sale materials and pharmacist training sessions, and current stock levels and lead times for new OmegaCare SKUs.\",\n  \"root_cause_hypothesis\": \"This is a positive business development opportunity from an existing high-volume retail customer seeking to deepen their product partnership and expand their wellness category offerings. The inquiry is commercial in nature and requires sales team engagement to prepare a competitive pricing and distribution proposal.\",\n  \"recommended_actions\": [\n    \"Route inquiry to regional sales representative for Gujarat region\",\n    \"Contact Mr. Arvind Mehta within 24 hours to schedule a commercial discussion call\",\n    \"Prepare bulk pricing structure for 500+ unit orders across OmegaCare SKUs\",\n    \"Evaluate feasibility of exclusive distribution rights for Surat metropolitan district\",\n    \"Compile current OmegaCare inventory levels and lead time estimates\",\n    \"Provide information on available POS materials and training session scheduling\"\n  ],\n  \"assigned_team\": \"Sales\",\n  \"sla_deadline_hours\": 24,\n  \"tags\": [\"business-expansion\", \"bulk-pricing\", \"distribution-rights\", \"existing-customer\", \"OmegaCare\", \"retail-chain\"],\n  \"status\": \"Open\"\n}",
+        "latency_seconds": 18.105,
+        "input_tokens": 472,
+        "output_tokens": 676,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.575,
+          "classification_accuracy": {
+            "score": 0.0,
+            "predicted": "sales",
+            "expected": "trade",
+            "details": "Invalid or missing category value: 'sales'"
+          },
+          "priority_accuracy": {
+            "score": 0.5,
+            "predicted": "medium",
+            "expected": "low",
+            "details": "Adjacent level: 'medium' (expected 'low') \u2013 partial credit"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {
+              "has_title": true,
+              "has_description": true,
+              "has_root_cause": true,
+              "has_2plus_actions": true,
+              "actions_actionable": true,
+              "has_assigned_team": true,
+              "has_sla_deadline": true
+            },
+            "details": "7/7 checks passed"
+          },
+          "format_compliance": {
+            "score": 1.0,
+            "valid_json": true,
+            "has_required_fields": true,
+            "details": "All required fields present"
+          },
+          "response_quality": {
+            "score": 1.0,
+            "word_count": 211,
+            "details": "Good quality"
+          },
+          "latency_seconds": 18.105
+        }
+      }
+    ]
+  },
+  "qwen3_5_plus": {
+    "display_name": "Qwen 3.5 Plus (Alibaba)",
+    "provider": "openrouter",
+    "model_id": "qwen3.5-plus",
+    "results": [
+      {
+        "task": "classify",
+        "scenario_name": "allergic_reaction",
+        "category": "Product",
+        "priority": "High",
+        "response": "{\n  \"category\": \"Product\",\n  \"priority\": \"High\",\n  \"justification\": \"Severe allergic reaction requiring emergency care indicates a critical safety risk potentially caused by undisclosed allergens.\",\n  \"keywords\": [\"allergic reaction\", \"difficulty breathing\", \"undisclosed ingredient\"],\n  \"sla_hours\": 4,\n  \"confidence\": \"High\"\n}",
+        "latency_seconds": 33.073,
+        "input_tokens": 695,
+        "output_tokens": 1513,
+        "error": null,
+        "evaluation": {
+          "overall_score": 1.0,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "product",
+            "expected": "product",
+            "details": "Correct: 'product'"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "high",
+            "expected": "high",
+            "details": "Correct: 'high'"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {},
+            "details": "Not evaluated for classify task"
+          },
+          "format_compliance": {
+            "score": 1.0,
+            "valid_json": true,
+            "has_required_fields": true,
+            "details": "All required fields present"
+          },
+          "response_quality": {
+            "score": 1.0,
+            "word_count": 34,
+            "details": "Good quality"
+          },
+          "latency_seconds": 33.073
+        }
+      },
+      {
+        "task": "resolve",
+        "scenario_name": "allergic_reaction",
+        "category": "Product",
+        "priority": "High",
+        "response": "{\n  \"immediate_action\": \"Notify Senior Management and QA Lead immediately; quarantine Batch PW-COL-2024-03; prepare urgent safety acknowledgment email.\",\n  \"resolution_steps\": [\n    \"[Support Executive] Contact customer within 1 hour to express concern and request medical documentation.\",\n    \"[Quality Assurance] Quarantine remaining stock of Batch PW-COL-2024-03 and initiate urgent allergen testing.\",\n    \"[Quality Assurance] File adverse event report with relevant health regulatory authority within 24 hours.\",\n    \"[Senior Management] Review test results to determine necessity of public recall or safety notice.\",\n    \"[Support Executive] Process full refund and discuss medical expense compensation upon validation.\"\n  ],\n  \"assigned_team\": \"Quality Assurance\",\n  \"escalation_required\": true,\n  \"follow_up_required\": true,\n  \"follow_up_timeline\": \"24 hours\",\n  \"customer_communication\": \"Dear Priya Sharma,\\n\\nWe are deeply concerned to hear about your severe reaction and hospital visit. Your safety is our absolute priority. We have immediately escalated this to our Quality Assurance and Senior Management teams. Batch PW-COL-2024-03 has been quarantined pending urgent investigation.\\n\\nPlease focus on your recovery; we will cover all costs related to this incident. We will update you within 24 hours. Please reply with any medical reports when convenient.\\n\\nSincerely,\\nProWellness Safety Team\",\n  \"estimated_resolution_time\": \"4 hours\"\n}",
+        "latency_seconds": 89.183,
+        "input_tokens": 565,
+        "output_tokens": 4794,
+        "error": null,
+        "evaluation": {
+          "overall_score": 1.0,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Product",
+            "details": "Not evaluated for resolve task"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "High",
+            "details": "Not evaluated for resolve task"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {
+              "has_immediate_action": true,
+              "has_3plus_steps": true,
+              "steps_use_action_verbs": true,
+              "has_customer_message": true,
+              "has_resolution_timeline": true,
+              "escalation_logic_correct": true
+            },
+            "details": "6/6 checks passed"
+          },
+          "format_compliance": {
+            "score": 1.0,
+            "valid_json": true,
+            "has_required_fields": true,
+            "details": "All required fields present"
+          },
+          "response_quality": {
+            "score": 1.0,
+            "word_count": 174,
+            "details": "Good quality"
+          },
+          "latency_seconds": 89.183
+        }
+      },
+      {
+        "task": "ticket",
+        "scenario_name": "allergic_reaction",
+        "category": "Product",
+        "priority": "High",
+        "response": "{\n  \"title\": \"Severe Allergic Reaction - ProWellness Collagen Peptide - Batch PW-COL-2024-03\",\n  \"category\": \"Product\",\n  \"priority\": \"High\",\n  \"description\": \"Customer Priya Sharma reported severe allergic reactions including breathing difficulty and lip swelling after consuming ProWellness Collagen Peptide Supplement. An ER visit was required, and the physician suspects an undisclosed ingredient triggered the reaction. The customer notes the label lacks a full allergen panel and demands immediate safety clarification.\",\n  \"root_cause_hypothesis\": \"Potential cross-contamination during manufacturing or incomplete allergen disclosure on the product packaging leading to an adverse health event.\",\n  \"recommended_actions\": [\n    \"Quarantine remaining stock of Batch PW-COL-2024-03 immediately\",\n    \"Contact customer to retrieve product samples and obtain medical documentation\",\n    \"Conduct full ingredient audit and labeling compliance review for the affected batch\"\n  ],\n  \"assigned_team\": \"Quality Assurance\",\n  \"sla_deadline_hours\": 4,\n  \"tags\": [\n    \"Adverse Event\",\n    \"Allergic Reaction\",\n    \"Labeling Compliance\",\n    \"Batch PW-COL-2024-03\"\n  ],\n  \"status\": \"Open\"\n}",
+        "latency_seconds": 45.535,
+        "input_tokens": 478,
+        "output_tokens": 2409,
+        "error": null,
+        "evaluation": {
+          "overall_score": 1.0,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "product",
+            "expected": "product",
+            "details": "Correct: 'product'"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "high",
+            "expected": "high",
+            "details": "Correct: 'high'"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {
+              "has_title": true,
+              "has_description": true,
+              "has_root_cause": true,
+              "has_2plus_actions": true,
+              "actions_actionable": true,
+              "has_assigned_team": true,
+              "has_sla_deadline": true
+            },
+            "details": "7/7 checks passed"
+          },
+          "format_compliance": {
+            "score": 1.0,
+            "valid_json": true,
+            "has_required_fields": true,
+            "details": "All required fields present"
+          },
+          "response_quality": {
+            "score": 1.0,
+            "word_count": 136,
+            "details": "Good quality"
+          },
+          "latency_seconds": 45.535
+        }
+      },
+      {
+        "task": "classify",
+        "scenario_name": "product_quality",
+        "category": "Product",
+        "priority": "Medium",
+        "response": "{\n  \"category\": \"Product\",\n  \"priority\": \"Medium\",\n  \"justification\": \"Customer reports efficacy failure and physical product variation indicating potential manufacturing quality defect.\",\n  \"keywords\": [\n    \"efficacy failure\",\n    \"tablet color change\",\n    \"manufacturing quality\"\n  ],\n  \"sla_hours\": 24,\n  \"confidence\": \"High\"\n}",
+        "latency_seconds": 42.426,
+        "input_tokens": 681,
+        "output_tokens": 2187,
+        "error": null,
+        "evaluation": {
+          "overall_score": 1.0,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "product",
+            "expected": "product",
+            "details": "Correct: 'product'"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "medium",
+            "expected": "medium",
+            "details": "Correct: 'medium'"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {},
+            "details": "Not evaluated for classify task"
+          },
+          "format_compliance": {
+            "score": 1.0,
+            "valid_json": true,
+            "has_required_fields": true,
+            "details": "All required fields present"
+          },
+          "response_quality": {
+            "score": 1.0,
+            "word_count": 34,
+            "details": "Good quality"
+          },
+          "latency_seconds": 42.426
+        }
+      },
+      {
+        "task": "resolve",
+        "scenario_name": "product_quality",
+        "category": "Product",
+        "priority": "Medium",
+        "response": "{\n  \"immediate_action\": \"Log complaint details, validate batch numbers from customer, and initiate refund approval workflow within 15 minutes.\",\n  \"resolution_steps\": [\n    \"[Support Executive] Issue full refund approval and email return shipping label to customer.\",\n    \"[Logistics] Coordinate pickup of returned tablets within 24 hours.\",\n    \"[QA Team] Inspect returned tablets for color variance and verify batch manufacturing records.\"\n  ],\n  \"assigned_team\": \"Customer Support\",\n  \"escalation_required\": false,\n  \"follow_up_required\": true,\n  \"follow_up_timeline\": \"24 hours\",\n  \"customer_communication\": \"Dear Mr. Kumar, thank you for contacting us. We sincerely apologize that ImmunoBoost did not meet your expectations and appreciate you highlighting the color variation. Your feedback is crucial for our quality standards. We have approved your refund request and will arrange a courier pickup for the unused tablets for our Quality Assurance team to analyze. We will contact you shortly to confirm the pickup time.\",\n  \"estimated_resolution_time\": \"24 hours\"\n}",
+        "latency_seconds": 58.914,
+        "input_tokens": 551,
+        "output_tokens": 3149,
+        "error": null,
+        "evaluation": {
+          "overall_score": 1.0,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Product",
+            "details": "Not evaluated for resolve task"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Medium",
+            "details": "Not evaluated for resolve task"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {
+              "has_immediate_action": true,
+              "has_3plus_steps": true,
+              "steps_use_action_verbs": true,
+              "has_customer_message": true,
+              "has_resolution_timeline": true,
+              "escalation_logic_correct": true
+            },
+            "details": "6/6 checks passed"
+          },
+          "format_compliance": {
+            "score": 1.0,
+            "valid_json": true,
+            "has_required_fields": true,
+            "details": "All required fields present"
+          },
+          "response_quality": {
+            "score": 1.0,
+            "word_count": 137,
+            "details": "Good quality"
+          },
+          "latency_seconds": 58.914
+        }
+      },
+      {
+        "task": "ticket",
+        "scenario_name": "product_quality",
+        "category": "Product",
+        "priority": "Medium",
+        "response": "{\n  \"title\": \"ImmunoBoost Efficacy Concern and Tablet Color Variation\",\n  \"category\": \"Product\",\n  \"priority\": \"High\",\n  \"description\": \"Customer reports reduced immunity efficacy compared to competitor brands despite consistent usage over three months. He observed a visible color variation in the new pack tablets, suspecting a formulation change. He is requesting a refund for two packs and offered to return unused tablets for quality testing.\",\n  \"root_cause_hypothesis\": \"Potential batch variation in manufacturing process affecting tablet coloration or active ingredient stability.\",\n  \"recommended_actions\": [\n    \"Initiate refund process for the two packs\",\n    \"Coordinate return of unused tablets to Quality Assurance for batch testing\",\n    \"Investigate manufacturing records for the specific batch regarding color specifications\"\n  ],\n  \"assigned_team\": \"Quality Assurance\",\n  \"sla_deadline_hours\": 24,\n  \"tags\": [\n    \"efficacy\",\n    \"color-variation\",\n    \"refund-request\"\n  ],\n  \"status\": \"Open\"\n}",
+        "latency_seconds": 45.075,
+        "input_tokens": 464,
+        "output_tokens": 2291,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.875,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "product",
+            "expected": "product",
+            "details": "Correct: 'product'"
+          },
+          "priority_accuracy": {
+            "score": 0.5,
+            "predicted": "high",
+            "expected": "medium",
+            "details": "Adjacent level: 'high' (expected 'medium') \u2013 partial credit"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {
+              "has_title": true,
+              "has_description": true,
+              "has_root_cause": true,
+              "has_2plus_actions": true,
+              "actions_actionable": true,
+              "has_assigned_team": true,
+              "has_sla_deadline": true
+            },
+            "details": "7/7 checks passed"
+          },
+          "format_compliance": {
+            "score": 1.0,
+            "valid_json": true,
+            "has_required_fields": true,
+            "details": "All required fields present"
+          },
+          "response_quality": {
+            "score": 1.0,
+            "word_count": 120,
+            "details": "Good quality"
+          },
+          "latency_seconds": 45.075
+        }
+      },
+      {
+        "task": "classify",
+        "scenario_name": "packaging_damage",
+        "category": "Packaging",
+        "priority": "Medium",
+        "response": "{\n  \"category\": \"Product\",\n  \"priority\": \"High\",\n  \"justification\": \"Broken tamper seal on an ingestible supplement indicates a potential safety risk and suspected contamination requiring immediate action.\",\n  \"keywords\": [\n    \"tamper seal\",\n    \"contamination\",\n    \"safety risk\"\n  ],\n  \"sla_hours\": 4,\n  \"confidence\": \"High\"\n}",
+        "latency_seconds": 58.312,
+        "input_tokens": 695,
+        "output_tokens": 3111,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.575,
+          "classification_accuracy": {
+            "score": 0.0,
+            "predicted": "product",
+            "expected": "packaging",
+            "details": "Wrong category: 'product' (expected 'packaging')"
+          },
+          "priority_accuracy": {
+            "score": 0.5,
+            "predicted": "high",
+            "expected": "medium",
+            "details": "Adjacent level: 'high' (expected 'medium') \u2013 partial credit"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {},
+            "details": "Not evaluated for classify task"
+          },
+          "format_compliance": {
+            "score": 1.0,
+            "valid_json": true,
+            "has_required_fields": true,
+            "details": "All required fields present"
+          },
+          "response_quality": {
+            "score": 1.0,
+            "word_count": 37,
+            "details": "Good quality"
+          },
+          "latency_seconds": 58.312
+        }
+      },
+      {
+        "task": "resolve",
+        "scenario_name": "packaging_damage",
+        "category": "Packaging",
+        "priority": "Medium",
+        "response": "{\n  \"immediate_action\": \"Email customer within 15 minutes advising not to consume the product and requesting photographic evidence.\",\n  \"resolution_steps\": [\n    \"[Support Executive] Verify order details, confirm replacement shipment with fragile handling flag.\",\n    \"[Quality Assurance] Review evidence for contamination risk and log incident for regulatory compliance.\",\n    \"[Logistics] File damage claim with carrier and audit packaging standards for supplements.\"\n  ],\n  \"assigned_team\": \"Customer Support\",\n  \"escalation_required\": true,\n  \"follow_up_required\": true,\n  \"follow_up_timeline\": \"24 hours\",\n  \"customer_communication\": \"Dear Sneha, Thank you for contacting us. We are deeply concerned about the condition of your OmegaCare shipment, specifically the torn seal. For your safety, please do not consume the product. We have initiated a replacement with enhanced packaging and will share tracking details soon. We are investigating this handling failure with our logistics partner. We apologize for this experience.\",\n  \"estimated_resolution_time\": \"24 hours\"\n}",
+        "latency_seconds": 65.129,
+        "input_tokens": 565,
+        "output_tokens": 3439,
+        "error": null,
+        "evaluation": {
+          "overall_score": 1.0,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Packaging",
+            "details": "Not evaluated for resolve task"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Medium",
+            "details": "Not evaluated for resolve task"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {
+              "has_immediate_action": true,
+              "has_3plus_steps": true,
+              "steps_use_action_verbs": true,
+              "has_customer_message": true,
+              "has_resolution_timeline": true,
+              "escalation_logic_correct": true
+            },
+            "details": "6/6 checks passed"
+          },
+          "format_compliance": {
+            "score": 1.0,
+            "valid_json": true,
+            "has_required_fields": true,
+            "details": "All required fields present"
+          },
+          "response_quality": {
+            "score": 1.0,
+            "word_count": 132,
+            "details": "Good quality"
+          },
+          "latency_seconds": 65.129
+        }
+      },
+      {
+        "task": "ticket",
+        "scenario_name": "packaging_damage",
+        "category": "Packaging",
+        "priority": "Medium",
+        "response": "{\n  \"title\": \"Damaged Delivery & Torn Seal - OmegaCare Fish Oil\",\n  \"category\": \"Packaging\",\n  \"priority\": \"High\",\n  \"description\": \"Customer received OmegaCare Fish Oil with a crushed outer box, dented carton, and a torn tamper-evident seal. There are significant concerns regarding product safety and potency due to potential exposure to contaminants. The customer requests an urgent replacement and investigation into logistics handling.\",\n  \"root_cause_hypothesis\": \"Rough handling by the logistics partner during transit caused physical damage to the packaging and compromised the tamper-evident seal.\",\n  \"recommended_actions\": [\"Verify customer photographs and approve immediate replacement shipment\", \"File incident report with logistics partner regarding handling standards\", \"Inspect remaining stock from same batch for packaging integrity\"],\n  \"assigned_team\": \"Quality Assurance\",\n  \"sla_deadline_hours\": 24,\n  \"tags\": [\"Damaged Packaging\", \"Tamper Seal Breach\", \"Urgent\"],\n  \"status\": \"Open\"\n}",
+        "latency_seconds": 51.969,
+        "input_tokens": 478,
+        "output_tokens": 2737,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.875,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "packaging",
+            "expected": "packaging",
+            "details": "Correct: 'packaging'"
+          },
+          "priority_accuracy": {
+            "score": 0.5,
+            "predicted": "high",
+            "expected": "medium",
+            "details": "Adjacent level: 'high' (expected 'medium') \u2013 partial credit"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {
+              "has_title": true,
+              "has_description": true,
+              "has_root_cause": true,
+              "has_2plus_actions": true,
+              "actions_actionable": true,
+              "has_assigned_team": true,
+              "has_sla_deadline": true
+            },
+            "details": "7/7 checks passed"
+          },
+          "format_compliance": {
+            "score": 1.0,
+            "valid_json": true,
+            "has_required_fields": true,
+            "details": "All required fields present"
+          },
+          "response_quality": {
+            "score": 1.0,
+            "word_count": 121,
+            "details": "Good quality"
+          },
+          "latency_seconds": 51.969
+        }
+      },
+      {
+        "task": "classify",
+        "scenario_name": "trade_inquiry",
+        "category": "Trade",
+        "priority": "Low",
+        "response": "{\n  \"category\": \"Trade\",\n  \"priority\": \"Low\",\n  \"justification\": \"The message is a business inquiry regarding commercial terms, distribution rights, and stock availability rather than a product defect or safety issue.\",\n  \"keywords\": [\"bulk pricing\", \"distribution rights\", \"stock availability\"],\n  \"sla_hours\": 72,\n  \"confidence\": \"High\"\n}",
+        "latency_seconds": 33.111,
+        "input_tokens": 728,
+        "output_tokens": 1673,
+        "error": null,
+        "evaluation": {
+          "overall_score": 1.0,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "trade",
+            "expected": "trade",
+            "details": "Correct: 'trade'"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "low",
+            "expected": "low",
+            "details": "Correct: 'low'"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {},
+            "details": "Not evaluated for classify task"
+          },
+          "format_compliance": {
+            "score": 1.0,
+            "valid_json": true,
+            "has_required_fields": true,
+            "details": "All required fields present"
+          },
+          "response_quality": {
+            "score": 1.0,
+            "word_count": 40,
+            "details": "Good quality"
+          },
+          "latency_seconds": 33.111
+        }
+      },
+      {
+        "task": "resolve",
+        "scenario_name": "trade_inquiry",
+        "category": "Trade",
+        "priority": "Low",
+        "response": "{\n  \"immediate_action\": \"Acknowledge receipt via email within 15 minutes and confirm regional sales representative assignment.\",\n  \"resolution_steps\": [\n    \"[Sales] Verify account history and calculate bulk pricing tiers for 500+ units\",\n    \"[Sales Manager] Review and approve exclusivity request for Surat metropolitan district\",\n    \"[Logistics] Confirm stock availability and lead times for OmegaCare SKUs\",\n    \"[Sales] Compile proposal including POS materials and training schedule\"\n  ],\n  \"assigned_team\": \"Sales\",\n  \"escalation_required\": true,\n  \"follow_up_required\": true,\n  \"follow_up_timeline\": \"72 hours\",\n  \"customer_communication\": \"Dear Mr. Mehta, Thank you for your continued partnership and interest in expanding our collaboration. We have received your request regarding commercial terms and OmegaCare assortment. Our regional sales representative will contact you within 72 hours to discuss pricing, exclusivity, and support materials. We value HealthPlus Pharmacy as a key partner.\",\n  \"estimated_resolution_time\": \"72 hours\"\n}",
+        "latency_seconds": 56.153,
+        "input_tokens": 598,
+        "output_tokens": 2949,
+        "error": null,
+        "evaluation": {
+          "overall_score": 1.0,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Trade",
+            "details": "Not evaluated for resolve task"
+          },
+          "priority_accuracy": {
+            "score": 1.0,
+            "predicted": "N/A",
+            "expected": "Low",
+            "details": "Not evaluated for resolve task"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {
+              "has_immediate_action": true,
+              "has_3plus_steps": true,
+              "steps_use_action_verbs": true,
+              "has_customer_message": true,
+              "has_resolution_timeline": true,
+              "escalation_logic_correct": true
+            },
+            "details": "6/6 checks passed"
+          },
+          "format_compliance": {
+            "score": 1.0,
+            "valid_json": true,
+            "has_required_fields": true,
+            "details": "All required fields present"
+          },
+          "response_quality": {
+            "score": 1.0,
+            "word_count": 125,
+            "details": "Good quality"
+          },
+          "latency_seconds": 56.153
+        }
+      },
+      {
+        "task": "ticket",
+        "scenario_name": "trade_inquiry",
+        "category": "Trade",
+        "priority": "Low",
+        "response": "{\n  \"title\": \"HealthPlus Pharmacy Partnership Expansion and Trade Terms Inquiry\",\n  \"category\": \"Trade\",\n  \"priority\": \"High\",\n  \"description\": \"HealthPlus Pharmacy, a chain of 18 outlets, requests to expand their assortment to include the full OmegaCare range. They are seeking commercial terms regarding bulk pricing, exclusive distribution rights for Surat, and marketing support. Immediate contact from a regional sales representative is required to discuss stock levels and lead times.\",\n  \"root_cause_hypothesis\": \"Customer intends to scale procurement but requires aligned commercial incentives and supply chain assurances before proceeding.\",\n  \"recommended_actions\": [\n    \"Assign regional sales representative to contact Mr. Arvind Mehta\",\n    \"Prepare bulk pricing and exclusivity proposal for Surat district\",\n    \"Verify OmegaCare inventory levels and lead times\"\n  ],\n  \"assigned_team\": \"Sales\",\n  \"sla_deadline_hours\": 24,\n  \"tags\": [\n    \"B2B\",\n    \"Distribution\",\n    \"OmegaCare\",\n    \"Partnership\"\n  ],\n  \"status\": \"Open\"\n}",
+        "latency_seconds": 41.069,
+        "input_tokens": 511,
+        "output_tokens": 2125,
+        "error": null,
+        "evaluation": {
+          "overall_score": 0.75,
+          "classification_accuracy": {
+            "score": 1.0,
+            "predicted": "trade",
+            "expected": "trade",
+            "details": "Correct: 'trade'"
+          },
+          "priority_accuracy": {
+            "score": 0.0,
+            "predicted": "high",
+            "expected": "low",
+            "details": "Adjacent level: 'high' (expected 'low') \u2013 partial credit"
+          },
+          "resolution_quality": {
+            "score": 1.0,
+            "checks": {
+              "has_title": true,
+              "has_description": true,
+              "has_root_cause": true,
+              "has_2plus_actions": true,
+              "actions_actionable": true,
+              "has_assigned_team": true,
+              "has_sla_deadline": true
+            },
+            "details": "7/7 checks passed"
+          },
+          "format_compliance": {
+            "score": 1.0,
+            "valid_json": true,
+            "has_required_fields": true,
+            "details": "All required fields present"
+          },
+          "response_quality": {
+            "score": 1.0,
+            "word_count": 124,
+            "details": "Good quality"
+          },
+          "latency_seconds": 41.069
+        }
+      }
+    ]
+  }
+}
