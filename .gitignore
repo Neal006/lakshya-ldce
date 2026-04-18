@@ -211,3 +211,5 @@ __marimo__/
 
 skills/
 stt/models/*
+
+text_classifier/models/*
