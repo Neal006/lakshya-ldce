@@ -1,0 +1,9 @@
+{
+  "model": "LogisticRegression",
+  "best_score": 1.0,
+  "best_params": {
+    "C": 0.0745934328572655,
+    "solver": "lbfgs",
+    "max_iter": 890
+  }
+}

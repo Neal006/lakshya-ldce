@@ -6,7 +6,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.preprocessing import StandardScaler
 
 from util.config import (
-    TEXT_COL, SENTIMENT_COL, PRIORITY_COL, RESOLUTION_TIME_COL,
+    TEXT_COL, SENTIMENT_COL,
     MODELS_DIR,
     TFIDF_MAX_FEATURES, TFIDF_NGRAM_RANGE, TFIDF_MIN_DF,
     TRADE_KEYWORDS, PACKAGING_KEYWORDS, PRODUCT_KEYWORDS,
@@ -100,27 +100,18 @@ class FeatureEngineer:
         return domain_features, domain_names
 
     def _build_metadata_features(self, df: pd.DataFrame, fit: bool = True) -> tuple:
-        """Block 4 — Metadata features (sentiment, priority, resolution_time)."""
-        # Sentiment (already numeric)
+        """Block 4 — Metadata features (sentiment only; priority/resolution_time excluded)."""
+        # Sentiment (already numeric, derived from text content)
         sentiment = df[SENTIMENT_COL].values.reshape(-1, 1)
-
-        # Priority encoding: Low=0, Medium=1, High=2
-        priority_map = {"Low": 0, "Medium": 1, "High": 2}
-        priority_encoded = df[PRIORITY_COL].map(priority_map).values.reshape(-1, 1)
-
-        # Resolution time (already numeric)
-        resolution_time = df[RESOLUTION_TIME_COL].values.reshape(-1, 1)
-
-        meta_raw = np.hstack([sentiment, priority_encoded, resolution_time])
 
         # Normalize
         if fit:
-            meta_scaled = self.scaler.fit_transform(meta_raw)
+            meta_scaled = self.scaler.fit_transform(sentiment)
             save_pickle(self.scaler, self.scaler_path)
         else:
-            meta_scaled = self.scaler.transform(meta_raw)
+            meta_scaled = self.scaler.transform(sentiment)
 
-        meta_names = ["sentiment_scaled", "priority_encoded_scaled", "resolution_time_scaled"]
+        meta_names = ["sentiment_scaled"]
         return meta_scaled, meta_names
 
     def fit_transform(self, df: pd.DataFrame) -> tuple:

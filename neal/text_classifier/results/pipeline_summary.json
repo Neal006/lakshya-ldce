@@ -1,0 +1,29 @@
+{
+  "model": "LogisticRegression_tuned",
+  "test_accuracy": 1.0,
+  "f1_macro": 1.0,
+  "mcc": 1.0,
+  "roc_auc_macro": 1.0,
+  "kfold_mean_f1": "1.0000 ± 0.0000",
+  "total_runtime": "8m 14s",
+  "features_used": [
+    "tfidf",
+    "statistical",
+    "domain",
+    "metadata",
+    "nlp_embeddings"
+  ],
+  "n_optuna_trials": 50,
+  "step_timings": {
+    "load_data": "0.04s",
+    "run_eda_step": "0.00s",
+    "preprocess_data": "5.21s",
+    "split_data": "0.05s",
+    "engineer_features": "0.89s",
+    "add_nlp_embeddings": "53.45s",
+    "train_baseline_models": "21.04s",
+    "optimize_hyperparameters": "406.93s",
+    "evaluate_model": "0.99s",
+    "run_kfold_validation": "5.60s"
+  }
+}
