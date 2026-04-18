@@ -23,7 +23,7 @@ async def twilio_voice_webhook(request: Request):
     host = PUBLIC_HOST
     twiml = f"""<?xml version="1.0" encoding="UTF-8"?>
 <Response>
-    <Say voice="en-IN-Neerja">Welcome to the complaint helpline. Please describe your issue after the beep.</Say>
+    <Say voice="Polly.Aditi">Welcome to the complaint helpline. Please describe your issue after the beep.</Say>
     <Connect>
         <Stream url="wss://{host}/twilio/media" />
     </Connect>
