@@ -5,7 +5,7 @@
   "mcc": 1.0,
   "roc_auc_macro": 1.0,
   "kfold_mean_f1": "1.0000 ± 0.0000",
-  "total_runtime": "8m 14s",
+  "total_runtime": "8m 58s",
   "features_used": [
     "tfidf",
     "statistical",
@@ -17,13 +17,13 @@
   "step_timings": {
     "load_data": "0.04s",
     "run_eda_step": "0.00s",
-    "preprocess_data": "5.21s",
-    "split_data": "0.05s",
+    "preprocess_data": "6.57s",
+    "split_data": "0.04s",
     "engineer_features": "0.89s",
-    "add_nlp_embeddings": "53.45s",
-    "train_baseline_models": "21.04s",
-    "optimize_hyperparameters": "406.93s",
-    "evaluate_model": "0.99s",
-    "run_kfold_validation": "5.60s"
+    "add_nlp_embeddings": "37.35s",
+    "train_baseline_models": "18.82s",
+    "optimize_hyperparameters": "464.59s",
+    "evaluate_model": "0.98s",
+    "run_kfold_validation": "9.33s"
   }
 }
