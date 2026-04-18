@@ -18,6 +18,9 @@
 | 5 | **MiniMax M2.5** | openrouter | `minimax-m2.5` |
 | 6 | **MiniMax M2.7** | openrouter | `minimax-m2.7` |
 | 7 | **Qwen 3.5 Plus (Alibaba)** | openrouter | `qwen3.5-plus` |
+| 8 | **Llama 3.3 70B (Groq)** | groq | `llama-3.3-70b-versatile` |
+| 9 | **Gemini 2.5 Flash (Google)** | google | `models/gemini-2.5-flash` |
+| 10 | **Qwen 2.5 72B (HuggingFace)** | huggingface | `Qwen/Qwen2.5-72B-Instruct` |
 
 All models accessed via OpenCode / OpenRouter (OpenAI-compatible API).
 
@@ -44,7 +47,7 @@ Each model response is scored on **five weighted metrics**:
 | Packaging / Seal Damage (Sneha Patel) | Packaging | Medium | Email |
 | Trade / Bulk Pricing Inquiry (HealthPlus Pharmacy) | Trade | Low | Email |
 
-Each scenario is tested on **3 tasks** (classify / resolve / ticket) → **12 API calls per model**, **84 total API calls**.
+Each scenario is tested on **3 tasks** (classify / resolve / ticket) → **12 API calls per model**, **120 total API calls**.
 
 ---
 
@@ -52,13 +55,16 @@ Each scenario is tested on **3 tasks** (classify / resolve / ticket) → **12 AP
 
 | Rank | Model | Overall | Latency | Category Acc. | Priority Acc. | Resolution | Format |
 |------|-------|:-------:|:-------:|:-------------:|:-------------:|:----------:|:------:|
-| 🥇 | **MiniMax M2.5** | 96.0% | 13.5s | 100% | 88% | 100% | 100% |
-| 🥈 | **Qwen 3.5 Plus (Alibaba)** | 92.3% | 51.7s | 92% | 79% | 100% | 100% |
-| 🥉 | **MiniMax M2.7** | 89.3% | 15.1s | 83% | 88% | 93% | 92% |
-| 4. | **GLM 5 (Zhipu)** | 49.2% | 19.1s | 58% | 62% | 33% | 33% |
-| 5. | **GLM 5.1 (Zhipu)** | 45.4% | 14.9s | 58% | 58% | 33% | 25% |
-| 6. | **MiMo V2 Pro (Xiaomi)** | 45.4% | 15.0s | 58% | 58% | 33% | 25% |
-| 7. | **MiMo V2 Omni (Xiaomi)** | 32.4% | 13.0s | 33% | 38% | 35% | 8% |
+| 🥇 | **Llama 3.3 70B (Groq)** | 96.9% | 1.4s | 100% | 88% | 100% | 100% |
+| 🥈 | **Qwen 2.5 72B (HuggingFace)** | 96.9% | 11.6s | 100% | 88% | 100% | 100% |
+| 🥉 | **MiniMax M2.5** | 96.0% | 13.5s | 100% | 88% | 100% | 100% |
+| 4. | **Qwen 3.5 Plus (Alibaba)** | 92.3% | 51.7s | 92% | 79% | 100% | 100% |
+| 5. | **Gemini 2.5 Flash (Google)** | 89.9% | 7.4s | 91% | 82% | 92% | 91% |
+| 6. | **MiniMax M2.7** | 89.3% | 15.1s | 83% | 88% | 93% | 92% |
+| 7. | **GLM 5 (Zhipu)** | 49.2% | 19.1s | 58% | 62% | 33% | 33% |
+| 8. | **GLM 5.1 (Zhipu)** | 45.4% | 14.9s | 58% | 58% | 33% | 25% |
+| 9. | **MiMo V2 Pro (Xiaomi)** | 45.4% | 15.0s | 58% | 58% | 33% | 25% |
+| 10. | **MiMo V2 Omni (Xiaomi)** | 32.4% | 13.0s | 33% | 38% | 35% | 8% |
 
 ---
 
@@ -104,8 +110,11 @@ Each scenario is tested on **3 tasks** (classify / resolve / ticket) → **12 AP
 
 | Model | Score | Latency |
 |-------|:-----:|:-------:|
+| Llama 3.3 70B (Groq) | 100.0% | 1.2s |
+| Qwen 2.5 72B (HuggingFace) | 100.0% | 5.8s |
 | MiniMax M2.5 | 97.4% | 7.4s |
 | Qwen 3.5 Plus (Alibaba) | 89.4% | 41.7s |
+| Gemini 2.5 Flash (Google) | 92.5% | 5.0s |
 | MiniMax M2.7 | 89.4% | 12.0s |
 | GLM 5 (Zhipu) | 89.4% | 22.3s |
 | GLM 5.1 (Zhipu) | 81.2% | 14.2s |
@@ -116,8 +125,11 @@ Each scenario is tested on **3 tasks** (classify / resolve / ticket) → **12 AP
 
 | Model | Score | Latency |
 |-------|:-----:|:-------:|
+| Llama 3.3 70B (Groq) | 100.0% | 1.6s |
+| Qwen 2.5 72B (HuggingFace) | 100.0% | 19.2s |
 | MiniMax M2.5 | 100.0% | 14.7s |
 | Qwen 3.5 Plus (Alibaba) | 100.0% | 67.3s |
+| Gemini 2.5 Flash (Google) | 89.7% | 10.4s |
 | MiniMax M2.7 | 92.3% | 16.9s |
 | GLM 5 (Zhipu) | 55.0% | 19.8s |
 | GLM 5.1 (Zhipu) | 55.0% | 16.0s |
@@ -128,8 +140,11 @@ Each scenario is tested on **3 tasks** (classify / resolve / ticket) → **12 AP
 
 | Model | Score | Latency |
 |-------|:-----:|:-------:|
+| Llama 3.3 70B (Groq) | 90.6% | 1.6s |
+| Qwen 2.5 72B (HuggingFace) | 90.6% | 9.9s |
 | MiniMax M2.5 | 90.6% | 18.4s |
 | Qwen 3.5 Plus (Alibaba) | 87.5% | 45.9s |
+| Gemini 2.5 Flash (Google) | 87.5% | 7.7s |
 | MiniMax M2.7 | 86.2% | 16.5s |
 | GLM 5 (Zhipu) | 3.2% | 15.3s |
 | GLM 5.1 (Zhipu) | 0.0% | 14.6s |
@@ -142,8 +157,11 @@ Each scenario is tested on **3 tasks** (classify / resolve / ticket) → **12 AP
 
 | Model | Category | Priority | Resolution | Format | Quality |
 |-------|:--------:|:--------:|:----------:|:------:|:-------:|
+| Llama 3.3 70B (Groq) | 100% | 88% | 100% | 100% | 100% |
+| Qwen 2.5 72B (HuggingFace) | 100% | 88% | 100% | 100% | 100% |
 | MiniMax M2.5 | 100% | 88% | 100% | 100% | 91% |
 | Qwen 3.5 Plus (Alibaba) | 92% | 79% | 100% | 100% | 100% |
+| Gemini 2.5 Flash (Google) | 91% | 82% | 92% | 91% | 100% |
 | MiniMax M2.7 | 83% | 88% | 93% | 92% | 100% |
 | GLM 5 (Zhipu) | 58% | 62% | 33% | 33% | 44% |
 | GLM 5.1 (Zhipu) | 58% | 58% | 33% | 25% | 25% |
@@ -154,11 +172,11 @@ Each scenario is tested on **3 tasks** (classify / resolve / ticket) → **12 AP
 
 ## Recommendation
 
-Based on this ablation study across **84 API calls**, **MiniMax M2.5** achieves the highest overall score of **96.0%**.
+Based on this ablation study across **120 API calls**, **Llama 3.3 70B (Groq)** achieves the highest overall score of **96.9%**.
 
-The runner-up is **Qwen 3.5 Plus (Alibaba)** at **92.3%**.
+The runner-up is **Qwen 2.5 72B (HuggingFace)** at **96.9%**.
 
-For latency-critical deployments (real-time complaint intake), **MiMo V2 Omni (Xiaomi)** is the fastest at **13.0s** average.
+For latency-critical deployments (real-time complaint intake), **Llama 3.3 70B (Groq)** is the fastest at **1.4s** average.
 
 ### Selection Criteria for TS-14 Production
 
