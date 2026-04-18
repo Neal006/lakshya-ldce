@@ -34,8 +34,8 @@ EMBEDDING_DIM = 384
 PCA_COMPONENTS = 50
 EMBEDDING_BATCH_SIZE = 64
 
-TRADE_KEYWORDS = ["trade", "pricing", "order", "inquiry", "bulk", "query"]
-PACKAGING_KEYWORDS = ["packaging", "box", "broken", "damaged", "poor", "quality"]
-PRODUCT_KEYWORDS = ["product", "defective", "malfunction", "stopped", "working", "item"]
+# NOTE: Static keyword lists (TRADE_KEYWORDS, etc.) intentionally removed.
+# The old approach was static rule-based mapping, which violates competition rules.
+# All classification is now done via ML-learned TF-IDF + embedding features.
 
 KFOLD_SPLITS = 5

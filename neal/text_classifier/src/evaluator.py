@@ -46,9 +46,14 @@ class ModelEvaluator:
         self.model_name = model_name
         self.feature_names = feature_names
 
-        # Predictions
-        self.y_pred = model.predict(X_test)
-        self.y_prob = self._get_probabilities()
+        # Predictions — either from model or set externally (for transformers)
+        if model is not None and X_test is not None:
+            self.y_pred = model.predict(X_test)
+            self.y_prob = self._get_probabilities()
+        else:
+            # Will be set externally via evaluator.y_pred and evaluator.y_probs
+            self.y_pred = None
+            self.y_prob = None
 
     def _get_probabilities(self) -> np.ndarray:
         """Get probability predictions, using calibration if needed."""
