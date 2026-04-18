@@ -60,5 +60,8 @@ class Config:
     SLA_MEDIUM: int = 24
     SLA_LOW: int = 72
 
+    # --- Reply email HTML output ---
+    REPLY_EMAIL_OUTPUT_DIR: str = os.getenv("REPLY_EMAIL_OUTPUT_DIR", "generated_emails")
+
 
 config = Config()

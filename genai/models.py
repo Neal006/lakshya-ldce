@@ -95,3 +95,39 @@ class HealthResponse(BaseModel):
     llm_connected: bool
     nlp_service_url: str
     version: str = "1.0.0"
+
+
+# ─── Reply email HTML ───────────────────────────────────────────────
+
+class EmailReplyHtmlRequest(BaseModel):
+    """Wraps the JSON body from POST /resolve to render a branded HTML reply."""
+
+    resolution: ResolutionResponse = Field(
+        ...,
+        description="Same object returned by POST /resolve (full resolution payload).",
+    )
+    customer_name: str = Field(
+        default="Valued Customer",
+        max_length=200,
+        description="Greeting name (not stored on ResolutionResponse).",
+    )
+    subject: str | None = Field(
+        default=None,
+        max_length=200,
+        description="If omitted, a subject line is derived from complaint id and category.",
+    )
+    persist_file: bool = Field(
+        default=True,
+        description="When true, the HTML is written under the configured output directory.",
+    )
+
+
+class EmailReplyHtmlResponse(BaseModel):
+    subject: str
+    html: str
+    file_path: str | None = Field(default=None, description="Absolute path when persist_file is true")
+    model_used: str = Field(
+        default="",
+        description="Copied from resolution.model_used (LLM that produced /resolve).",
+    )
+    genai_latency_ms: float = 0.0

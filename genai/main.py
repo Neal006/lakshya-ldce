@@ -2,9 +2,10 @@
 main.py — FastAPI server for the GenAI Resolution Microservice.
 
 Endpoints:
-    GET  /health    → Service health check
-    POST /resolve   → Generate resolution from classifier output
-    GET  /metrics   → Prometheus metrics
+    GET  /health              → Service health check
+    POST /resolve             → Generate resolution from classifier output
+    POST /reply/email-html    → Generate solv.ai branded HTML for a customer reply email
+    GET  /metrics             → Prometheus metrics
 
 Start with:
     uvicorn main:app --host 0.0.0.0 --port 8001 --reload
@@ -14,6 +15,7 @@ import time
 import logging
 import uuid
 from collections import defaultdict
+from pathlib import Path
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, HTTPException, Request, Depends
@@ -28,6 +30,8 @@ from models import (
     ResolutionResponse,
     HealthResponse,
     ComplaintStatus,
+    EmailReplyHtmlRequest,
+    EmailReplyHtmlResponse,
 )
 from prompts import SYSTEM_PROMPT_RESOLVE, USER_PROMPT_RESOLVE
 from guardrails import (
@@ -35,7 +39,9 @@ from guardrails import (
     validate_input,
     validate_output,
     safe_json_parse,
+    check_prompt_injection,
 )
+from email_html import build_solvai_reply_html_from_resolution, write_reply_html_file
 
 # ─── Logging ─────────────────────────────────────────────────────────
 
@@ -46,9 +52,16 @@ logging.basicConfig(
 )
 logger = logging.getLogger("genai")
 
+_GENAI_ROOT = Path(__file__).resolve().parent
+
 # ─── Rate Limiter (in-memory, per-IP) ────────────────────────────────
 
 _rate_store: dict[str, list[float]] = defaultdict(list)
+
+
+def _reply_email_output_dir() -> Path:
+    p = Path(config.REPLY_EMAIL_OUTPUT_DIR)
+    return p.resolve() if p.is_absolute() else (_GENAI_ROOT / p).resolve()
 
 
 def _check_rate_limit(client_ip: str) -> bool:
@@ -281,3 +294,68 @@ async def resolve_quick(data: ClassifierOutput):
     """
     request = ResolveRequest(classifier_output=data)
     return await resolve(request)
+
+
+@app.post("/reply/email-html", response_model=EmailReplyHtmlResponse, dependencies=[Depends(verify_api_key)])
+async def reply_email_html(body: EmailReplyHtmlRequest):
+    """
+    Turn the JSON from **POST /resolve** into a black & orange solv.ai HTML email document.
+    No extra LLM call — the email content comes from `resolution` (e.g. `customer_response`, steps, SLA).
+    Optional `customer_name` fills the greeting (same field you use on `/resolve`).
+    """
+    start = time.time()
+    request_id = str(uuid.uuid4())[:8]
+    r = body.resolution
+
+    for label, text in (
+        ("original_text", r.original_text),
+        ("customer_response", r.customer_response),
+    ):
+        if len((text or "").strip()) < 3:
+            raise HTTPException(status_code=400, detail=f"resolution.{label} is missing or too short")
+
+    inj: list[str] = []
+    for text in (r.original_text, r.customer_response):
+        inj.extend(check_prompt_injection(text))
+    if inj:
+        logger.warning(f"[{request_id}] Email HTML request blocked: {inj}")
+        raise HTTPException(
+            status_code=400,
+            detail={"error": "input_validation_failed", "violations": inj},
+        )
+
+    subject = (body.subject or "").strip() or f"Re: Your request #{r.complaint_id} — {r.category}"
+    status_label = r.status.value if hasattr(r.status, "value") else str(r.status)
+
+    html_doc = build_solvai_reply_html_from_resolution(
+        subject=subject,
+        customer_name=body.customer_name,
+        complaint_id=r.complaint_id,
+        category=r.category,
+        priority=r.priority,
+        status=status_label,
+        original_text=r.original_text,
+        customer_response=r.customer_response,
+        resolution_steps=r.resolution_steps,
+        follow_up_timeline=r.follow_up_timeline,
+        estimated_resolution_time=r.estimated_resolution_time,
+        assigned_team=r.assigned_team,
+        escalation_required=r.escalation_required,
+        sla_deadline_hours=r.sla_deadline_hours,
+    )
+
+    file_path: str | None = None
+    if body.persist_file:
+        stem = f"reply_{r.complaint_id}_{request_id}_{int(time.time())}"
+        path = write_reply_html_file(_reply_email_output_dir(), stem, html_doc)
+        file_path = str(path)
+        logger.info(f"[{request_id}] Wrote reply HTML: {file_path}")
+
+    latency_ms = round((time.time() - start) * 1000, 2)
+    return EmailReplyHtmlResponse(
+        subject=subject,
+        html=html_doc,
+        file_path=file_path,
+        model_used=r.model_used,
+        genai_latency_ms=latency_ms,
+    )
