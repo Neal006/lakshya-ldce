@@ -1,13 +1,16 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.exceptions import RequestValidationError
+from fastapi.staticfiles import StaticFiles
 from starlette.exceptions import HTTPException as StarletteHTTPException
+from starlette.responses import HTMLResponse, FileResponse
 from app.config import CORS_ORIGINS, ENVIRONMENT
 from app.routes import auth, complaints, analytics, sse, webhooks, demo, health, users
 from app.middleware.exceptions import (
     AppException, app_exception_handler, http_exception_handler,
     validation_exception_handler,
 )
+import os
 
 app = FastAPI(
     title="TS-14 Complaint Resolution Engine",
@@ -36,6 +39,17 @@ app.include_router(webhooks.router, prefix="/webhooks", tags=["Webhooks"])
 app.include_router(demo.router, prefix="/demo", tags=["Demo Mode"])
 app.include_router(health.router, prefix="/health", tags=["Health"])
 app.include_router(users.router, prefix="/users", tags=["User Management"])
+
+
+DASHBOARD_DIR = os.environ.get("DASHBOARD_DIR", os.path.join(os.path.dirname(__file__), "..", "..", "..", "voice-agent", "dashboard"))
+
+
+@app.get("/dashboard", response_class=HTMLResponse)
+async def dashboard_index():
+    dashboard_path = os.path.join(DASHBOARD_DIR, "index.html")
+    if os.path.exists(dashboard_path):
+        return FileResponse(dashboard_path)
+    return HTMLResponse("<h1>Dashboard not found</h1><p>Set DASHBOARD_DIR env var to the dashboard directory.</p>")
 
 
 @app.on_event("startup")

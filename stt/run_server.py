@@ -14,7 +14,7 @@ import uvicorn
 def main():
     parser = argparse.ArgumentParser(description="STT Inference Server")
     parser.add_argument("--host", default="0.0.0.0", help="Bind host (default: 0.0.0.0)")
-    parser.add_argument("--port", type=int, default=8000, help="Bind port (default: 8000)")
+    parser.add_argument("--port", type=int, default=8001, help="Bind port (default: 8001)")
     parser.add_argument("--reload", action="store_true", help="Enable auto-reload (dev only)")
     args = parser.parse_args()
 

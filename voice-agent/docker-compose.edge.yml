@@ -1,0 +1,125 @@
+# Edge deployment — no Twilio, no cloud APIs, all local
+# For web-based complaint entry on local network
+version: "3.9"
+
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: lakshya-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11434/api/tags"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+
+  stt:
+    build:
+      context: ../stt
+      dockerfile: Dockerfile
+    container_name: lakshya-stt
+    ports:
+      - "8001:8000"
+    environment:
+      - WHISPER_MODEL_SIZE=tiny
+    volumes:
+      - stt_models:/app/models
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+
+  classifier:
+    build:
+      context: ../text_classifier
+      dockerfile: Dockerfile
+    container_name: lakshya-classifier
+    ports:
+      - "8002:8000"
+    volumes:
+      - classifier_models:/app/models
+      - classifier_data:/app/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+
+  backend:
+    build:
+      context: ../website/backend
+      dockerfile: Dockerfile
+    container_name: lakshya-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite:///./ts14.db
+      - ML_SERVICE_URL=http://classifier:8000
+      - JWT_SECRET=edge-secret-change-in-production
+      - CORS_ORIGINS=http://localhost:3000,http://localhost:8000,http://localhost:8003
+    volumes:
+      - backend_data:/app/data
+    depends_on:
+      classifier:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+
+  orchestrator:
+    build:
+      context: ./orchestrator
+      dockerfile: Dockerfile
+    container_name: lakshya-orchestrator
+    ports:
+      - "8003:8000"
+    environment:
+      - OLLAMA_BASE_URL=http://ollama:11434
+      - STT_SERVICE_URL=http://stt:8000
+      - CLASSIFIER_SERVICE_URL=http://classifier:8000
+      - BACKEND_SERVICE_URL=http://backend:8000
+      - SERVICE_ACCOUNT_EMAIL=system@lakshya.ai
+      - SERVICE_ACCOUNT_PASSWORD=Changeme123
+      - PRIMARY_LLM=ollama
+      - PRIMARY_TTS=piper
+      - NETWORK_MODE=offline
+      - DASHBOARD_DIR=/app/dashboard
+    volumes:
+      - piper_voices:/app/piper/voices
+    depends_on:
+      - ollama
+      - stt
+      - classifier
+      - backend
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+
+volumes:
+  ollama_data:
+  stt_models:
+  classifier_models:
+  classifier_data:
+  backend_data:
+  piper_voices:

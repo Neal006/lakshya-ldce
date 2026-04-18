@@ -7,8 +7,8 @@ async def classify_complaint(raw_text: str) -> dict:
     try:
         async with httpx.AsyncClient(timeout=15.0) as client:
             response = await client.post(
-                f"{ML_SERVICE_URL}/classify",
-                json={"text": raw_text},
+                f"{ML_SERVICE_URL}/predict",
+                json={"complaint_id": "voice", "text": raw_text},
             )
             response.raise_for_status()
             data = response.json()

@@ -38,6 +38,7 @@ class SubmittedViaEnum(str, enum.Enum):
     email = "email"
     call = "call"
     dashboard = "dashboard"
+    voice = "voice"
 
 
 class Profile(Base):
