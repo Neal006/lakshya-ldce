@@ -1,7 +1,9 @@
 import os
 from dotenv import load_dotenv
 
-load_dotenv()
+# Load .env from voice-agent/ (one level up from this orchestrator/ dir)
+_ENV_PATH = os.path.join(os.path.dirname(__file__), "..", ".env")
+load_dotenv(dotenv_path=_ENV_PATH, override=True)
 
 # ---------------------------------------------------------------------------
 # Twilio
@@ -47,6 +49,7 @@ Piper_VOICE_FILES = {
 STT_SERVICE_URL = os.getenv("STT_SERVICE_URL", "http://localhost:8001")
 CLASSIFIER_SERVICE_URL = os.getenv("CLASSIFIER_SERVICE_URL", "http://localhost:8002")
 BACKEND_SERVICE_URL = os.getenv("BACKEND_SERVICE_URL", "http://localhost:8000")
+GENAI_SERVICE_URL = os.getenv("GENAI_SERVICE_URL", "http://localhost:8004")
 
 # ---------------------------------------------------------------------------
 # Backend Auth
