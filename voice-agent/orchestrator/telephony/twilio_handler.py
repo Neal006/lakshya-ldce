@@ -67,6 +67,8 @@ async def twilio_media_stream(websocket: WebSocket):
     audio_buffer = bytearray()
     barge_in = BargeInDetector()
     is_sending_tts = False
+    tts_ended_at: float = 0.0
+    TTS_COOLDOWN_SEC = 1.5  # discard audio for 1.5s after TTS ends to avoid echo
 
     try:
         while True:
@@ -102,78 +104,98 @@ async def twilio_media_stream(websocket: WebSocket):
                 inbound_audio = decode_twilio_audio(data["media"]["payload"])
                 inbound_float = pcm16_to_float32(inbound_audio)
 
-                # Check for barge-in: user speaking while TTS is playing
-                barge_in.set_tts_playing(is_sending_tts)
-                if barge_in.process_inbound(inbound_float):
-                    logger.info(f"[{call_sid}] Barge-in detected")
-                    is_sending_tts = False
+                # While TTS is playing: only check for barge-in, never accumulate
+                if is_sending_tts:
+                    barge_in.set_tts_playing(True)
+                    if barge_in.process_inbound(inbound_float):
+                        logger.info(f"[{call_sid}] Barge-in detected")
+                        is_sending_tts = False
+                        tts_ended_at = time.time()
+                        audio_buffer.clear()
+                    continue  # always skip accumulation during TTS
+
+                # Post-TTS cooldown: discard audio to avoid processing TTS echo
+                if time.time() - tts_ended_at < TTS_COOLDOWN_SEC:
                     audio_buffer.clear()
                     continue
 
                 audio_buffer.extend(inbound_audio)
 
                 # Accumulate ~2 seconds of audio before processing
-                if len(audio_buffer) >= 64000:  # ~2 seconds at 16kHz * 2 bytes
-                    chunk_start = time.time()
-                    audio_float = pcm16_to_float32(bytes(audio_buffer))
+                if len(audio_buffer) < 64000:  # ~2 seconds at 16kHz * 2 bytes
+                    continue
 
+                chunk_start = time.time()
+                audio_float = pcm16_to_float32(bytes(audio_buffer))
+                audio_buffer.clear()  # clear immediately so new audio isn't processed twice
+
+                try:
+                    from agents.stt_client import transcribe_audio
+                    stt_result = await transcribe_audio(audio_float)
+                except Exception as e:
+                    logger.error(f"[{call_sid}] STT error: {e}", exc_info=True)
+                    continue
+
+                if not (stt_result and stt_result.get("text", "").strip()):
+                    continue
+
+                text = stt_result["text"].strip()
+                confidence = stt_result.get("confidence", 0)
+                stt_ms = round((time.time() - chunk_start) * 1000)
+                logger.info(f"[{call_sid}] STT: '{text}' confidence={confidence:.2f} ({stt_ms}ms)")
+
+                # Drop low-confidence transcriptions (noise / echo filter)
+                if confidence < 0.40:
+                    logger.info(f"[{call_sid}] STT confidence {confidence:.2f} below threshold, skipping")
+                    continue
+
+                process_start = time.time()
+                result = await coordinator.process_text(text, session)
+                process_ms = round((time.time() - process_start) * 1000)
+                logger.info(f"[{call_sid}] Pipeline: state={result.get('state')} ({process_ms}ms)")
+
+                if result and result.get("tts_text"):
                     try:
-                        from agents.stt_client import transcribe_audio
-                        stt_result = await transcribe_audio(audio_float)
-                    except Exception as e:
-                        logger.error(f"[{call_sid}] STT error: {e}", exc_info=True)
-                        audio_buffer.clear()
-                        continue
+                        from tts import synthesize_speech
+                        tts_start = time.time()
+                        tts_text = result["tts_text"]
+                        logger.info(f"[{call_sid}] TTS text: '{tts_text[:100]}...'")
+                        is_sending_tts = True
+                        audio_buffer.clear()  # discard any audio that arrived during pipeline
+                        audio_pcm = await synthesize_speech(tts_text)
+                        tts_ms = round((time.time() - tts_start) * 1000)
 
-                    if stt_result and stt_result.get("text", "").strip():
-                        text = stt_result["text"].strip()
-                        confidence = stt_result.get("confidence", 0)
-                        stt_ms = round((time.time() - chunk_start) * 1000)
-                        logger.info(f"[{call_sid}] STT: '{text}' confidence={confidence:.2f} ({stt_ms}ms)")
-
-                        process_start = time.time()
-                        result = await coordinator.process_text(text, session)
-                        process_ms = round((time.time() - process_start) * 1000)
-                        logger.info(f"[{call_sid}] Pipeline: state={result.get('state')} ({process_ms}ms)")
-
-                        if result and result.get("tts_text"):
-                            try:
-                                from tts import synthesize_speech
-                                tts_start = time.time()
-                                tts_text = result["tts_text"]
-                                logger.info(f"[{call_sid}] TTS text: '{tts_text[:100]}...'")
-                                audio_pcm = await synthesize_speech(tts_text)
-                                tts_ms = round((time.time() - tts_start) * 1000)
-
-                                if audio_pcm:
-                                    is_sending_tts = True
-                                    twilio_payload = encode_twilio_audio(audio_pcm)
-                                    if not stream_sid:
-                                        logger.error(f"[{call_sid}] Missing streamSid, cannot send audio")
-                                        is_sending_tts = False
-                                        audio_buffer.clear()
-                                        continue
-                                    await websocket.send_text(json.dumps({
-                                        "event": "media",
-                                        "streamSid": stream_sid,
-                                        "media": {"payload": twilio_payload}
-                                    }))
-                                    total_ms = round((time.time() - chunk_start) * 1000)
-                                    logger.info(f"[{call_sid}] Sent TTS {len(audio_pcm)}B ({tts_ms}ms) | total_latency={total_ms}ms")
-                                    is_sending_tts = False
-
-                                    # Hang up after goodbye when call is complete
-                                    if session and session.state in (SessionState.done, SessionState.ticket_created):
-                                        logger.info(f"[{call_sid}] Call complete, closing WebSocket")
-                                        await websocket.close()
-                                        return
-                                else:
-                                    logger.warning(f"[{call_sid}] TTS returned empty audio")
-                            except Exception as e:
-                                logger.error(f"[{call_sid}] TTS error: {e}", exc_info=True)
+                        if audio_pcm:
+                            twilio_payload = encode_twilio_audio(audio_pcm)
+                            if not stream_sid:
+                                logger.error(f"[{call_sid}] Missing streamSid, cannot send audio")
                                 is_sending_tts = False
+                                tts_ended_at = time.time()
+                                continue
+                            await websocket.send_text(json.dumps({
+                                "event": "media",
+                                "streamSid": stream_sid,
+                                "media": {"payload": twilio_payload}
+                            }))
+                            total_ms = round((time.time() - chunk_start) * 1000)
+                            logger.info(f"[{call_sid}] Sent TTS {len(audio_pcm)}B ({tts_ms}ms) | total_latency={total_ms}ms")
+                            is_sending_tts = False
+                            tts_ended_at = time.time()
+                            audio_buffer.clear()
 
-                    audio_buffer.clear()
+                            # Hang up after goodbye when call is complete
+                            if session and session.state in (SessionState.done, SessionState.ticket_created):
+                                logger.info(f"[{call_sid}] Call complete, closing WebSocket")
+                                await websocket.close()
+                                return
+                        else:
+                            logger.warning(f"[{call_sid}] TTS returned empty audio")
+                            is_sending_tts = False
+                            tts_ended_at = time.time()
+                    except Exception as e:
+                        logger.error(f"[{call_sid}] TTS error: {e}", exc_info=True)
+                        is_sending_tts = False
+                        tts_ended_at = time.time()
 
             elif data["event"] == "stop":
                 logger.info(f"[{call_sid}] Call ended | "
