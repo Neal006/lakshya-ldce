@@ -27,7 +27,7 @@ class PipelineCoordinator:
 
         if session.state == SessionState.greeting:
             session.state = SessionState.collecting
-            return await self._handle_collecting(session)
+            return {"tts_text": "Please go ahead and describe your complaint.", "state": session.state.value}
 
         elif session.state == SessionState.collecting:
             return await self._handle_collecting(session)
@@ -154,8 +154,9 @@ class PipelineCoordinator:
         unsatisfied_words = ["no", "not", "unsatisfied", "dissatisfied", "nahi", "nope",
                              "wrong", "bad", "worse", "escalate", "agent", "human", "manager"]
 
-        is_satisfied = any(word in last_text for word in satisfied_words)
-        is_unsatisfied = any(word in last_text for word in unsatisfied_words)
+        words_in_text = set(last_text.replace(".", "").replace(",", "").replace("?", "").split())
+        is_satisfied = any(word in words_in_text for word in satisfied_words)
+        is_unsatisfied = any(word in words_in_text for word in unsatisfied_words)
 
         if is_unsatisfied and not (is_satisfied and not is_unsatisfied):
             # Not satisfied -> create escalated ticket for admin portal
