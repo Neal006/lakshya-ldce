@@ -1,0 +1,223 @@
+-- ============================================
+-- SOLV.ai (TS-14) - Seed Data
+-- ============================================
+-- Run this AFTER 001_create_tables.sql in Supabase SQL Editor
+-- ============================================
+
+-- Password hash for 'admin123' using bcryptjs (cost factor 12)
+-- Generated: $2b$12$WdSMwFxcXGnUk8iBAu5PFeYahnQqfh26TgM51b6Bv4UpSUTEbVWrS
+
+-- ============================================
+-- EMPLOYEES (3 demo users matching the login page)
+-- ============================================
+INSERT INTO employees (id, name, email, password_hash, role, department) VALUES
+  ('a0000000-0000-0000-0000-000000000001', 'Admin User', 'admin@company.com', '$2b$12$WdSMwFxcXGnUk8iBAu5PFeYahnQqfh26TgM51b6Bv4UpSUTEbVWrS', 'admin', 'Management'),
+  ('a0000000-0000-0000-0000-000000000002', 'Operations Manager', 'ops@company.com', '$2b$12$WdSMwFxcXGnUk8iBAu5PFeYahnQqfh26TgM51b6Bv4UpSUTEbVWrS', 'operational', 'Operations'),
+  ('a0000000-0000-0000-0000-000000000003', 'Support Agent', 'support@company.com', '$2b$12$WdSMwFxcXGnUk8iBAu5PFeYahnQqfh26TgM51b6Bv4UpSUTEbVWrS', 'call_center', 'Customer Support')
+ON CONFLICT (email) DO NOTHING;
+
+-- ============================================
+-- SLA CONFIGS
+-- ============================================
+INSERT INTO sla_configs (id, priority, response_hours, resolve_hours) VALUES
+  ('b0000000-0000-0000-0000-000000000001', 'High', 1, 4),
+  ('b0000000-0000-0000-0000-000000000002', 'Medium', 4, 24),
+  ('b0000000-0000-0000-0000-000000000003', 'Low', 24, 72)
+ON CONFLICT (priority) DO NOTHING;
+
+-- ============================================
+-- CUSTOMERS (30 demo customers)
+-- ============================================
+INSERT INTO customers (id, name, email, phone) VALUES
+  ('c0000001-0000-0000-0000-000000000001', 'Rajesh Kumar', 'rajesh.kumar@email.com', '+91-98765-43201'),
+  ('c0000002-0000-0000-0000-000000000002', 'Priya Sharma', 'priya.sharma@email.com', '+91-98765-43202'),
+  ('c0000003-0000-0000-0000-000000000003', 'Amit Patel', 'amit.patel@email.com', '+91-98765-43203'),
+  ('c0000004-0000-0000-0000-000000000004', 'Sunita Verma', 'sunita.verma@email.com', '+91-98765-43204'),
+  ('c0000005-0000-0000-0000-000000000005', 'Deepak Singh', 'deepak.singh@email.com', '+91-98765-43205'),
+  ('c0000006-0000-0000-0000-000000000006', 'Anita Desai', 'anita.desai@email.com', '+91-98765-43206'),
+  ('c0000007-0000-0000-0000-000000000007', 'Vikram Mehta', 'vikram.mehta@email.com', '+91-98765-43207'),
+  ('c0000008-0000-0000-0000-000000000008', 'Kavita Reddy', 'kavita.reddy@email.com', '+91-98765-43208'),
+  ('c0000009-0000-0000-0000-000000000009', 'Suresh Nair', 'suresh.nair@email.com', '+91-98765-43209'),
+  ('c0000010-0000-0000-0000-000000000010', 'Meera Iyer', 'meera.iyer@email.com', '+91-98765-43210'),
+  ('c0000011-0000-0000-0000-000000000011', 'Arjun Kapoor', 'arjun.kapoor@email.com', '+91-98765-43211'),
+  ('c0000012-0000-0000-0000-000000000012', 'Neha Gupta', 'neha.gupta@email.com', '+91-98765-43212'),
+  ('c0000013-0000-0000-0000-000000000013', 'Ramesh Joshi', 'ramesh.joshi@email.com', '+91-98765-43213'),
+  ('c0000014-0000-0000-0000-000000000014', 'Sunita Rao', 'sunita.rao@email.com', '+91-98765-43214'),
+  ('c0000015-0000-0000-0000-000000000015', 'Devendra Chauhan', 'devendra.chauhan@email.com', '+91-98765-43215'),
+  ('c0000016-0000-0000-0000-000000000016', 'Pooja Agarwal', 'pooja.agarwal@email.com', '+91-98765-43216'),
+  ('c0000017-0000-0000-0000-000000000017', 'Manish Tiwari', 'manish.tiwari@email.com', '+91-98765-43217'),
+  ('c0000018-0000-0000-0000-000000000018', 'Rekha Pillai', 'rekha.pillai@email.com', '+91-98765-43218'),
+  ('c0000019-0000-0000-0000-000000000019', 'Sanjay Mishra', 'sanjay.mishra@email.com', '+91-98765-43219'),
+  ('c0000020-0000-0000-0000-000000000020', 'Lakshmi Venkat', 'lakshmi.venkat@email.com', '+91-98765-43220'),
+  ('c0000021-0000-0000-0000-000000000021', 'Siddharth Das', 'siddharth.das@email.com', '+91-98765-43221'),
+  ('c0000022-0000-0000-0000-000000000022', 'Ritu Saxena', 'ritu.saxena@email.com', '+91-98765-43222'),
+  ('c0000023-0000-0000-0000-000000000023', 'Ganesh Bhosle', 'ganesh.bhosle@email.com', '+91-98765-43223'),
+  ('c0000024-0000-0000-0000-000000000024', 'Swati Kulkarni', 'swati.kulkarni@email.com', '+91-98765-43224'),
+  ('c0000025-0000-0000-0000-000000000025', 'Harish Malhotra', 'harish.malhotra@email.com', '+91-98765-43225')
+ON CONFLICT (email) DO NOTHING;
+
+-- ============================================
+-- PRODUCTS (6 products - matching existing data)
+-- ============================================
+-- Note: If products already exist from earlier insert, these will be skipped
+INSERT INTO products (id, name, sku, category) VALUES
+  ('p0000001-0000-0000-0000-000000000001', 'Parle-G Glucose Biscuits', 'PLG-001', 'Product'),
+  ('p0000002-0000-0000-0000-000000000002', 'Frooti Mango Drink', 'FRT-002', 'Product'),
+  ('p0000003-0000-0000-0000-000000000003', 'Marie Gold Biscuits', 'MRG-003', 'Product'),
+  ('p0000004-0000-0000-0000-000000000004', 'Hide & Seek Cookies', 'HDS-004', 'Product'),
+  ('p0000005-0000-0000-0000-000000000005', 'Bakery Fresh Bread', 'BFB-005', 'Product'),
+  ('p0000006-0000-0000-0000-000000000006', 'Tropical Juice Pack', 'TJP-006', 'Product')
+ON CONFLICT (sku) DO NOTHING;
+
+-- ============================================
+-- COMPLAINTS (50+ demo complaints with various categories, priorities, sources, statuses)
+-- ============================================
+
+-- Product category complaints
+INSERT INTO complaints (id, complaint_text, category, priority, sentiment_score, source, status, immediate_action, resolution_steps, assigned_team, escalation_required, customer_response, customer_id, product_id, created_at, updated_at, resolved_at) VALUES
+-- High priority Product complaints
+('d0000001-0000-0000-0000-000000000001', 'Found plastic pieces inside the Parle-G biscuit packet. This is a serious safety hazard and my child could have been injured!', 'Product', 'High', -0.87, 'call', 'escalated', 'Quarantine affected batch immediately', '["1. Recall affected batch LOT-2024-0891", "2. Quality inspection of production line", "3. Replace customer product", "4. Issue public safety notice"]', 'Quality Assurance', true, 'Dear Customer, we take this matter extremely seriously. We have initiated an immediate investigation and product recall.', 'c0000001-0000-0000-0000-000000000001', 'p0000001-0000-0000-0000-000000000001', now() - interval '2 days', now() - interval '1 day', NULL),
+
+('d0000002-0000-0000-0000-000000000002', 'The Frooti mango drink tasted sour and had a strange chemical aftertaste. I suspect it was expired or improperly stored.', 'Product', 'High', -0.72, 'email', 'in_progress', 'Pull all Frooti from concerned store shelves', '["1. Verify expiry date on returned product", "2. Inspect cold chain logistics", "3. Lab testing of sample", "4. Customer refund + compensation"]', 'Supply Chain', true, 'We sincerely apologize for this experience. We are investigating the supply chain and will provide a full refund.', 'c0000002-0000-0000-0000-000000000002', 'p0000002-0000-0000-0000-000000000002', now() - interval '3 days', now() - interval '2 days', NULL),
+
+('d0000003-0000-0000-0000-000000000003', 'My son fell ill after eating Hide & Seek cookies. Vomiting and stomach pain within 2 hours of consumption. We still have the packet.', 'Product', 'High', -0.91, 'call', 'escalated', 'Immediate health concern escalation', '["1. Collect remaining product for lab testing", "2. Alert food safety authority", "3. Customer medical expense reimbursement", "4. Batch recall if contamination found"]', 'Safety & Compliance', true, 'We are deeply concerned about this report. Our safety team has been alerted and will contact you within 1 hour.', 'c0000003-0000-0000-0000-000000000003', 'p0000004-0000-0000-0000-000000000004', now() - interval '1 day', now() - interval '1 day', NULL),
+
+-- Medium priority Product complaints
+('d0000004-0000-0000-0000-000000000004', 'The Marie Gold biscuits are consistently breaking into crumbs. Out of 3 packets I bought, all had more than half the biscuits crumbled.', 'Product', 'Medium', -0.35, 'walkin', 'assigned', 'Replace customer product and review packaging', '["1. Replace 3 packets", "2. Review packaging integrity at factory", "3. Add cushioning to packaging", "4. Follow up with customer in 3 days"]', 'Packaging Team', false, 'We apologize for the inconvenience. We will send replacement packets and investigate the packaging.', 'c0000004-0000-0000-0000-000000000004', 'p0000003-0000-0000-0000-000000000003', now() - interval '4 days', now() - interval '3 days', NULL),
+
+('d0000005-0000-0000-0000-000000000005', 'The Bakery Fresh Bread had mold on it even though the expiry date is still 3 days away. This is unacceptable quality.', 'Product', 'Medium', -0.58, 'email', 'in_progress', 'Replace product and review shelf life testing', '["1. Immediate product replacement", "2. Review shelf life testing procedures", "3. Check storage conditions at retailer", "4. Adjust best-before date if needed"]', 'Quality Assurance', false, 'We are sorry about this experience. A replacement will be arranged and our QA team will investigate.', 'c0000005-0000-0000-0000-000000000005', 'p0000005-0000-0000-0000-000000000005', now() - interval '5 days', now() - interval '4 days', NULL),
+
+('d0000006-0000-0000-0000-000000000006', 'The new Parle-G variant tastes different from the original. Its less sweet and has a weird aftertaste. Very disappointed.', 'Product', 'Low', -0.22, 'email', 'new', 'Review product formula with R&D', '["1. Forward feedback to R&D team", "2. Conduct taste test comparison", "3. Review manufacturing process", "4. Respond to customer with findings"]', 'R&D', false, 'Thank you for your feedback. We have noted your concern and will review with our R&D team.', 'c0000006-0000-0000-0000-000000000006', 'p0000001-0000-0000-0000-000000000001', now() - interval '6 hours', now() - interval '6 hours', NULL),
+
+('d0000007-0000-0000-0000-000000000007', 'Tropical Juice Pack has inconsistent flavor across batches. Some taste amazing, others are bland. Need better quality control.', 'Product', 'Medium', -0.31, 'walkin', 'assigned', 'Review QC process for juice production', '["1. Compare samples across batches", "2. Review mixing process controls", "3. Adjust formula if needed", "4. Customer follow-up"]', 'Quality Assurance', false, 'We appreciate your feedback on the flavor inconsistency. Our QC team is reviewing the production process.', 'c0000007-0000-0000-0000-000000000007', 'p0000006-0000-0000-0000-000000000006', now() - interval '1 day', now() - interval '1 day', NULL),
+
+-- Low priority Product complaints
+('d0000008-0000-0000-0000-000000000008', 'The biscuit packet had slightly different color than what I usually get. Not sure if this is a formula change or printing issue.', 'Product', 'Low', -0.08, 'walkin', 'new', 'Verify with production team', '["1. Check packaging print batch", "2. Confirm product formula unchanged", "3. Respond to customer"]', 'Quality Assurance', false, 'Thank you for bringing this to our attention. We will verify and get back to you.', 'c0000008-0000-0000-0000-000000000008', 'p0000001-0000-0000-0000-000000000001', now() - interval '3 hours', now() - interval '3 hours', NULL),
+
+('d0000009-0000-0000-0000-000000000009', 'I brought 5 packs of Frooti from a superstore. Two of them had dented packaging. The juice itself was fine though.', 'Product', 'Low', -0.12, 'walkin', 'new', 'Replace dented packs and check packaging', '["1. Arrange replacement for dented packs", "2. Check packaging durability at distribution", "3. Update handling guidelines"]', 'Supply Chain', false, 'We will arrange replacement packs and review our packaging guidelines with distributors.', 'c0000009-0000-0000-0000-000000000009', 'p0000002-0000-0000-0000-000000000002', now() - interval '8 hours', now() - interval '8 hours', NULL),
+
+-- Packaging category complaints
+('d0000010-0000-0000-0000-000000000010', 'The Parle-G biscuit packaging is impossible to open without tearing it completely. Every time I open a pack, it spills everywhere.', 'Packaging', 'Medium', -0.38, 'email', 'in_progress', 'Design easy-open packaging feature', '["1. R&D easy-open tab feature", "2. Consumer testing of new design", "3. Roll out updated packaging", "4. Send samples to customer"]', 'Packaging Team', false, 'We understand the frustration. Our packaging team is working on an easy-open feature.', 'c0000010-0000-0000-0000-000000000010', 'p0000001-0000-0000-0000-000000000001', now() - interval '5 days', now() - interval '4 days', NULL),
+
+('d0000011-0000-0000-0000-000000000011', 'The Frooti tetra pack started leaking from the bottom after opening. Product spilled all over my table and documents.', 'Packaging', 'High', -0.65, 'call', 'escalated', 'Investigate packaging seal integrity', '["1. Collect leaky pack samples", "2. Test seal integrity across batches", "3. Redesign bottom seal if needed", "4. Customer compensation"]', 'Packaging Team', true, 'We sincerely apologize for the mess. We are investigating the seal quality and will compensate for damages.', 'c0000011-0000-0000-0000-000000000011', 'p0000002-0000-0000-0000-000000000002', now() - interval '12 hours', now() - interval '6 hours', NULL),
+
+('d0000012-0000-0000-0000-000000000012', 'Hide & Seek cookie box was already opened when delivered. The seal was broken. Is this a safety issue?', 'Packaging', 'High', -0.78, 'email', 'escalated', 'Investigate tamper evidence failure', '["1. Investigate tamper-evident seal failure", "2. Check distribution handling", "3. Recall affected lots", "4. Replace product"]', 'Safety & Compliance', true, 'This is a serious concern. We are investigating immediately and will replace your product.', 'c0000012-0000-0000-0000-000000000012', 'p0000004-0000-0000-0000-000000000004', now() - interval '8 hours', now() - interval '4 hours', NULL),
+
+('d0000013-0000-0000-0000-000000000013', 'The nutritional information on Marie Gold is different from what you advertise on your website. Calories per serving dont match.', 'Packaging', 'Medium', -0.25, 'email', 'assigned', 'Verify and correct nutritional labels', '["1. Cross-check website vs packaging values", "2. Update website if discrepancy found", "3. Update packaging in next print run", "4. Notify customer of corrections"]', 'Regulatory Affairs', false, 'Thank you for catching this. We are verifying the nutritional information across all channels.', 'c0000013-0000-0000-0000-000000000013', 'p0000003-0000-0000-0000-000000000003', now() - interval '2 days', now() - interval '1 day', NULL),
+
+('d0000014-0000-0000-0000-000000000014', 'Bakery Fresh Bread packaging tears too easily. Its not protecting the bread properly during transport. Several loaves were squished.', 'Packaging', 'Medium', -0.42, 'walkin', 'assigned', 'Improve packaging durability', '["1. Evaluate thicker packaging material", "2. Add handling instructions for retailers", "3. Test new packaging in transport", "4. Customer follow-up"]', 'Packaging Team', false, 'We understand your frustration. We are upgrading our bread packaging for better protection.', 'c0000014-0000-0000-0000-000000000014', 'p0000005-0000-0000-0000-000000000005', now() - interval '3 days', now() - interval '2 days', NULL),
+
+('d0000015-0000-0000-0000-000000000015', 'The Tropical Juice Pack label came off when I put it in the fridge. Entire label peeled off and now I cant read the expiry date.', 'Packaging', 'Low', -0.15, 'walkin', 'new', 'Improve label adhesive', '["1. Test alternative label adhesives", "2. Consider printed-on expiry dates", "3. Customer replacement"]', 'Packaging Team', false, 'Sorry about that. We will improve our label adhesive and send you product info including expiry date.', 'c0000015-0000-0000-0000-000000000015', 'p0000006-0000-0000-0000-000000000006', now() - interval '4 hours', now() - interval '4 hours', NULL),
+
+-- Trade category complaints
+('d0000016-0000-0000-0000-000000000016', 'I bought Parle-G from a local store and it was completely stale. The expiry was 2 months ago. The store should not be selling expired products!', 'Trade', 'High', -0.82, 'call', 'escalated', 'Investigate retailer selling expired products', '["1. Visit reported retailer", "2. Check stock rotation compliance", "3. Issue formal warning", "4. Customer full refund + compensation"]', 'Trade Compliance', true, 'We take expired product sales very seriously. We are investigating this retailer and will ensure corrective action.', 'c0000016-0000-0000-0000-000000000016', 'p0000001-0000-0000-0000-000000000001', now() - interval '1 day', now() - interval '12 hours', NULL),
+
+('d0000017-0000-0000-0000-000000000017', 'The retailer charged me Rs. 20 for a product with MRP of Rs. 15. This is overcharging and illegal. Store name: SuperMart, Koramangala.', 'Trade', 'High', -0.73, 'call', 'escalated', 'Report retailer for MRP violation', '["1. Verify MRP violation", "2. Send legal notice to retailer", "3. Report to authorities", "4. Customer refund of excess amount"]', 'Trade Compliance', true, 'We will not tolerate MRP violations. We are taking immediate action against this retailer.', 'c0000017-0000-0000-0000-000000000017', 'p0000002-0000-0000-0000-000000000002', now() - interval '18 hours', now() - interval '12 hours', NULL),
+
+('d0000018-0000-0000-0000-000000000018', 'I ordered Frooti online and received a completely different brand. This is false advertising.', 'Trade', 'Medium', -0.48, 'email', 'in_progress', 'Investigate e-commerce listing', '["1. Check e-commerce product listing", "2. Verify distributor credentials", "3. Remove misleading listings", "4. Customer full refund"]', 'E-Commerce Team', false, 'We apologize for this. We are checking with our e-commerce partners to ensure correct listings.', 'c0000018-0000-0000-0000-000000000018', 'p0000002-0000-0000-0000-000000000002', now() - interval '2 days', now() - interval '1 day', NULL),
+
+('d0000019-0000-0000-0000-000000000019', 'The local distributor has been selling our area at inflated prices consistently. Multiple customers have complained.', 'Trade', 'High', -0.69, 'walkin', 'in_progress', 'Audit distributor pricing practices', '["1. Initiate distributor audit", "2. Review pricing agreements", "3. Customer price guarantee", "4. Consider alternate distributor"]', 'Trade Compliance', true, 'We are auditing this distributors pricing practices and will take corrective measures.', 'c0000019-0000-0000-0000-000000000019', 'p0000003-0000-0000-0000-000000000003', now() - interval '3 days', now() - interval '2 days', NULL),
+
+('d0000020-0000-0000-0000-000000000020', 'The promotional offer shown on the website is not being honored at my local store. They say they dont know about it.', 'Trade', 'Medium', -0.33, 'email', 'assigned', 'Coordinate promotion with retail partners', '["1. Verify promotion details with marketing", "2. Notify retailer about promotion", "3. Honor promotion for customer", "4. Update promotion communication process"]', 'Marketing & Trade', false, 'We apologize for the confusion. We will honor the promotion and ensure all retailers are informed.', 'c0000020-0000-0000-0000-000000000020', 'p0000004-0000-0000-0000-000000000004', now() - interval '4 days', now() - interval '3 days', NULL),
+
+-- More Product complaints
+('d0000021-0000-0000-0000-000000000021', 'Parle-G biscuits have been getting thinner over the last few months. Is the company reducing the biscuit size?', 'Product', 'Low', -0.18, 'email', 'new', 'Review product specifications', '["1. Compare current specs vs original", "2. Verify manufacturing tolerances", "3. Respond to customer"]', 'R&D', false, 'Thank you for your observation. We will review our product specifications.', 'c0000021-0000-0000-0000-000000000021', 'p0000001-0000-0000-0000-000000000001', now() - interval '5 hours', now() - interval '5 hours', NULL),
+
+('d0000022-0000-0000-0000-000000000022', 'The Frooti I bought yesterday was perfect! Great taste and perfectly chilled. Just wanted to say, keep up the good work!', 'Product', 'Low', 0.89, 'email', 'resolved', 'No action needed - positive feedback', '["1. Send thank you note", "2. Add to positive feedback database"]', 'Customer Success', false, 'Thank you for the wonderful feedback! We are glad you enjoyed our product.', 'c0000022-0000-0000-0000-000000000022', 'p0000002-0000-0000-0000-000000000002', now() - interval '6 days', now() - interval '5 days', now() - interval '5 days'),
+
+('d0000023-0000-0000-0000-000000000023', 'Marie Gold used to be the best biscuit in India but quality has gone down over the last year. Please bring back the old recipe.', 'Product', 'Medium', -0.45, 'email', 'assigned', 'Review recipe consistency', '["1. Compare current vs historical recipe", "2. Consumer taste test", "3. Adjust if quality drop confirmed", "4. Follow up with customer"]', 'R&D', false, 'We value your feedback and are reviewing our recipe to ensure consistent quality.', 'c0000023-0000-0000-0000-000000000023', 'p0000003-0000-0000-0000-000000000003', now() - interval '7 days', now() - interval '6 days', NULL),
+
+('d0000024-0000-0000-0000-000000000024', 'Bakery Fresh Bread has inconsistent sizes. Sometimes the loaf is full, sometimes half the size. Need standardization.', 'Product', 'Medium', -0.29, 'walkin', 'in_progress', 'Standardize portioning process', '["1. Audit portioning equipment", "2. Implement weight-based QC check", "3. Retrain staff", "4. Customer replacement"]', 'Quality Assurance', false, 'We are standardizing our portioning process to ensure consistent loaf sizes.', 'c0000004-0000-0000-0000-000000000004', 'p0000005-0000-0000-0000-000000000005', now() - interval '4 days', now() - interval '3 days', NULL),
+
+('d0000025-0000-0000-0000-000000000025', 'I found a hair in my Hide & Seek cookies. Absolutely disgusted. This should not happen in a food manufacturing plant.', 'Product', 'High', -0.92, 'call', 'escalated', 'Investigate hygiene protocols', '["1. Review factory hygiene standards", "2. Investigate specific batch", "3. Customer full refund + compensation", "4. Issue hygiene compliance report"]', 'Safety & Compliance', true, 'We take this very seriously. We are investigating our hygiene protocols and will compensate you.', 'c0000025-0000-0000-0000-000000000025', 'p0000004-0000-0000-0000-000000000004', now() - interval '10 hours', now() - interval '5 hours', NULL),
+
+-- More Packaging complaints
+('d0000026-0000-0000-0000-000000000026', 'The Parle-G family pack is too big. Once opened, the biscuits go stale before you can finish them. Can you add a resealable option?', 'Packaging', 'Low', 0.15, 'email', 'resolved', 'Consider resealable packaging option', '["1. Evaluate resealable packaging feasibility", "2. Consumer survey on pack sizes", "3. Pilot resealable family pack"]', 'Packaging Team', false, 'Great suggestion! We are evaluating resealable packaging options for our family packs.', 'c0000010-0000-0000-0000-000000000010', 'p0000001-0000-0000-0000-000000000001', now() - interval '10 days', now() - interval '9 days', now() - interval '8 days'),
+
+('d0000027-0000-0000-0000-000000000027', 'The printing on the Marie Gold packet is faded and unreadable. This looks like a cheap knockoff but I bought it from a reputable store.', 'Packaging', 'Medium', -0.41, 'walkin', 'assigned', 'Investigate print quality', '["1. Check printing press calibration", "2. Verify batch authenticity", "3. Replace customer product", "4. QC check all packs from batch"]', 'Packaging Team', false, 'We will investigate the print quality and ensure authenticity. Replacement on the way.', 'c0000013-0000-0000-0000-000000000013', 'p0000003-0000-0000-0000-000000000003', now() - interval '3 days', now() - interval '2 days', NULL),
+
+('d0000028-0000-0000-0000-000000000028', 'Tropical Juice Pack carton had sharp edge that cut my finger when opening. Need safer packaging design!', 'Packaging', 'High', -0.61, 'call', 'in_progress', 'Redesign opening mechanism for safety', '["1. Review carton edge design", "2. Implement rounded corners", "3. Add safety warning", "4. Customer compensation for injury"]', 'Packaging Team', true, 'We are sorry about your injury. We are redesigning the carton opening for safety and will compensate medical expenses.', 'c0000007-0000-0000-0000-000000000007', 'p0000006-0000-0000-0000-000000000006', now() - interval '15 hours', now() - interval '10 hours', NULL),
+
+-- More Trade complaints
+('d0000029-0000-0000-0000-000000000029', 'The local shop says they cant order Marie Gold because the distributor never delivers on time. Supply chain issue.', 'Trade', 'Medium', -0.28, 'walkin', 'assigned', 'Investigate distributor delivery performance', '["1. Review distributor SLA compliance", "2. Implement delivery tracking", "3. Consider backup distributor", "4. Ensure retailer stock availability"]', 'Supply Chain', false, 'We are working with our distributors to improve delivery timeliness in your area.', 'c0000023-0000-0000-0000-000000000023', 'p0000003-0000-0000-0000-000000000003', now() - interval '5 days', now() - interval '4 days', NULL),
+
+('d0000030-0000-0000-0000-000000000030', 'I work at a retail store and Parle products are always delivered late. We lose sales because of this. Fix your distribution!', 'Trade', 'Medium', -0.39, 'call', 'assigned', 'Optimize distribution route and timing', '["1. Map current delivery routes", "2. Identify bottlenecks", "3. Add delivery vehicle if needed", "4. Set up retailer delivery schedule"]', 'Supply Chain', false, 'We appreciate your feedback and are optimizing our distribution routes to improve timeliness.', 'c0000024-0000-0000-0000-000000000024', 'p0000001-0000-0000-0000-000000000001', now() - interval '6 days', now() - interval '5 days', NULL),
+
+-- Additional complaints to reach 50+
+('d0000031-0000-0000-0000-000000000031', 'The Parle-G I bought tastes burnt. The whole packet has a charred aftertaste. Not the usual quality.', 'Product', 'Medium', -0.55, 'email', 'new', 'Check oven temperature controls', '["1. Review oven temperature logs", "2. Inspect baking process", "3. Replace customer product", "4. QC report"]', 'Quality Assurance', false, 'We are sorry about the taste. We will investigate the baking process and replace your product.', 'c0000025-0000-0000-0000-000000000025', 'p0000001-0000-0000-0000-000000000001', now() - interval '7 hours', now() - interval '7 hours', NULL),
+
+('d0000032-0000-0000-0000-000000000032', 'Excellent quality Frooti as always. My kids love it. Just wish it came in bigger bottles.', 'Product', 'Low', 0.78, 'email', 'resolved', 'Consider larger bottle sizes', '["1. Market research for larger sizes", "2. Consumer survey"]', 'Marketing', false, 'Thank you for the kind words! We are considering larger bottle sizes.', 'c0000002-0000-0000-0000-000000000002', 'p0000002-0000-0000-0000-000000000002', now() - interval '12 days', now() - interval '11 days', now() - interval '10 days'),
+
+('d0000033-0000-0000-0000-000000000033', 'Hide & Seek was excellent this time! Perfectly crunchy with right amount of chocolate chips. Consistency has improved!', 'Product', 'Low', 0.82, 'email', 'resolved', 'Note positive production consistency', '["1. Document production parameters for batch", "2. Share success with production team"]', 'Quality Assurance', false, 'Wonderful to hear! We are glad our quality consistency is showing.', 'c0000012-0000-0000-0000-000000000012', 'p0000004-0000-0000-0000-000000000004', now() - interval '8 days', now() - interval '7 days', now() - interval '7 days'),
+
+('d0000034-0000-0000-0000-000000000034', 'I bought 3 packs of Bakery Fresh Bread and all had different expiry dates printed, despite being from same batch. Confusing!', 'Packaging', 'Low', -0.10, 'walkin', 'new', 'Fix batch expiry date consistency', '["1. Check date stamping machine alignment", "2. Standardize batch printing", "3. Replace confusing packs"]', 'Packaging Team', false, 'We will ensure consistent expiry date labeling. Apologies for the confusion.', 'c0000014-0000-0000-0000-000000000014', 'p0000005-0000-0000-0000-000000000005', now() - interval '2 hours', now() - interval '2 hours', NULL),
+
+('d0000035-0000-0000-0000-000000000035', 'The local kirana store charges more than MRP for all Parle products. This has been going on for months.', 'Trade', 'High', -0.71, 'call', 'in_progress', 'Investigate MRP violation', '["1. Visit reported store", "2. Check all product MRPs", "3. Issue warning", "4. Report to authorities if needed"]', 'Trade Compliance', true, 'We take MRP violations seriously and are investigating immediately.', 'c0000016-0000-0000-0000-000000000016', 'p0000001-0000-0000-0000-000000000001', now() - interval '20 hours', now() - interval '15 hours', NULL),
+
+('d0000036-0000-0000-0000-000000000036', 'Marie Gold biscuits arrived crushed in online delivery. Packaging didnt protect them at all. Very disappointed.', 'Packaging', 'Medium', -0.52, 'email', 'assigned', 'Improve e-commerce packaging', '["1. Implement double-packaging for online orders", "2. Add fragile stickers", "3. Test new packaging with delivery simulation"]', 'Packaging Team', false, 'We are upgrading our e-commerce packaging to prevent damage during shipping.', 'c0000004-0000-0000-0000-000000000004', 'p0000003-0000-0000-0000-000000000003', now() - interval '3 days', now() - interval '2 days', NULL),
+
+('d0000037-0000-0000-0000-000000000037', 'The distributor delivers old stock that is close to expiry. We have to sell products that expire in a week. Customers are unhappy.', 'Trade', 'Medium', -0.44, 'walkin', 'assigned', 'Improve stock freshness at distribution', '["1. Implement FIFO at distribution center", "2. Set minimum shelf life at delivery", "3. Investigate distributor stock management"]', 'Supply Chain', false, 'We are implementing FIFO practices and setting minimum shelf life requirements for deliveries.', 'c0000019-0000-0000-0000-000000000019', 'p0000002-0000-0000-0000-000000000002', now() - interval '4 days', now() - interval '3 days', NULL),
+
+('d0000038-0000-0000-0000-000000000038', 'Frooti package exploded in my bag! The pouch burst open and ruined everything. Definitely a manufacturing defect.', 'Packaging', 'High', -0.80, 'call', 'escalated', 'Investigate pouch seal integrity', '["1. Collect burst package for testing", "2. Pressure test similar batch", "3. Customer full refund + bag replacement", "4. Recall if systematic defect"]', 'Packaging Team', true, 'We are extremely sorry. This is a serious defect and we are investigating immediately. Compensation will be provided.', 'c0000011-0000-0000-0000-000000000011', 'p0000002-0000-0000-0000-000000000002', now() - interval '6 hours', now() - interval '3 hours', NULL),
+
+('d0000039-0000-0000-0000-000000000039', 'The Tropical Juice Pack I received was leaking from the cap. Small leak but product quality seems fine otherwise.', 'Product', 'Low', -0.19, 'walkin', 'new', 'Check cap seal quality', '["1. Sample test cap seals from same batch", "2. Replace customer product", "3. Review capping machine calibration"]', 'Quality Assurance', false, 'Sorry about that. We will check our cap sealing process and send a replacement.', 'c0000015-0000-0000-0000-000000000015', 'p0000006-0000-0000-0000-000000000006', now() - interval '1 hour', now() - interval '1 hour', NULL),
+
+('d0000040-0000-0000-0000-000000000040', 'The store refused to accept return of a defective Parle-G pack. Said company policy doesnt allow returns. Please clarify your return policy.', 'Trade', 'Medium', -0.36, 'call', 'assigned', 'Clarify and communicate return policy', '["1. Review return policy", "2. Communicate policy to all retailers", "3. Customer direct refund", "4. Issue policy cards to retailers"]', 'Trade Compliance', false, 'Our policy does allow returns for defective products. We will refund you directly and clarify with retailers.', 'c0000021-0000-0000-0000-000000000021', 'p0000001-0000-0000-0000-000000000001', now() - interval '2 days', now() - interval '1 day', NULL),
+
+('d0000041-0000-0000-0000-000000000041', 'Bakery Fresh Bread had weird sour smell even though expiry date is fine. Not sure if it is safe to eat.', 'Product', 'High', -0.64, 'call', 'in_progress', 'Investigate possible contamination', '["1. Collect sample for testing", "2. Check production batch records", "3. Customer refund", "4. Alert distribution if contamination confirmed"]', 'Safety & Compliance', false, 'Please do not consume the bread. We are investigating and will replace your product.', 'c0000005-0000-0000-0000-000000000005', 'p0000005-0000-0000-0000-000000000005', now() - interval '10 hours', now() - interval '8 hours', NULL),
+
+('d0000042-0000-0000-0000-000000000042', 'Great service resolution! My earlier complaint about broken biscuits was addressed promptly. Keep up the good work on customer support.', 'Product', 'Low', 0.85, 'email', 'resolved', 'No action needed - positive feedback', '["1. Add to positive feedback records", "2. Share with support team"]', 'Customer Success', false, 'Thank you! We are glad we could resolve your issue quickly.', 'c0000004-0000-0000-0000-000000000004', 'p0000003-0000-0000-0000-000000000003', now() - interval '9 days', now() - interval '8 days', now() - interval '8 days'),
+
+('d0000043-0000-0000-0000-000000000043', 'Hide & Seek cookies packaging says 180g but when I weighed it, it was only 165g. This is short measure!', 'Packaging', 'High', -0.69, 'email', 'escalated', 'Investigate net weight accuracy', '["1. Verify batch net weights", "2. Check filling machine calibration", "3. Regulator notification if required", "4. Customer compensation"]', 'Quality Assurance', true, 'We take net weight very seriously. We are investigating and will compensate if found short.', 'c0000012-0000-0000-0000-000000000012', 'p0000004-0000-0000-0000-000000000004', now() - interval '16 hours', now() - interval '10 hours', NULL),
+
+('d0000044-0000-0000-0000-000000000044', 'The promotional standee at the store was misleading. Showed a different product than what was underneath. Deceptive marketing.', 'Trade', 'Medium', -0.37, 'walkin', 'new', 'Review store promotional materials', '["1. Audit store promotional materials", "2. Update guidelines for retailers", "3. Customer clarification"]', 'Marketing & Trade', false, 'We will review our promotional material guidelines with all retail partners.', 'c0000020-0000-0000-0000-000000000020', 'p0000002-0000-0000-0000-000000000002', now() - interval '3 hours', now() - interval '3 hours', NULL),
+
+('d0000045-0000-0000-0000-000000000045', 'Parle-G is always fresh and tasty. My familys favorite biscuit for 20 years. Keep making it the same way!', 'Product', 'Low', 0.93, 'email', 'resolved', 'Thank customer', '["1. Thank customer", "2. Add to loyalty program"]', 'Customer Success', false, 'Thank you for 20 years of loyalty! We promise to keep the same great taste.', 'c0000001-0000-0000-0000-000000000001', 'p0000001-0000-0000-0000-000000000001', now() - interval '14 days', now() - interval '13 days', now() - interval '12 days'),
+
+('d0000046-0000-0000-0000-000000000046', 'I received a Frooti with damaged packaging from online order. The box was crushed. Need better shipping protection.', 'Packaging', 'Medium', -0.43, 'email', 'assigned', 'Improve shipping packaging', '["1. Add shipping box reinforcement", "2. Include bubble wrap for tetra packs", "3. Mark as fragile for courier", "4. Customer replacement"]', 'Packaging Team', false, 'Sorry about the damaged packaging. We are improving our shipping protection.', 'c0000018-0000-0000-0000-000000000018', 'p0000002-0000-0000-0000-000000000002', now() - interval '1 day', now() - interval '18 hours', NULL),
+
+('d0000047-0000-0000-0000-000000000047', 'The store near me stopped carrying Hide & Seek. When will it be back in stock? I cant find it anywhere.', 'Trade', 'Low', -0.07, 'call', 'new', 'Check distribution coverage', '["1. Check retailer stock status", "2. Ensure distributor delivery", "3. Inform customer when available"]', 'Supply Chain', false, 'We are checking with our distributors to ensure Hide & Seek is available at your local store.', 'c0000008-0000-0000-0000-000000000008', 'p0000004-0000-0000-0000-000000000004', now() - interval '30 minutes', now() - interval '30 minutes', NULL),
+
+('d0000048-0000-0000-0000-000000000048', 'The Bakery Fresh Bread has been really inconsistent lately. Sometimes great, sometimes flat and dense. Need quality consistency.', 'Product', 'Medium', -0.32, 'email', 'assigned', 'Review bread quality consistency', '["1. Review production logs for inconsistencies", "2. Check yeast quality", "3. Adjust proofing times", "4. Customer follow-up"]', 'Quality Assurance', false, 'We are reviewing our bread production process for consistency.', 'c0000024-0000-0000-0000-000000000024', 'p0000005-0000-0000-0000-000000000005', now() - interval '1 day', now() - interval '12 hours', NULL),
+
+('d0000049-0000-0000-0000-000000000049', 'The Tropical Juice Pack has great flavor variety. My whole family enjoys it. Just wanted to say thank you!', 'Product', 'Low', 0.81, 'email', 'resolved', 'No action needed', '["1. Add to positive feedback records"]', 'Customer Success', false, 'Thank you for the kind words! We love hearing that families enjoy our products.', 'c0000022-0000-0000-0000-000000000022', 'p0000006-0000-0000-0000-000000000006', now() - interval '11 days', now() - interval '10 days', now() - interval '10 days'),
+
+('d0000050-0000-0000-0000-000000000050', 'I saw a Parle-G display that was using our company logo incorrectly at a local store. Trading name misuse.', 'Trade', 'Medium', -0.26, 'walkin', 'new', 'Investigate brand misuse', '["1. Visit store and document", "2. Send cease and desist if violations found", "3. Update retailer branding guidelines"]', 'Trade Compliance', false, 'We will investigate and ensure our brand is correctly represented.', 'c0000023-0000-0000-0000-000000000023', 'p0000001-0000-0000-0000-000000000001', now() - interval '45 minutes', now() - interval '45 minutes', NULL),
+
+-- A few more extra complaints for good measure
+('d0000051-0000-0000-0000-000000000051', 'Parle-G biscuits had ants inside the sealed packet! How did they get in? This is a serious quality lapse.', 'Product', 'High', -0.88, 'call', 'escalated', 'Investigate sealing and pest control', '["1. Collect sample for investigation", "2. Inspect factory pest control", "3. Customer full refund", "4. Recall batch if infestation found"]', 'Safety & Compliance', true, 'This is absolutely unacceptable. We are investigating our production facility immediately.', 'c0000003-0000-0000-0000-000000000003', 'p0000001-0000-0000-0000-000000000001', now() - interval '4 hours', now() - interval '2 hours', NULL),
+
+('d0000052-0000-0000-0000-000000000052', 'Frooti tasted fermented. It was like juice had gone bad even though expiry date was fine. Very unsafe.', 'Product', 'High', -0.76, 'call', 'in_progress', 'Investigate fermentation issue', '["1. Collect sample for lab testing", "2. Check pasteurization process", "3. Inspect cold chain at retailer", "4. Customer refund"]', 'Safety & Compliance', true, 'Please do not consume the product. We are investigating and will refund you.', 'c0000002-0000-0000-0000-000000000002', 'p0000002-0000-0000-0000-000000000002', now() - interval '14 hours', now() - interval '10 hours', NULL),
+
+('d0000053-0000-0000-0000-000000000053', 'The new Bakery Fresh Bread packaging looks great! Easy to open and keeps the bread fresh longer. Good improvement!', 'Packaging', 'Low', 0.74, 'email', 'resolved', 'Note positive packaging feedback', '["1. Share positive feedback with packaging team"]', 'Packaging Team', false, 'Thank you! We are glad you like the new packaging design.', 'c0000010-0000-0000-0000-000000000010', 'p0000005-0000-0000-0000-000000000005', now() - interval '7 days', now() - interval '6 days', now() - interval '6 days'),
+
+('d0000054-0000-0000-0000-000000000054', 'The retailer told me to call the company directly for a refund. They wont help at all. Poor customer service ecosystem.', 'Trade', 'Medium', -0.34, 'call', 'assigned', 'Improve retailer customer service training', '["1. Customer service training for retailers", "2. Create retailer FAQ", "3. Set up direct refund hotline", "4. Customer refund processed"]', 'Customer Success', false, 'We apologize for the runaround. We are processing your refund and improving retailer support.', 'c0000016-0000-0000-0000-000000000016', 'p0000003-0000-0000-0000-000000000003', now() - interval '2 days', now() - interval '1 day', NULL),
+
+('d0000055-0000-0000-0000-000000000055', 'Hide & Seek cookies have smaller chocolate chips than before. The product description still shows big chunks. Misleading.', 'Product', 'Low', -0.23, 'email', 'new', 'Review product consistency with specs', '["1. Compare current product vs marketing photos", "2. Verify chocolate chip size specifications", "3. Update marketing materials if needed"]', 'R&D', false, 'We will review our product specifications and ensure our marketing accurately represents the product.', 'c0000021-0000-0000-0000-000000000021', 'p0000004-0000-0000-0000-000000000004', now() - interval '10 hours', now() - interval '10 hours', NULL),
+
+('d0000056-0000-0000-0000-000000000056', 'My complaint from last week about Frooti packaging leak was resolved quickly. Good response time. Thank you.', 'Packaging', 'Low', 0.72, 'email', 'resolved', 'Close - positive resolution feedback', '["1. Add to successful resolution metrics", "2. Thank customer"]', 'Customer Success', false, 'Thank you! We are glad we could resolve your issue quickly.', 'c0000011-0000-0000-0000-000000000011', 'p0000002-0000-0000-0000-000000000002', now() - interval '4 days', now() - interval '3 days', now() - interval '3 days');
+
+-- ============================================
+-- COMPLAINT TIMELINE ENTRIES (sample entries for some complaints)
+-- ============================================
+INSERT INTO complaint_timeline (id, complaint_id, action, performed_by, metadata, created_at) VALUES
+  ('e0000001-0000-0000-0000-000000000001', 'd0000001-0000-0000-0000-000000000001', 'Complaint created and classified', 'NLP Classifier', '{"category": "Product", "priority": "High", "sentiment_score": -0.87}', now() - interval '2 days'),
+  ('e0000002-0000-0000-0000-000000000002', 'd0000001-0000-0000-0000-000000000001', 'Escalated to Quality Assurance', 'AI Resolver', '{"assigned_team": "Quality Assurance", "escalation_required": true}', now() - interval '2 days' + interval '5 minutes'),
+  ('e0000003-0000-0000-0000-000000000003', 'd0000001-0000-0000-0000-000000000001', 'Batch LOT-2024-0891 quarantined', 'Quality Assurance', '{"action": "batch_quarantine"}', now() - interval '1 day 12 hours'),
+  ('e0000004-0000-0000-0000-000000000004', 'd0000002-0000-0000-0000-000000000002', 'Complaint created and classified', 'NLP Classifier', '{"category": "Product", "priority": "High", "sentiment_score": -0.72}', now() - interval '3 days'),
+  ('e0000005-0000-0000-0000-000000000005', 'd0000002-0000-0000-0000-000000000002', 'Assigned to Supply Chain', 'AI Resolver', '{"assigned_team": "Supply Chain"}', now() - interval '3 days' + interval '10 minutes'),
+  ('e0000006-0000-0000-0000-000000000006', 'd0000003-0000-0000-0000-000000000003', 'Complaint created and classified', 'NLP Classifier', '{"category": "Product", "priority": "High", "sentiment_score": -0.91}', now() - interval '1 day'),
+  ('e0000007-0000-0000-0000-000000000007', 'd0000003-0000-0000-0000-000000000003', 'Escalated to Safety & Compliance', 'AI Resolver', '{"assigned_team": "Safety & Compliance", "escalation_required": true}', now() - interval '1 day' + interval '2 minutes');
+
+-- ============================================
+-- DAILY METRICS (last 7 days)
+-- ============================================
+INSERT INTO daily_metrics (date, total_complaints, high_priority, medium_priority, low_priority, product_count, packaging_count, trade_count, avg_sentiment, resolved_count) VALUES
+  (CURRENT_DATE - interval '6 days', 5, 1, 3, 1, 2, 2, 1, -0.12, 2),
+  (CURRENT_DATE - interval '5 days', 8, 2, 4, 2, 4, 2, 2, -0.18, 3),
+  (CURRENT_DATE - interval '4 days', 6, 1, 3, 2, 3, 1, 2, -0.08, 4),
+  (CURRENT_DATE - interval '3 days', 9, 3, 4, 2, 5, 2, 2, -0.25, 2),
+  (CURRENT_DATE - interval '2 days', 7, 2, 3, 2, 3, 3, 1, -0.15, 5),
+  (CURRENT_DATE - interval '1 day', 11, 4, 5, 2, 6, 3, 2, -0.35, 3),
+  (CURRENT_DATE, 10, 3, 4, 3, 5, 3, 2, -0.27, 2)
+ON CONFLICT (date) DO NOTHING;

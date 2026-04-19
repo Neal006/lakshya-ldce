@@ -1,0 +1,138 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  admin
+  operational
+  call_center
+}
+
+enum Category {
+  Product
+  Packaging
+  Trade
+}
+
+enum Priority {
+  High
+  Medium
+  Low
+}
+
+enum Source {
+  email
+  call
+  walkin
+}
+
+enum Status {
+  new
+  assigned
+  in_progress
+  escalated
+  resolved
+  closed
+}
+
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  name          String
+  password_hash String
+  role          Role     @default(call_center)
+  department    String?
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+}
+
+model Product {
+  id         String      @id @default(cuid())
+  name       String
+  sku        String      @unique
+  category   String
+  created_at DateTime    @default(now())
+  complaints Complaint[]
+}
+
+model Customer {
+  id         String    @id @default(cuid())
+  name       String
+  email      String?   @unique
+  phone      String?
+  created_at DateTime  @default(now())
+  complaints Complaint[]
+}
+
+model Complaint {
+  id                  String   @id @default(cuid())
+  text                String   @db.Text
+  category            Category
+  priority            Priority
+  sentiment_score     Float
+  source              Source
+  status              Status   @default(new)
+
+  immediate_action    String?  @db.Text
+  resolution_steps    Json?
+  assigned_team       String?
+  escalation_required Boolean  @default(false)
+  customer_response   String?  @db.Text
+
+  customer_id         String
+  product_id          String
+  customer            Customer @relation(fields: [customer_id], references: [id])
+  product             Product  @relation(fields: [product_id], references: [id])
+
+  created_at          DateTime @default(now())
+  updated_at          DateTime @updatedAt
+  resolved_at         DateTime?
+
+  timeline            ComplaintTimeline[]
+
+  @@index([status])
+  @@index([priority])
+  @@index([category])
+  @@index([created_at])
+}
+
+model ComplaintTimeline {
+  id           String   @id @default(cuid())
+  complaint_id String
+  action       String
+  performed_by String?
+  metadata     Json?
+  created_at   DateTime @default(now())
+
+  complaint Complaint @relation(fields: [complaint_id], references: [id], onDelete: Cascade)
+
+  @@index([complaint_id])
+}
+
+model DailyMetric {
+  id               String   @id @default(cuid())
+  date             DateTime @unique
+  total_complaints Int      @default(0)
+  high_priority    Int      @default(0)
+  medium_priority  Int      @default(0)
+  low_priority     Int      @default(0)
+  product_count    Int      @default(0)
+  packaging_count  Int      @default(0)
+  trade_count      Int      @default(0)
+  avg_sentiment    Float    @default(0)
+  resolved_count   Int      @default(0)
+  created_at       DateTime @default(now())
+}
+
+model SLAConfig {
+  id             String   @id @default(cuid())
+  priority       Priority @unique
+  response_hours Int
+  resolve_hours  Int
+  updated_at     DateTime @updatedAt
+}
