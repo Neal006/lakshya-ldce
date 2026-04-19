@@ -33,12 +33,12 @@ A production-grade, multi-layer AI system that ingests customer complaints via v
               │                │                │
               ▼                ▼                ▼
   ┌───────────────────┐  ┌─────────────────────────────┐
-  │   TWILIO          │  │   WEBSITE (Next.js :3000)    │
-  │   Media Stream    │  │   • Landing page             │
-  │   WebSocket PCM16 │  │   • Role-based dashboard     │
-  └────────┬──────────┘  │   • Complaint intake API     │
-           │             │   • SSE real-time updates     │
-           ▼             │   • Supabase/PostgreSQL       │
+  │   TWILIO          │  │   WEBSITE (Next.js :3000)   │
+  │   Media Stream    │  │   • Landing page            │
+  │   WebSocket PCM16 │  │   • Role-based dashboard    │
+  └────────┬──────────┘  │   • Complaint intake API    │
+           │             │   • SSE real-time updates   │
+           ▼             │   • Supabase/PostgreSQL     │
   ┌───────────────────┐  └──────────────┬──────────────┘
   │  ORCHESTRATOR     │                 │
   │  (:8003)          │                 │
@@ -55,7 +55,7 @@ A production-grade, multi-layer AI system that ingests customer complaints via v
 ┌──────┐ ┌──────┐ ┌────────┐    ┌──────────────┐
 │ STT  │ │ NLP  │ │ GenAI  │    │  SUPABASE /   │
 │:8001 │ │:8002 │ │:8001   │    │  PostgreSQL   │
-│Whisper│ │ONNX  │ │Groq    │    │  + Prisma ORM │
+│Whisper││ONNX  │ │Groq    │    │  + Prisma ORM │
 │+VAD  │ │+VADER│ │Llama70B│    │               │
 └──────┘ └──────┘ └────────┘    └──────────────┘
 ```
@@ -152,9 +152,9 @@ The NLP layer is the **first stage of the processing pipeline**. It classifies r
 INPUT TEXT
     │
     ├──► [DistilBERT-MNLI ONNX] ──► Zero-shot entailment logits ────────┐
-    │                                                                     │
+    │                                                                   │
     ├──► [MiniLM-L6 ONNX] ───────► 384-dim embedding ─► Cosine sim ─────┤
-    │                                                                     │
+    │                                                                    │
     │                                                          ENSEMBLE  │
     │                                                          (50/50)   │
     │                                                             │      │
