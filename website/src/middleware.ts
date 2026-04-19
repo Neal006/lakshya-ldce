@@ -8,6 +8,7 @@ const roleRoutes: Record<string, string[]> = {
   admin: ['/admin'],
   operational: ['/operational'],
   call_center: ['/call-center'],
+  quality_assurance: ['/quality-assurance'],
 }
 
 const DEMO_MODE = process.env.DEMO_MODE === 'true'
@@ -48,6 +49,9 @@ export async function middleware(request: Request) {
           if (userRole === 'call_center') {
             return NextResponse.redirect(new URL('/call-center', request.url))
           }
+          if (userRole === 'quality_assurance') {
+            return NextResponse.redirect(new URL('/quality-assurance', request.url))
+          }
           return NextResponse.redirect(new URL('/login', request.url))
         }
       }
@@ -62,6 +66,7 @@ export const config = {
     '/admin/:path*',
     '/operational/:path*',
     '/call-center/:path*',
+    '/quality-assurance/:path*',
     '/api/:path*',
   ],
 }

@@ -5,15 +5,15 @@
 -- ============================================
 
 -- Password hash for 'admin123' using bcryptjs (cost factor 12)
--- Generated: $2b$12$WdSMwFxcXGnUk8iBAu5PFeYahnQqfh26TgM51b6Bv4UpSUTEbVWrS
+-- Generated: $2b$12$X9U.MfNpEckUSkUYVZdZoe5J/Gs2SeXb0maDXrq49SRFZB/9WjHfi
 
 -- ============================================
 -- EMPLOYEES (3 demo users matching the login page)
 -- ============================================
 INSERT INTO employees (id, name, email, password_hash, role, department) VALUES
-  ('a0000000-0000-0000-0000-000000000001', 'Admin User', 'admin@company.com', '$2b$12$WdSMwFxcXGnUk8iBAu5PFeYahnQqfh26TgM51b6Bv4UpSUTEbVWrS', 'admin', 'Management'),
-  ('a0000000-0000-0000-0000-000000000002', 'Operations Manager', 'ops@company.com', '$2b$12$WdSMwFxcXGnUk8iBAu5PFeYahnQqfh26TgM51b6Bv4UpSUTEbVWrS', 'operational', 'Operations'),
-  ('a0000000-0000-0000-0000-000000000003', 'Support Agent', 'support@company.com', '$2b$12$WdSMwFxcXGnUk8iBAu5PFeYahnQqfh26TgM51b6Bv4UpSUTEbVWrS', 'call_center', 'Customer Support')
+  ('a0000000-0000-0000-0000-000000000001', 'Admin User', 'admin@company.com', '$2b$12$X9U.MfNpEckUSkUYVZdZoe5J/Gs2SeXb0maDXrq49SRFZB/9WjHfi', 'admin', 'Management'),
+  ('a0000000-0000-0000-0000-000000000002', 'Operations Manager', 'ops@company.com', '$2b$12$X9U.MfNpEckUSkUYVZdZoe5J/Gs2SeXb0maDXrq49SRFZB/9WjHfi', 'operational', 'Operations'),
+  ('a0000000-0000-0000-0000-000000000003', 'Support Agent', 'support@company.com', '$2b$12$X9U.MfNpEckUSkUYVZdZoe5J/Gs2SeXb0maDXrq49SRFZB/9WjHfi', 'call_center', 'Customer Support')
 ON CONFLICT (email) DO NOTHING;
 
 -- ============================================

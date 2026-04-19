@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createAdminClient } from '@/lib/supabase-client'
 import { z } from 'zod'
+import bcrypt from 'bcryptjs'
 
 const updateEmployeeSchema = z.object({
   name: z.string().min(1).optional(),
   email: z.string().email().optional(),
-  role: z.enum(['admin', 'operational', 'call_center']).optional(),
+  role: z.enum(['admin', 'operational', 'call_center', 'quality_assurance']).optional(),
   department: z.string().optional(),
   password: z.string().min(6).optional(),
 })
@@ -36,7 +37,9 @@ export async function PUT(
     if (validated.email) updateData.email = validated.email
     if (validated.role) updateData.role = validated.role
     if (validated.department !== undefined) updateData.department = validated.department
-    if (validated.password) updateData.password_hash = validated.password
+    if (validated.password) {
+      updateData.password_hash = await bcrypt.hash(validated.password, 10)
+    }
 
     const { data: employee, error } = await admin
       .from('employees')

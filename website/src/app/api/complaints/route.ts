@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createAdminClient } from '@/lib/supabase-client'
+import { isSupabaseUnreachableError, supabaseUnavailableResponse } from '@/lib/supabase-http'
 import { classifyComplaint } from '@/lib/nlp-client'
 import { transcribeAudio } from '@/lib/stt-client'
 import { generateResolution } from '@/lib/genai-client'
@@ -54,10 +55,8 @@ export async function GET(request: NextRequest) {
     })
   } catch (error) {
     console.error('Error fetching complaints:', error)
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    )
+    if (isSupabaseUnreachableError(error)) return supabaseUnavailableResponse()
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }
 
@@ -141,10 +140,13 @@ export async function POST(request: NextRequest) {
     if (complaint?.id) {
       await admin.from('complaint_timeline').insert({
         complaint_id: complaint.id,
-        status_from: 'new',
-        status_to: 'new',
-        changed_by: 'System',
-        notes: 'Complaint created and classified as ' + complaint.category + ' with priority ' + complaint.priority,
+        action: 'Complaint created and classified',
+        performed_by: 'System',
+        metadata: {
+          category: complaint.category,
+          priority: complaint.priority,
+          status: complaint.status,
+        },
       })
     }
 
@@ -175,9 +177,7 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       )
     }
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    )
+    if (isSupabaseUnreachableError(error)) return supabaseUnavailableResponse()
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }

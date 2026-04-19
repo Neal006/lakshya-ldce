@@ -35,7 +35,7 @@ const steps = [
 
 export function HowItWorksSection() {
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 relative">
+    <section id="how-it-works" className="py-24 px-4 sm:px-6 lg:px-8 relative scroll-mt-24">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">

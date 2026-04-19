@@ -116,10 +116,12 @@ export async function POST(request: NextRequest) {
     if (complaint?.id) {
       await admin.from('complaint_timeline').insert({
         complaint_id: complaint.id,
-        status_from: 'new',
-        status_to: 'new',
-        changed_by: 'System',
-        notes: 'Complaint created via Brevo email webhook from ' + senderEmail + (emailSent ? '. Acknowledgment email sent.' : ''),
+        action: 'Complaint created via email (Brevo webhook)',
+        performed_by: 'System',
+        metadata: {
+          sender: senderEmail,
+          acknowledgment_email_sent: emailSent,
+        },
       })
     }
 

@@ -1,8 +1,10 @@
 'use client';
 
 import {
+  LandingNavbar,
   HeroSection,
   StatsSection,
+  BusinessMetricsSection,
   HowItWorksSection,
   FeaturesSection,
   DashboardPreviewSection,
@@ -14,8 +16,10 @@ import {
 export default function LandingPage() {
   return (
     <main className="relative overflow-hidden bg-black">
+      <LandingNavbar />
       <HeroSection />
       <StatsSection />
+      <BusinessMetricsSection />
       <HowItWorksSection />
       <FeaturesSection />
       <DashboardPreviewSection />

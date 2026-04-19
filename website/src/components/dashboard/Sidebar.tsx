@@ -10,11 +10,12 @@ import {
   Headphones, 
   Users, 
   LogOut,
-  AlertCircle
+  AlertCircle,
+  ShieldCheck,
 } from 'lucide-react';
 
 interface SidebarProps {
-  role: 'admin' | 'operational' | 'call_center';
+  role: 'admin' | 'operational' | 'call_center' | 'quality_assurance';
 }
 
 const navItems = {
@@ -28,13 +29,16 @@ const navItems = {
   call_center: [
     { href: '/call-center', label: 'New Complaint', icon: Headphones },
   ],
+  quality_assurance: [
+    { href: '/quality-assurance', label: 'QA Insights', icon: ShieldCheck },
+  ],
 };
 
 export function Sidebar({ role }: SidebarProps) {
   const pathname = usePathname();
   const router = useRouter();
   const { data: session } = useSession();
-  const items = navItems[role];
+  const items = navItems[role] || [];
 
   const handleLogout = async () => {
     await signOut({ redirect: false });

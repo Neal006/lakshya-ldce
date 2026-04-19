@@ -2,7 +2,6 @@
 
 import { useEffect, useState, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sidebar } from '@/components/dashboard/Sidebar';
 import { Card, Button, Input, Badge } from '@/components/ui';
 import { apiClient } from '@/lib/api-client';
 import { 
@@ -53,7 +52,7 @@ export default function CallCenterPage() {
       setAudioFile(file);
       setIsProcessingAudio(true);
       try {
-        const result = await (await import('@/lib/stt-client')).transcribeAudio(file);
+        const result = await apiClient.transcribeAudio(file);
         setComplaintText(result.text);
       } catch (err) {
         console.error('STT failed:', err);
@@ -105,10 +104,8 @@ export default function CallCenterPage() {
   };
 
   return (
-    <div className="flex min-h-screen bg-[var(--color-background)]">
-      <Sidebar role="call_center" />
-      
-      <main className="flex-1 p-8">
+    <div className="min-h-[calc(100vh-5rem)]">
+      <div className="p-4 sm:p-8 max-w-4xl mx-auto">
         <motion.div 
           className="mb-8"
           initial={{ opacity: 0, y: -20 }}
@@ -370,7 +367,7 @@ export default function CallCenterPage() {
             )}
           </AnimatePresence>
         </div>
-      </main>
+      </div>
     </div>
   );
 }

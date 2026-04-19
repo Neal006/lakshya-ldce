@@ -6,7 +6,7 @@ import numpy as np
 from fastapi import APIRouter, Request, WebSocket, WebSocketDisconnect
 from fastapi.responses import Response
 
-from config import TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, PUBLIC_HOST, SESSION_TIMEOUT
+from config import TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, PUBLIC_HOST, SESSION_TIMEOUT, INTERNAL_SAMPLE_RATE
 from pipeline.session import SessionManager, CallSession, SessionState
 from pipeline.coordinator import PipelineCoordinator
 from telephony.barge_in import BargeInDetector
@@ -67,8 +67,8 @@ async def twilio_media_stream(websocket: WebSocket):
     audio_buffer = bytearray()
     barge_in = BargeInDetector()
     is_sending_tts = False
-    tts_ended_at: float = 0.0
-    TTS_COOLDOWN_SEC = 1.5  # discard audio for 1.5s after TTS ends to avoid echo
+    tts_play_until: float = 0.0   # time when Twilio finishes playing current TTS
+    TTS_POST_COOLDOWN = 1.0       # extra seconds after playback before listening again
 
     try:
         while True:
@@ -104,19 +104,26 @@ async def twilio_media_stream(websocket: WebSocket):
                 inbound_audio = decode_twilio_audio(data["media"]["payload"])
                 inbound_float = pcm16_to_float32(inbound_audio)
 
-                # While TTS is playing: only check for barge-in, never accumulate
+                # Phase 1 — synthesis in progress: discard, only check barge-in
                 if is_sending_tts:
                     barge_in.set_tts_playing(True)
                     if barge_in.process_inbound(inbound_float):
-                        logger.info(f"[{call_sid}] Barge-in detected")
+                        logger.info(f"[{call_sid}] Barge-in during synthesis")
                         is_sending_tts = False
-                        tts_ended_at = time.time()
+                        tts_play_until = 0.0
                         audio_buffer.clear()
-                    continue  # always skip accumulation during TTS
+                    continue
 
-                # Post-TTS cooldown: discard audio to avoid processing TTS echo
-                if time.time() - tts_ended_at < TTS_COOLDOWN_SEC:
-                    audio_buffer.clear()
+                # Phase 2 — Twilio is still playing the audio we sent: discard, allow barge-in
+                if time.time() < tts_play_until:
+                    barge_in.set_tts_playing(True)
+                    if barge_in.process_inbound(inbound_float):
+                        logger.info(f"[{call_sid}] Barge-in during TTS playback")
+                        tts_play_until = 0.0
+                        audio_buffer.clear()
+                        audio_buffer.extend(inbound_audio)  # keep this frame
+                    else:
+                        audio_buffer.clear()
                     continue
 
                 audio_buffer.extend(inbound_audio)
@@ -170,7 +177,7 @@ async def twilio_media_stream(websocket: WebSocket):
                             if not stream_sid:
                                 logger.error(f"[{call_sid}] Missing streamSid, cannot send audio")
                                 is_sending_tts = False
-                                tts_ended_at = time.time()
+                                tts_play_until = 0.0
                                 continue
                             await websocket.send_text(json.dumps({
                                 "event": "media",
@@ -178,24 +185,28 @@ async def twilio_media_stream(websocket: WebSocket):
                                 "media": {"payload": twilio_payload}
                             }))
                             total_ms = round((time.time() - chunk_start) * 1000)
-                            logger.info(f"[{call_sid}] Sent TTS {len(audio_pcm)}B ({tts_ms}ms) | total_latency={total_ms}ms")
+                            # audio_pcm is 16kHz 16-bit PCM (2 bytes/sample) — calculate playback duration
+                            playback_sec = len(audio_pcm) / (INTERNAL_SAMPLE_RATE * 2)
+                            tts_play_until = time.time() + playback_sec + TTS_POST_COOLDOWN
+                            logger.info(f"[{call_sid}] Sent TTS {len(audio_pcm)}B ({tts_ms}ms) | "
+                                        f"total_latency={total_ms}ms | playback={playback_sec:.1f}s")
                             is_sending_tts = False
-                            tts_ended_at = time.time()
                             audio_buffer.clear()
 
-                            # Hang up after goodbye when call is complete
+                            # Hang up after goodbye — wait for audio to finish playing first
                             if session and session.state in (SessionState.done, SessionState.ticket_created):
-                                logger.info(f"[{call_sid}] Call complete, closing WebSocket")
+                                logger.info(f"[{call_sid}] Call complete, waiting {playback_sec:.1f}s for goodbye audio")
+                                await asyncio.sleep(playback_sec + 0.5)
                                 await websocket.close()
                                 return
                         else:
                             logger.warning(f"[{call_sid}] TTS returned empty audio")
                             is_sending_tts = False
-                            tts_ended_at = time.time()
+                            tts_play_until = 0.0
                     except Exception as e:
                         logger.error(f"[{call_sid}] TTS error: {e}", exc_info=True)
                         is_sending_tts = False
-                        tts_ended_at = time.time()
+                        tts_play_until = 0.0
 
             elif data["event"] == "stop":
                 logger.info(f"[{call_sid}] Call ended | "

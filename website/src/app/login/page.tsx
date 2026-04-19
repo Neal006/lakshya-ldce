@@ -1,8 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import { signIn } from 'next-auth/react'
+import { signIn, getSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
+import { dashboardHomeForRole } from '@/lib/roles'
 import { motion } from 'framer-motion'
 import { Package, Loader2, AlertCircle } from 'lucide-react'
 import { Card } from '@/components/ui'
@@ -32,8 +33,10 @@ export default function LoginPage() {
         return
       }
 
-      router.push('/admin')
       router.refresh()
+      const session = await getSession()
+      router.push(dashboardHomeForRole(session?.user?.role))
+      setIsLoading(false)
     } catch {
       setError('An error occurred. Please try again.')
       setIsLoading(false)
@@ -121,9 +124,10 @@ export default function LoginPage() {
           <div className="mt-6 pt-6 border-t border-gray-200">
             <p className="text-center text-sm text-gray-500">Demo accounts</p>
             <div className="mt-4 space-y-2 text-sm text-gray-600">
-              <p className="text-center"><strong>Admin:</strong> admin@company.com / admin123</p>
-              <p className="text-center"><strong>Operations:</strong> ops@company.com / admin123</p>
-              <p className="text-center"><strong>Support:</strong> support@company.com / admin123</p>
+              <p className="text-center"><strong>Support executive:</strong> admin@company.com / admin123</p>
+              <p className="text-center"><strong>Caller intake:</strong> support@company.com / admin123</p>
+              <p className="text-center"><strong>Operations manager:</strong> ops@company.com / admin123</p>
+              <p className="text-center"><strong>Quality assurance:</strong> qa@company.com / admin123</p>
             </div>
           </div>
         </Card>
