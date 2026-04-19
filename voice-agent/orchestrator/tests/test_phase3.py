@@ -148,7 +148,7 @@ async def test_orchestrator_health():
 
 async def main():
     print("=" * 60)
-    print("  Lakshya Voice Agent - Phase 3 Integration Tests")
+    print("  SOLV.ai Voice Agent - Phase 3 Integration Tests")
     print("  Testing with REAL services (STT, Classifier, Ollama, Backend)")
     print("=" * 60)
 

@@ -56,7 +56,7 @@ REQUEST_COUNT = Counter("orchestrator_requests_total", "Total requests", ["endpo
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     logger.info("=" * 60)
-    logger.info("  Lakshya Voice Orchestrator — Starting")
+    logger.info("  SOLV.ai Voice Orchestrator — Starting")
     logger.info("=" * 60)
     logger.info(f"  STT:             {STT_SERVICE_URL}")
     logger.info(f"  Classifier:      {CLASSIFIER_SERVICE_URL}")
@@ -72,7 +72,7 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(
-    title="Lakshya Voice Orchestrator",
+    title="SOLV.ai Voice Orchestrator",
     description="AI-Powered Voice Complaint Management - Orchestration Layer",
     version="1.1.0",
     lifespan=lifespan,

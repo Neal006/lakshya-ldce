@@ -67,7 +67,7 @@ async def create_ticket(
 ) -> dict | None:
     """Create a ticket via the existing backend API."""
     if not customer_email:
-        customer_email = f"voice_{customer_phone or 'unknown'}@call.lakshya"
+        customer_email = f"voice_{customer_phone or 'unknown'}@voice.solv.ai"
 
     # Ensure customer_name is not empty (backend requires min_length=1)
     if not customer_name or not customer_name.strip():

@@ -232,7 +232,7 @@ async def test_config_values():
 
 async def main():
     print("=" * 60)
-    print("  Lakshya Voice Agent - Phase 2 Integration Tests")
+    print("  SOLV.ai Voice Agent - Phase 2 Integration Tests")
     print("=" * 60)
     
     tests = [
