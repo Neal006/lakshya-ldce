@@ -37,8 +37,8 @@ EDGE_TTS_VOICE_MAP = {
 }
 
 Piper_VOICE_FILES = {
-    "en-IN": "en_IN-nepm-medium.onnx",
-    "hi-IN": "hi_IN-nepm-medium.onnx",
+    "en-IN": "en_US-lessac-medium.onnx",   # Indian English fallback: US English Lessac voice
+    "hi-IN": "en_US-lessac-medium.onnx",   # Hindi fallback: same (no Hindi Piper model available)
 }
 
 # ---------------------------------------------------------------------------

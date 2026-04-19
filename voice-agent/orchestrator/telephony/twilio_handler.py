@@ -36,6 +36,7 @@ async def twilio_media_stream(websocket: WebSocket):
     """Bidirectional media stream: receive caller audio, send TTS audio back."""
     await websocket.accept()
     call_sid = None
+    stream_sid = None
     session = None
     audio_buffer = bytearray()
     barge_in = BargeInDetector()
@@ -51,8 +52,9 @@ async def twilio_media_stream(websocket: WebSocket):
 
             elif data["event"] == "start":
                 call_sid = data["start"]["callSid"]
+                stream_sid = data["start"].get("streamSid")
                 session = session_manager.create_session(call_sid)
-                logger.info(f"Call started: {call_sid}")
+                logger.info(f"Call started: {call_sid}, stream: {stream_sid}")
 
             elif data["event"] == "media":
                 if not session:
@@ -95,15 +97,25 @@ async def twilio_media_stream(websocket: WebSocket):
                         if result and result.get("tts_text"):
                             try:
                                 from tts import synthesize_speech
+                                logger.info(f"TTS text for {call_sid}: {result['tts_text']}")
                                 audio_pcm = await synthesize_speech(result["tts_text"])
                                 if audio_pcm:
                                     is_sending_tts = True
                                     twilio_payload = encode_twilio_audio(audio_pcm)
+                                    if not stream_sid:
+                                        logger.error(f"Missing streamSid for {call_sid}; cannot send audio back to Twilio")
+                                        is_sending_tts = False
+                                        audio_buffer.clear()
+                                        continue
                                     await websocket.send_text(json.dumps({
                                         "event": "media",
+                                        "streamSid": stream_sid,
                                         "media": {"payload": twilio_payload}
                                     }))
+                                    logger.info(f"Sent {len(audio_pcm)} bytes of TTS audio to Twilio for {call_sid}")
                                     is_sending_tts = False
+                                else:
+                                    logger.warning(f"TTS synthesis returned empty audio for {call_sid}")
                             except Exception as e:
                                 logger.error(f"TTS error: {e}")
                                 is_sending_tts = False

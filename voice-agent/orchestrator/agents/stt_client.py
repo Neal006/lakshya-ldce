@@ -14,8 +14,8 @@ async def transcribe_audio(audio: np.ndarray) -> dict | None:
         client = get_client()
         response = await client.post(
             f"{STT_SERVICE_URL}/transcribe/raw",
-            content=pcm_bytes,
-            params={"sample_rate": 16000},
+            files={"file": ("audio.raw", pcm_bytes, "application/octet-stream")},
+            data={"sample_rate": "16000"},
             timeout=15.0,
         )
         response.raise_for_status()
