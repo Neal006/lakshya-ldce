@@ -34,7 +34,7 @@ export function HeroSection() {
         {/* Badge */}
         <div className="mb-8">
           <span className="section-badge">
-            Tark Shaastra · Lakshya 2.0
+            SOLV.ai · Tark Shaastra · LDCE
           </span>
         </div>
 
@@ -80,7 +80,7 @@ export function HeroSection() {
               </div>
               <div className="flex-1 flex justify-center">
                 <div className="bg-[#1a1a1a] rounded-md px-4 py-1 text-xs text-gray-500">
-                  ts-14.app/dashboard
+                  solv.ai/dashboard
                 </div>
               </div>
             </div>

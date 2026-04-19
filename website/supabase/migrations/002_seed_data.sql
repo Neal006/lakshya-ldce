@@ -1,5 +1,5 @@
 -- ============================================
--- SOLV.ai (TS-14) - Seed Data
+-- SOLV.ai — seed data
 -- ============================================
 -- Run this AFTER 001_create_tables.sql in Supabase SQL Editor
 -- ============================================

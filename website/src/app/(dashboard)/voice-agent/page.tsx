@@ -9,7 +9,6 @@ import {
   AlertTriangle,
   CheckCircle,
   Clock,
-  Zap,
   ArrowRight,
   Loader2,
   RotateCcw,
@@ -39,7 +38,6 @@ interface VoiceAgentResponse {
   resolution: Resolution | null
   message?: string
   sttAvailable?: boolean
-  nlpAvailable?: boolean
   genaiAvailable?: boolean
   details?: string
 }
@@ -274,7 +272,7 @@ const stopRecording = useCallback(async () => {
             setResponse({
               transcript: capturedBrowserTranscript,
               confidence: 0.6,
-              classification: { category: 'Product', priority: 'Medium', sentiment_score: 0 },
+              classification: null,
               resolution: {
                 immediate_action: `Acknowledge the complaint: "${capturedBrowserTranscript.substring(0, 100)}". Collect details and assure investigation.`,
                 resolution_steps: ['Document the complaint details', 'Classify and assign to the appropriate team', 'Contact the customer with an update within 24 hours', 'Follow up to confirm resolution'],
@@ -286,7 +284,6 @@ const stopRecording = useCallback(async () => {
                 estimated_resolution_time: '1-3 business days',
               },
               sttAvailable: false,
-              nlpAvailable: false,
               genaiAvailable: false,
             })
             setTranscriptParts((prev) => [...prev, capturedBrowserTranscript])
@@ -372,15 +369,6 @@ const stopRecording = useCallback(async () => {
     const mins = Math.floor(seconds / 60)
     const secs = seconds % 60
     return `${mins}:${secs.toString().padStart(2, '0')}`
-  }
-
-  const priorityColor = (priority: string) => {
-    switch (priority?.toLowerCase()) {
-      case 'high': return '#EF4444'
-      case 'medium': return '#3B82F6'
-      case 'low': return '#22C55E'
-      default: return '#9CA3AF'
-    }
   }
 
   return (
@@ -561,45 +549,6 @@ const stopRecording = useCallback(async () => {
                   <p className="text-xs text-gray-500 mt-2">Confidence: {Math.round(response.confidence * 100)}%</p>
                 )}
               </div>
-
-              {/* Classification */}
-              {response.classification && (
-                <div className="p-5 rounded-2xl"
-                  style={{
-                    background: 'linear-gradient(165deg, #1A1A1D 0%, #0D0D0F 100%)',
-                    boxShadow: '12px 12px 24px rgba(0, 0, 0, 0.7), -12px -12px 24px rgba(255, 255, 255, 0.02), inset 1px 1px 2px rgba(255, 255, 255, 0.05)',
-                    border: '1px solid rgba(255, 255, 255, 0.03)',
-                  }}
-                >
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="p-2 rounded-lg" style={{ background: 'linear-gradient(145deg, #3B82F6 0%, #1D4ED8 100%)' }}>
-                      <Zap size={16} className="text-white" />
-                    </div>
-                    <h3 className="text-sm font-semibold text-blue-400 uppercase tracking-wider">AI Classification</h3>
-                    {response.nlpAvailable === false && (
-                      <span className="text-xs text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-full border border-amber-500/20">Default</span>
-                    )}
-                  </div>
-                  <div className="grid grid-cols-3 gap-4">
-                    <div className="p-3 rounded-xl" style={{ background: 'rgba(59, 130, 246, 0.1)', border: '1px solid rgba(59, 130, 246, 0.2)' }}>
-                      <p className="text-xs text-gray-400 mb-1">Category</p>
-                      <p className="text-sm font-semibold text-[#F5F5F5]">{response.classification.category}</p>
-                    </div>
-                    <div className="p-3 rounded-xl" style={{ background: 'rgba(59, 130, 246, 0.1)', border: '1px solid rgba(59, 130, 246, 0.2)' }}>
-                      <p className="text-xs text-gray-400 mb-1">Priority</p>
-                      <p className="text-sm font-semibold" style={{ color: priorityColor(response.classification.priority) }}>
-                        {response.classification.priority}
-                      </p>
-                    </div>
-                    <div className="p-3 rounded-xl" style={{ background: 'rgba(59, 130, 246, 0.1)', border: '1px solid rgba(59, 130, 246, 0.2)' }}>
-                      <p className="text-xs text-gray-400 mb-1">Sentiment</p>
-                      <p className="text-sm font-semibold text-[#F5F5F5]">
-                        {response.classification.sentiment_score > 0.05 ? 'Positive' : response.classification.sentiment_score < -0.05 ? 'Negative' : 'Neutral'}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              )}
 
               {/* GenAI Resolution */}
               {response.resolution && (

@@ -36,7 +36,7 @@ export function LandingNavbar() {
               <AlertCircle className="text-white" size={20} aria-hidden />
             </div>
             <div className="leading-tight">
-              <span className="font-valorant text-lg tracking-wide text-white">TS-14</span>
+              <span className="font-valorant text-lg tracking-wide text-white">SOLV.ai</span>
               <p className="text-[11px] text-gray-400">Complaint resolution</p>
             </div>
           </Link>

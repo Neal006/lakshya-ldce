@@ -1,5 +1,5 @@
 """
-Test scenarios for the TS-14 ablation study.
+Test scenarios for the SOLV.ai ablation study.
 Four realistic wellness-industry customer complaints covering all three
 complaint categories (Product, Packaging, Trade) and all three priority
 levels (High, Medium, Low).

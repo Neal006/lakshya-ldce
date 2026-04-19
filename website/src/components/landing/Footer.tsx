@@ -28,7 +28,7 @@ export function Footer() {
                 <span className="font-valorant text-white text-lg">TS</span>
               </div>
               <div>
-                <span className="font-valorant text-xl text-white">TS-14</span>
+                <span className="font-valorant text-xl text-white">SOLV.ai</span>
               </div>
             </div>
             <p className="text-sm text-gray-500 mb-4">AI Complaint Resolution</p>
@@ -76,7 +76,7 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="mt-16 pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-gray-500 text-sm">
-            © 2024 TS-14. Built for Tark Shaastra · Lakshya 2.0
+            © 2026 SOLV.ai. Built for Tark Shaastra · LDCE Hackathon
           </p>
           <p className="text-gray-500 text-sm">
             Made with ♥ for the hackathon

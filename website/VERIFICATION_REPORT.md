@@ -1,4 +1,4 @@
-# Verification Report - SOLV.ai (TS-14)
+# Verification Report — SOLV.ai
 
 **Date**: 2026-04-19  
 **Environment**: Local Development  

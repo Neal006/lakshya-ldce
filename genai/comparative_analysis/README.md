@@ -1,7 +1,7 @@
-# TS-14 – LLM Ablation Study & Comparative Analysis
+# SOLV.ai – LLM Ablation Study & Comparative Analysis
 ## AI-Powered Complaint Classification & Resolution Recommendation Engine
 
-> **Objective:** Determine the best LLM for TS-14's wellness-industry complaint
+> **Objective:** Determine the best LLM for SOLV.ai's wellness-industry complaint
 > management pipeline by benchmarking 8 models on real complaint prompts across
 > three tasks, then justify the production selection with data.
 
@@ -159,7 +159,7 @@ The chosen model must meet all of:
 | Category accuracy | ≥ 90% | Mis-classification routes tickets to the wrong team |
 | Priority accuracy | ≥ 85% | Incorrect priority breaks SLA compliance |
 | Resolution quality | ≥ 75% | Actionable steps drive actual resolution |
-| Average latency | ≤ 5 s | Real-time processing requirement (TS-14 winning logic) |
+| Average latency | ≤ 5 s | Real-time processing requirement (SOLV.ai winning logic) |
 | Format compliance | ≥ 80% | Downstream dashboard parsing requires valid JSON |
 
 ---

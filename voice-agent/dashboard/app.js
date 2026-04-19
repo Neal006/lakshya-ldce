@@ -1,6 +1,25 @@
 const API_BASE = window.location.origin.replace(/:\d+$/, ':8000');
-let authToken = localStorage.getItem('lakshya_token');
-let currentUser = JSON.parse(localStorage.getItem('lakshya_user') || 'null');
+const STORAGE_TOKEN = 'solv_token';
+const STORAGE_USER = 'solv_user';
+const LEGACY_TOKEN = 'lakshya_token';
+const LEGACY_USER = 'lakshya_user';
+
+function loadStoredSession() {
+    const hadLegacy = localStorage.getItem(LEGACY_TOKEN) || localStorage.getItem(LEGACY_USER);
+    let token = localStorage.getItem(STORAGE_TOKEN) || localStorage.getItem(LEGACY_TOKEN);
+    let userRaw = localStorage.getItem(STORAGE_USER) || localStorage.getItem(LEGACY_USER);
+    if (hadLegacy) {
+        if (token) localStorage.setItem(STORAGE_TOKEN, token);
+        if (userRaw) localStorage.setItem(STORAGE_USER, userRaw);
+        localStorage.removeItem(LEGACY_TOKEN);
+        localStorage.removeItem(LEGACY_USER);
+    }
+    return { token, user: userRaw ? JSON.parse(userRaw) : null };
+}
+
+const _session = loadStoredSession();
+let authToken = _session.token;
+let currentUser = _session.user;
 let currentPage = 'overview';
 let currentFilters = { status: '', category: '', priority: '', page: 1 };
 
@@ -59,8 +78,10 @@ async function handleLogin(e) {
         }
         authToken = data.data.access_token;
         currentUser = data.data.user;
-        localStorage.setItem('lakshya_token', authToken);
-        localStorage.setItem('lakshya_user', JSON.stringify(currentUser));
+        localStorage.setItem(STORAGE_TOKEN, authToken);
+        localStorage.setItem(STORAGE_USER, JSON.stringify(currentUser));
+        localStorage.removeItem(LEGACY_TOKEN);
+        localStorage.removeItem(LEGACY_USER);
         showDashboard();
     } catch (err) {
         errEl.textContent = 'Network error. Is the backend running?';
@@ -71,8 +92,10 @@ async function handleLogin(e) {
 function handleLogout() {
     authToken = null;
     currentUser = null;
-    localStorage.removeItem('lakshya_token');
-    localStorage.removeItem('lakshya_user');
+    localStorage.removeItem(STORAGE_TOKEN);
+    localStorage.removeItem(STORAGE_USER);
+    localStorage.removeItem(LEGACY_TOKEN);
+    localStorage.removeItem(LEGACY_USER);
     showLogin();
 }
 

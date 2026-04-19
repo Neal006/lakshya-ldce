@@ -60,6 +60,8 @@ export async function POST(request: NextRequest) {
         customer_name: senderName,
         product_name: defaultProduct.name,
         complaint_text: complaintText,
+        sentiment_score: nlpResult.sentiment_score,
+        nlp_latency_ms: nlpResult.latency_ms,
       })
     } catch {
       console.error('GenAI resolution failed for Brevo webhook')

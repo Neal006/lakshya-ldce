@@ -1,12 +1,12 @@
 #!/bin/bash
-# start.sh - Start all services for Lakshya Voice Complaint System
+# start.sh - Start all services for SOLV.ai Voice Complaint System
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
 
 echo "=========================================="
-echo "  Lakshya Voice Complaint System"
+echo "  SOLV.ai Voice Complaint System"
 echo "=========================================="
 echo ""
 
@@ -62,7 +62,7 @@ until curl -sf http://localhost:11434/api/tags > /dev/null 2>&1; do
     sleep 3
 done
 
-docker exec lakshya-ollama ollama pull qwen2.5:1.5b 2>/dev/null || echo "  (Ollama pull may need manual setup)"
+docker exec solv-ollama ollama pull qwen2.5:1.5b 2>/dev/null || echo "  (Ollama pull may need manual setup)"
 
 echo ""
 echo "=========================================="

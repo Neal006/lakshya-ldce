@@ -52,9 +52,9 @@ async function checkService(name: string, url: string): Promise<ServiceHealth> {
 
 export async function GET() {
   const services = [
-    { name: 'NLP Classifier', url: process.env.ML_CLASSIFIER_URL || 'http://localhost:8001' },
-    { name: 'STT Service', url: process.env.STT_SERVICE_URL || 'http://localhost:8002' },
-    { name: 'GenAI Service', url: process.env.GENAI_SERVICE_URL || 'http://localhost:8003' },
+    { name: 'NLP Classifier', url: process.env.ML_CLASSIFIER_URL || 'http://localhost:8002' },
+    { name: 'STT Service', url: process.env.STT_SERVICE_URL || 'http://localhost:8001' },
+    { name: 'GenAI Service', url: process.env.GENAI_SERVICE_URL || 'http://localhost:8004' },
   ]
 
   const results = await Promise.all(services.map(s => checkService(s.name, s.url)))

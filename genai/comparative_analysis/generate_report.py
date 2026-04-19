@@ -1,5 +1,5 @@
 """
-Generate comparative analysis report with graphs from TS-14 ablation results.
+Generate comparative analysis report with graphs from SOLV.ai ablation results.
 
 Usage:
     cd genai
@@ -109,7 +109,7 @@ def plot_overall_scores(metrics: dict):
     bars = ax.barh(names, scores, color=colors, edgecolor="white", height=0.55)
     ax.set_xlim(0, 1.1)
     ax.set_xlabel("Average Overall Score (0–1)", fontsize=11)
-    ax.set_title("TS-14 – Overall Model Performance Comparison", fontsize=14,
+    ax.set_title("SOLV.ai – Overall Model Performance Comparison", fontsize=14,
                  fontweight="bold", pad=14)
     ax.xaxis.set_major_formatter(mticker.PercentFormatter(xmax=1.0))
     ax.axvline(x=0.7, color="gray", linestyle="--", linewidth=1, alpha=0.5,
@@ -149,7 +149,7 @@ def plot_radar_chart(metrics: dict):
     ax.set_xticks(angles[:-1])
     ax.set_xticklabels(cats, fontsize=9)
     ax.set_ylim(0, 1.1)
-    ax.set_title("TS-14 – Multi-Metric Radar Comparison", fontsize=14,
+    ax.set_title("SOLV.ai – Multi-Metric Radar Comparison", fontsize=14,
                  fontweight="bold", pad=25)
     ax.legend(loc="upper right", bbox_to_anchor=(1.4, 1.15), fontsize=8)
     plt.tight_layout()
@@ -169,7 +169,7 @@ def plot_latency(metrics: dict):
 
     bars = ax.barh(names, latencies, color=colors, edgecolor="white", height=0.55)
     ax.set_xlabel("Average Latency (seconds)", fontsize=11)
-    ax.set_title("TS-14 – Response Latency Comparison", fontsize=14,
+    ax.set_title("SOLV.ai – Response Latency Comparison", fontsize=14,
                  fontweight="bold", pad=14)
 
     for bar, lat in zip(bars, latencies):
@@ -203,7 +203,7 @@ def plot_per_task_scores(metrics: dict):
                color=MODEL_COLORS[i % len(MODEL_COLORS)], edgecolor="white")
 
     ax.set_ylabel("Average Score", fontsize=11)
-    ax.set_title("TS-14 – Performance by Task Type", fontsize=14,
+    ax.set_title("SOLV.ai – Performance by Task Type", fontsize=14,
                  fontweight="bold", pad=14)
     ax.set_xticks(x)
     ax.set_xticklabels(task_labels, fontsize=11)
@@ -231,7 +231,7 @@ def plot_score_vs_latency(metrics: dict):
 
     ax.set_xlabel("Average Latency (seconds)", fontsize=11)
     ax.set_ylabel("Average Overall Score", fontsize=11)
-    ax.set_title("TS-14 – Quality vs Speed (top-left is best)", fontsize=14,
+    ax.set_title("SOLV.ai – Quality vs Speed (top-left is best)", fontsize=14,
                  fontweight="bold", pad=14)
     ax.yaxis.set_major_formatter(mticker.PercentFormatter(xmax=1.0))
     ax.grid(True, alpha=0.3)
@@ -268,7 +268,7 @@ def plot_metric_heatmap(metrics: dict):
             ax.text(j, i, f"{val:.0%}", ha="center", va="center",
                     fontsize=11, fontweight="bold", color=color)
 
-    ax.set_title("TS-14 – Detailed Metric Heatmap", fontsize=14,
+    ax.set_title("SOLV.ai – Detailed Metric Heatmap", fontsize=14,
                  fontweight="bold", pad=14)
     fig.colorbar(im, ax=ax, label="Score", shrink=0.8)
     plt.tight_layout()
@@ -294,7 +294,7 @@ def plot_token_usage(metrics: dict):
            color="#E11D48", edgecolor="white")
 
     ax.set_ylabel("Average Tokens per Call", fontsize=11)
-    ax.set_title("TS-14 – Token Usage Comparison", fontsize=14,
+    ax.set_title("SOLV.ai – Token Usage Comparison", fontsize=14,
                  fontweight="bold", pad=14)
     ax.set_xticks(x)
     ax.set_xticklabels(names, fontsize=9, rotation=20, ha="right")
@@ -349,7 +349,7 @@ def plot_category_priority_accuracy(data: dict, metrics: dict):
         if ax_idx == 1:
             ax.legend(fontsize=7, ncol=2, loc="upper right")
 
-    plt.suptitle("TS-14 – Classification & Priority Accuracy per Scenario",
+    plt.suptitle("SOLV.ai – Classification & Priority Accuracy per Scenario",
                  fontsize=13, fontweight="bold", y=1.02)
     plt.tight_layout()
     out = GRAPHS_DIR / "08_scenario_accuracy.png"
@@ -364,10 +364,10 @@ def generate_markdown_report(metrics: dict, data: dict) -> Path:
     ranked = sorted(metrics.items(), key=lambda x: x[1]["avg_overall"], reverse=True)
 
     lines = [
-        "# TS-14 – Complaint Classification & Resolution Engine",
+        "# SOLV.ai – Complaint Classification & Resolution Engine",
         "## Ablation Study / Comparative Analysis",
         "",
-        "> **Objective:** Identify the best LLM for the TS-14 wellness-industry complaint",
+        "> **Objective:** Identify the best LLM for the SOLV.ai wellness-industry complaint",
         "> management system by benchmarking models across classification, resolution",
         "> recommendation, and ticket generation tasks.",
         "",
@@ -532,9 +532,9 @@ def generate_markdown_report(metrics: dict, data: dict) -> Path:
         f"**{fastest_m['display_name']}** is the fastest at "
         f"**{fastest_m['avg_latency']:.1f}s** average.",
         "",
-        "### Selection Criteria for TS-14 Production",
+        "### Selection Criteria for SOLV.ai Production",
         "",
-        "The recommended model for TS-14 must:",
+        "The recommended model for SOLV.ai must:",
         "- Classify complaints with **≥ 90% category accuracy** (no misfiled tickets)",
         "- Assign correct priority in **≥ 85% of cases** (SLA compliance depends on this)",
         "- Produce valid, actionable resolution steps for all complaint types",
@@ -564,7 +564,7 @@ def generate_markdown_report(metrics: dict, data: dict) -> Path:
         "",
         "---",
         "",
-        "*Report auto-generated by TS-14 Ablation Study Framework*",
+        "*Report auto-generated by SOLV.ai Ablation Study Framework*",
     ]
 
     report_path = GRAPHS_DIR.parent / "ABLATION_REPORT.md"
@@ -580,7 +580,7 @@ def main():
     os.makedirs(GRAPHS_DIR, exist_ok=True)
 
     print("=" * 65)
-    print("  TS-14 – Generating Comparative Analysis Report")
+    print("  SOLV.ai – Generating Comparative Analysis Report")
     print("=" * 65)
 
     data    = load_results()

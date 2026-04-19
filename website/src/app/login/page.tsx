@@ -62,7 +62,7 @@ export default function LoginPage() {
               <Package className="text-white" size={32} />
             </motion.div>
             <h1 className="text-2xl font-bold text-[var(--color-secondary)]">
-              ComplaintAI
+              SOLV.ai
             </h1>
             <p className="text-gray-500 mt-2">Sign in to your account</p>
           </div>

@@ -15,7 +15,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "TS-14 | AI Complaint Resolution Engine",
+  title: "SOLV.ai | AI Complaint Resolution Engine",
   description: "Transform customer complaints into resolved tickets in seconds with AI-powered classification and resolution",
 };
 

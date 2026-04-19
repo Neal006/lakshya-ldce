@@ -1,5 +1,5 @@
 -- ============================================
--- SOLV.ai (TS-14) - Supabase Database Schema
+-- SOLV.ai — Supabase database schema
 -- ============================================
 
 -- Enable UUID extension

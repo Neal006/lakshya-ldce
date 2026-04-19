@@ -1,5 +1,5 @@
 -- =============================================================================
--- TS-14 / SOLV.ai — Populate demo data (run in Supabase SQL Editor)
+-- SOLV.ai — populate demo data (run in Supabase SQL Editor)
 -- Safe to re-run: uses ON CONFLICT / DO UPDATE where possible.
 -- Run AFTER your base tables exist (employees, customers, products, complaints…).
 -- =============================================================================

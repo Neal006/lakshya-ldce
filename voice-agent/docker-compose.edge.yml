@@ -5,7 +5,7 @@ version: "3.9"
 services:
   ollama:
     image: ollama/ollama:latest
-    container_name: lakshya-ollama
+    container_name: solv-ollama
     ports:
       - "11434:11434"
     volumes:
@@ -25,7 +25,7 @@ services:
     build:
       context: ../stt
       dockerfile: Dockerfile
-    container_name: lakshya-stt
+    container_name: solv-stt
     ports:
       - "8001:8000"
     environment:
@@ -47,7 +47,7 @@ services:
     build:
       context: ../text_classifier
       dockerfile: Dockerfile
-    container_name: lakshya-classifier
+    container_name: solv-classifier
     ports:
       - "8002:8000"
     volumes:
@@ -68,7 +68,7 @@ services:
     build:
       context: ../website/backend
       dockerfile: Dockerfile
-    container_name: lakshya-backend
+    container_name: solv-backend
     ports:
       - "8000:8000"
     environment:
@@ -90,7 +90,7 @@ services:
     build:
       context: ./orchestrator
       dockerfile: Dockerfile
-    container_name: lakshya-orchestrator
+    container_name: solv-orchestrator
     ports:
       - "8003:8000"
     environment:
@@ -98,7 +98,7 @@ services:
       - STT_SERVICE_URL=http://stt:8000
       - CLASSIFIER_SERVICE_URL=http://classifier:8000
       - BACKEND_SERVICE_URL=http://backend:8000
-      - SERVICE_ACCOUNT_EMAIL=system@lakshya.ai
+      - SERVICE_ACCOUNT_EMAIL=system@solv.ai
       - SERVICE_ACCOUNT_PASSWORD=Changeme123
       - PRIMARY_LLM=ollama
       - PRIMARY_TTS=piper

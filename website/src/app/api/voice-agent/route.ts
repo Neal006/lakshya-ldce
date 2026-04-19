@@ -94,6 +94,7 @@ export async function POST(request: NextRequest) {
         customer_name: session.user?.name || 'Voice Caller',
         product_name: 'General',
         complaint_text: transcript,
+        sentiment_score: classification.sentiment_score,
       })
       genaiAvailable = true
     } catch (genaiErr) {

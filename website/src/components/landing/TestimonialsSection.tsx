@@ -4,7 +4,7 @@ import { Quote, Star } from 'lucide-react';
 
 const testimonials = [
   {
-    quote: "TS-14 has completely transformed how we handle customer complaints. The AI classification is incredibly accurate and saves us hours every day.",
+    quote: "SOLV.ai has completely transformed how we handle customer complaints. The AI classification is incredibly accurate and saves us hours every day.",
     author: "Sarah Mitchell",
     role: "Head of Customer Success",
     company: "TechCorp Inc.",
@@ -18,7 +18,7 @@ const testimonials = [
     initial: "J",
   },
   {
-    quote: "We integrated TS-14 in under a week. The API is clean, documentation is excellent, and the team was incredibly responsive.",
+    quote: "We integrated SOLV.ai in under a week. The API is clean, documentation is excellent, and the team was incredibly responsive.",
     author: "Priya Patel",
     role: "CTO",
     company: "StartupXYZ",
@@ -39,7 +39,7 @@ const testimonials = [
     initial: "E",
   },
   {
-    quote: "We've reduced our average resolution time from days to hours. The ROI on TS-14 was visible within the first month.",
+    quote: "We've reduced our average resolution time from days to hours. The ROI on SOLV.ai was visible within the first month.",
     author: "David Kim",
     role: "CEO",
     company: "RapidResponse",
