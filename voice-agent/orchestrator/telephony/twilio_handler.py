@@ -161,6 +161,12 @@ async def twilio_media_stream(websocket: WebSocket):
                                     total_ms = round((time.time() - chunk_start) * 1000)
                                     logger.info(f"[{call_sid}] Sent TTS {len(audio_pcm)}B ({tts_ms}ms) | total_latency={total_ms}ms")
                                     is_sending_tts = False
+
+                                    # Hang up after goodbye when call is complete
+                                    if session and session.state in (SessionState.done, SessionState.ticket_created):
+                                        logger.info(f"[{call_sid}] Call complete, closing WebSocket")
+                                        await websocket.close()
+                                        return
                                 else:
                                     logger.warning(f"[{call_sid}] TTS returned empty audio")
                             except Exception as e:
