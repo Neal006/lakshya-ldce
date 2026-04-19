@@ -1,5 +1,4 @@
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
 from enum import Enum
 from typing import Optional
 import time
@@ -11,6 +10,7 @@ class SessionState(str, Enum):
     confirming = "confirming"
     classifying = "classifying"
     resolving = "resolving"
+    satisfaction_check = "satisfaction_check"
     ticket_created = "ticket_created"
     done = "done"
     error = "error"
@@ -28,6 +28,12 @@ class CallSession:
     created_at: float = field(default_factory=time.time)
     turn_count: int = 0
     max_turns: int = 4
+    # Caller info from Twilio
+    caller_phone: str = ""
+    caller_name: str = ""
+    caller_city: str = ""
+    caller_state: str = ""
+    caller_country: str = ""
 
     @property
     def full_transcript(self) -> str:

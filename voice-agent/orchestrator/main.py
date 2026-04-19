@@ -1,38 +1,80 @@
+import os
+import sys
 import time
+import logging
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, PlainTextResponse
 from prometheus_client import Counter, generate_latest
-from fastapi.responses import PlainTextResponse
 
 from config import (
     STT_SERVICE_URL, CLASSIFIER_SERVICE_URL, BACKEND_SERVICE_URL,
-    OLLAMA_BASE_URL, PRIMARY_LLM, PRIMARY_TTS, NETWORK_MODE,
+    OLLAMA_BASE_URL, PRIMARY_LLM, PRIMARY_TTS, NETWORK_MODE, GENAI_SERVICE_URL,
 )
+
+# ---------------------------------------------------------------------------
+# Logging Setup — console + file for debugging
+# ---------------------------------------------------------------------------
+LOG_DIR = os.path.join(os.path.dirname(__file__), "logs")
+os.makedirs(LOG_DIR, exist_ok=True)
+
+LOG_FORMAT = "%(asctime)s | %(levelname)-7s | %(name)-25s | %(message)s"
+LOG_DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
+
+# Root logger
+root_logger = logging.getLogger()
+root_logger.setLevel(logging.DEBUG)
+
+# Console handler (INFO+)
+console_handler = logging.StreamHandler(sys.stdout)
+console_handler.setLevel(logging.INFO)
+console_handler.setFormatter(logging.Formatter(LOG_FORMAT, datefmt=LOG_DATE_FORMAT))
+root_logger.addHandler(console_handler)
+
+# File handler — full debug log
+file_handler = logging.FileHandler(os.path.join(LOG_DIR, "orchestrator.log"), encoding="utf-8")
+file_handler.setLevel(logging.DEBUG)
+file_handler.setFormatter(logging.Formatter(LOG_FORMAT, datefmt=LOG_DATE_FORMAT))
+root_logger.addHandler(file_handler)
+
+# Error-only file
+error_handler = logging.FileHandler(os.path.join(LOG_DIR, "errors.log"), encoding="utf-8")
+error_handler.setLevel(logging.ERROR)
+error_handler.setFormatter(logging.Formatter(LOG_FORMAT, datefmt=LOG_DATE_FORMAT))
+root_logger.addHandler(error_handler)
+
+# Quiet noisy third-party loggers
+for noisy in ("httpx", "httpcore", "uvicorn.access", "websockets"):
+    logging.getLogger(noisy).setLevel(logging.WARNING)
+
+logger = logging.getLogger("orchestrator")
 
 REQUEST_COUNT = Counter("orchestrator_requests_total", "Total requests", ["endpoint", "status"])
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    print("=" * 50)
-    print("  Lakshya Voice Orchestrator")
-    print("=" * 50)
-    print(f"  STT:             {STT_SERVICE_URL}")
-    print(f"  Classifier:      {CLASSIFIER_SERVICE_URL}")
-    print(f"  Backend:         {BACKEND_SERVICE_URL}")
-    print(f"  LLM:             {PRIMARY_LLM}")
-    print(f"  TTS:             {PRIMARY_TTS}")
-    print(f"  Network:         {NETWORK_MODE}")
-    print("=" * 50)
+    logger.info("=" * 60)
+    logger.info("  Lakshya Voice Orchestrator — Starting")
+    logger.info("=" * 60)
+    logger.info(f"  STT:             {STT_SERVICE_URL}")
+    logger.info(f"  Classifier:      {CLASSIFIER_SERVICE_URL}")
+    logger.info(f"  Backend:         {BACKEND_SERVICE_URL}")
+    logger.info(f"  GenAI:           {GENAI_SERVICE_URL}")
+    logger.info(f"  LLM (dialog):    {PRIMARY_LLM}")
+    logger.info(f"  TTS:             {PRIMARY_TTS}")
+    logger.info(f"  Network:         {NETWORK_MODE}")
+    logger.info(f"  Logs:            {LOG_DIR}")
+    logger.info("=" * 60)
     yield
+    logger.info("Orchestrator shutting down.")
 
 
 app = FastAPI(
     title="Lakshya Voice Orchestrator",
     description="AI-Powered Voice Complaint Management - Orchestration Layer",
-    version="1.0.0",
+    version="1.1.0",
     lifespan=lifespan,
 )
 
@@ -73,6 +115,14 @@ async def health():
             checks["backend"] = {"status": "error", "detail": str(e)}
             overall = "degraded"
 
+        try:
+            r = await client.get(f"{GENAI_SERVICE_URL}/health")
+            data = r.json()
+            checks["genai"] = {"status": "ok" if data.get("status") == "healthy" else "degraded", "detail": data}
+        except Exception as e:
+            checks["genai"] = {"status": "error", "detail": str(e)}
+            overall = "degraded"
+
     try:
         async with httpx.AsyncClient(timeout=3.0) as client:
             r = await client.get(f"{OLLAMA_BASE_URL}/api/tags")
@@ -87,6 +137,7 @@ async def health():
             "primary_llm": PRIMARY_LLM,
             "primary_tts": PRIMARY_TTS,
             "network_mode": NETWORK_MODE,
+            "genai_url": GENAI_SERVICE_URL,
         },
         "services": checks,
     }
@@ -118,8 +169,8 @@ async def test_pipeline(request: Request):
     session.state = SessionState.collecting
     session.transcript.append(text)
 
-    coordinator = PipelineCoordinator()
-    result = await coordinator.process_text(text, session)
+    coord = PipelineCoordinator()
+    result = await coord.process_text(text, session)
 
     return {
         "call_sid": session.call_sid,

@@ -93,6 +93,7 @@ services:
       - CLASSIFIER_SERVICE_URL=http://classifier:8000
       - BACKEND_SERVICE_URL=http://backend:8000
       - OLLAMA_BASE_URL=http://ollama:11434
+      - GENAI_SERVICE_URL=${GENAI_SERVICE_URL:-http://host.docker.internal:8004}
     volumes:
       - piper_voices:/app/piper/voices
     depends_on:
