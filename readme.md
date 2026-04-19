@@ -1029,7 +1029,7 @@ Results are saved to `results/` and graphs to `genai/comparative_analysis/graphs
 
 | Name | Phone | Email | University | Graduation Year | Roles |
 |------|-------|-------|------------|-----------------|-----------------------|
-| **Tirth Patel** (leader) | 9662003952 | 24btm028@nirmauni.ac.in | Nirma University | 2028 | Full Stack Developer |
-| **Neal Daftary** | 9106497430 | 24bam019@nirmauni.ac.in | Nirma University | 2028 | ML Engineer |
-| **Parshva Shah** | 8141700606 | 24bam043@nirmauni.ac.in | Nirma University | 2028 | Data Engineer |
-| **Priyanshu Doshi** | 9549926195 | 24bam050@nirmauni.ac.in | Nirma University | 2028 | GenAI Developer |
+| **Priyanshu Doshi** (leader) | 9549926195 | 24bam050@nirmauni.ac.in | Nirma University | 2028 | Conversational ML Engineer |
+| **Tirth Patel** | 9662003952 | 24btm028@nirmauni.ac.in | Nirma University | 2028 | Full Stack Developer |
+| **Neal Daftary** | 9106497430 | 24bam019@nirmauni.ac.in | Nirma University | 2028 | Conversational ML Engineer |
+| **Parshva Shah** | 8141700606 | 24bam043@nirmauni.ac.in | Nirma University | 2028 | Data Engineer & Researcher |
