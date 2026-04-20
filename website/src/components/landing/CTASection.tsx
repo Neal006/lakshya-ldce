@@ -24,7 +24,7 @@ export function CTASection() {
 
             {/* Subtitle */}
             <p className="text-lg text-gray-400 max-w-xl mx-auto mb-8">
-              Join thousands of teams using TS-14 to resolve complaints faster, smarter, and with AI-powered precision.
+              Join thousands of teams using SOLV.ai to resolve complaints faster, smarter, and with AI-powered precision.
             </p>
 
             {/* CTA Buttons */}

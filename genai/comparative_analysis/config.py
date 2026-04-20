@@ -1,5 +1,5 @@
 """
-Configuration for the TS-14 ablation study.
+Configuration for the SOLV.ai ablation study.
 AI-Powered Complaint Classification & Resolution Recommendation Engine.
 All models accessed via OpenCode / OpenRouter unified OpenAI-compatible API.
 """

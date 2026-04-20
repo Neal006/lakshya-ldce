@@ -9,9 +9,10 @@ interface StatCardProps {
   value: string | number;
   subtitle?: string;
   icon: ReactNode;
-  trend?: 'up' | 'down';
-  trendValue?: string;
+  trend?: string;
+  trendUp?: boolean;
   delay?: number;
+  className?: string;
 }
 
 export function StatCard({ 
@@ -20,12 +21,18 @@ export function StatCard({
   subtitle, 
   icon, 
   trend, 
-  trendValue,
-  delay = 0 
+  trendUp = true,
+  delay = 0,
+  className = ''
 }: StatCardProps) {
   return (
     <motion.div
-      className="card"
+      className={`p-6 rounded-2xl ${className}`}
+      style={{
+        background: 'linear-gradient(165deg, #1A1A1D 0%, #0D0D0F 100%)',
+        boxShadow: '12px 12px 24px rgba(0, 0, 0, 0.7), -12px -12px 24px rgba(255, 255, 255, 0.02), inset 1px 1px 2px rgba(255, 255, 255, 0.05)',
+        border: '1px solid rgba(255, 255, 255, 0.03)',
+      }}
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ 
@@ -33,25 +40,53 @@ export function StatCard({
         delay,
         ease: [0.22, 1, 0.36, 1] 
       }}
-      whileHover={{ y: -4 }}
+      whileHover={{ 
+        y: -4,
+        boxShadow: '16px 16px 32px rgba(0, 0, 0, 0.8), -16px -16px 32px rgba(255, 255, 255, 0.03), inset 1px 1px 2px rgba(255, 255, 255, 0.05)',
+      }}
     >
       <div className="flex items-start justify-between">
         <div className="flex-1">
           <p className="text-sm text-gray-400 font-medium mb-1 uppercase tracking-wider">{title}</p>
-          <h3 className="text-3xl font-black text-white heading-fortnite" style={{ fontSize: '2rem' }}>{value}</h3>
+          <h3 
+            className="text-3xl font-black text-[#F5F5F5]"
+            style={{ 
+              fontFamily: "'SF Pro Display', -apple-system, sans-serif",
+              fontStretch: '125%',
+            }}
+          >
+            {value}
+          </h3>
+          
           {subtitle && (
             <p className="text-sm text-gray-500 mt-1">{subtitle}</p>
           )}
-          {trend && trendValue && (
-            <div className={`flex items-center gap-1 mt-2 text-sm font-semibold ${
-              trend === 'up' ? 'text-[#34C759]' : 'text-[#FF3B30]'
-            }`}>
-              {trend === 'up' ? <TrendingUp size={16} /> : <TrendingDown size={16} />}
-              <span>{trendValue}</span>
+          
+          {trend && (
+            <div 
+              className={`flex items-center gap-1 mt-3 text-sm font-semibold ${
+                trendUp ? 'text-[#22C55E]' : 'text-[#EF4444]'
+              }`}
+            >
+              <div 
+                className="flex items-center gap-1 px-2 py-1 rounded-lg"
+                style={{
+                  background: trendUp ? 'rgba(34, 197, 94, 0.1)' : 'rgba(239, 68, 68, 0.1)',
+                }}
+              >
+                {trendUp ? <TrendingUp size={14} /> : <TrendingDown size={14} />}
+                <span>{trend}</span>
+              </div>
             </div>
           )}
         </div>
-        <div className="p-3 rounded-xl bg-[#1A1A1A] border border-white/10 shadow-lg">
+        <div 
+          className="p-3 rounded-xl"
+          style={{
+            background: 'linear-gradient(165deg, #2A2A2E 0%, #1C1C1F 100%)',
+            boxShadow: 'inset 4px 4px 8px rgba(0, 0, 0, 0.6), inset -4px -4px 8px rgba(255, 255, 255, 0.02)',
+          }}
+        >
           {icon}
         </div>
       </div>

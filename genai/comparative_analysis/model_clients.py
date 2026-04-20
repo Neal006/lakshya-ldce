@@ -318,8 +318,8 @@ def create_client(model_config: dict) -> BaseLLMClient:
             base_url=base_url,
             endpoint=model_config.get("endpoint", "/chat/completions"),
             extra_headers={
-                "HTTP-Referer": "https://ts14-complaints.app",
-                "X-Title":      "TS-14 Complaint Engine Ablation Study",
+                "HTTP-Referer": "https://solv.ai",
+                "X-Title":      "SOLV.ai Complaint Engine Ablation Study",
             },
         )
     elif provider == "google":

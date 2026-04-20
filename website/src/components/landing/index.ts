@@ -1,5 +1,7 @@
+export { LandingNavbar } from './LandingNavbar';
 export { HeroSection } from './HeroSection';
 export { StatsSection } from './StatsSection';
+export { BusinessMetricsSection } from './BusinessMetricsSection';
 export { HowItWorksSection } from './HowItWorksSection';
 export { FeaturesSection } from './FeaturesSection';
 export { DashboardPreviewSection } from './DashboardPreviewSection';

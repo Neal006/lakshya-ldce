@@ -54,7 +54,7 @@ GENAI_SERVICE_URL = os.getenv("GENAI_SERVICE_URL", "http://localhost:8004")
 # ---------------------------------------------------------------------------
 # Backend Auth
 # ---------------------------------------------------------------------------
-SERVICE_ACCOUNT_EMAIL = os.getenv("SERVICE_ACCOUNT_EMAIL", "system@lakshya.ai")
+SERVICE_ACCOUNT_EMAIL = os.getenv("SERVICE_ACCOUNT_EMAIL", "system@solv.ai")
 SERVICE_ACCOUNT_PASSWORD = os.getenv("SERVICE_ACCOUNT_PASSWORD", "")
 
 # ---------------------------------------------------------------------------

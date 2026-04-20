@@ -1,12 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createAdminClient } from '@/lib/supabase-client'
 import { z } from 'zod'
+import bcrypt from 'bcryptjs'
 
 const createEmployeeSchema = z.object({
   name: z.string().min(1),
   email: z.string().email(),
   password: z.string().min(6),
-  role: z.enum(['admin', 'operational', 'call_center']),
+  role: z.enum(['admin', 'operational', 'call_center', 'quality_assurance']),
   department: z.string().optional(),
 })
 
@@ -45,12 +46,14 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Email already exists' }, { status: 409 })
     }
 
+    const password_hash = await bcrypt.hash(validated.password, 10)
+
     const { data: employee, error } = await admin
       .from('employees')
       .insert({
         name: validated.name,
         email: validated.email,
-        password_hash: validated.password,
+        password_hash,
         role: validated.role,
         department: validated.department,
       })

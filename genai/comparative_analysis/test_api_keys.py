@@ -18,7 +18,7 @@ from comparative_analysis.model_clients import create_client
 
 def test_all_keys():
     print("=" * 65)
-    print("  TS-14  -  API Key Verification")
+    print("  SOLV.ai  -  API Key Verification")
     print("=" * 65)
     print()
 

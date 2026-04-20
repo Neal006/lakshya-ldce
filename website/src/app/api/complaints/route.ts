@@ -1,20 +1,44 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createAdminClient } from '@/lib/supabase-client'
+import { isSupabaseUnreachableError, supabaseUnavailableResponse } from '@/lib/supabase-http'
 import { classifyComplaint } from '@/lib/nlp-client'
 import { transcribeAudio } from '@/lib/stt-client'
 import { generateResolution } from '@/lib/genai-client'
 import { z } from 'zod'
 import { broadcastComplaint } from '@/lib/sse-broadcast'
+import { sendCustomerSuggestionEmail } from '@/lib/email-client'
 
-const createComplaintSchema = z.object({
-  text: z.string().min(1).max(5000).optional(),
-  source: z.enum(['email', 'call', 'walkin']),
-  product_id: z.string().min(1),
-  customer_name: z.string().min(1),
-  customer_email: z.string().email().optional().nullable(),
-  customer_phone: z.string().optional().nullable(),
-  audio_base64: z.string().optional().nullable(),
-})
+const createComplaintSchema = z
+  .object({
+    text: z.string().min(1).max(5000).optional(),
+    source: z.enum(['email', 'call', 'walkin']),
+    product_id: z.string().min(1),
+    customer_name: z.string().min(1),
+    customer_email: z.string().optional().nullable(),
+    customer_phone: z.string().optional().nullable(),
+    audio_base64: z.string().optional().nullable(),
+  })
+  .superRefine((data, ctx) => {
+    if (data.source === 'email' || data.source === 'walkin') {
+      const em = (data.customer_email ?? '').trim()
+      if (!em) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: 'Customer email is required for email and walk-in complaints',
+          path: ['customer_email'],
+        })
+        return
+      }
+      const ok = z.string().email().safeParse(em)
+      if (!ok.success) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: 'Invalid customer email',
+          path: ['customer_email'],
+        })
+      }
+    }
+  })
 
 export async function GET(request: NextRequest) {
   try {
@@ -54,10 +78,8 @@ export async function GET(request: NextRequest) {
     })
   } catch (error) {
     console.error('Error fetching complaints:', error)
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    )
+    if (isSupabaseUnreachableError(error)) return supabaseUnavailableResponse()
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }
 
@@ -65,6 +87,10 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
     const validated = createComplaintSchema.parse(body)
+    const customerEmailTrimmed =
+      validated.customer_email != null && String(validated.customer_email).trim() !== ''
+        ? String(validated.customer_email).trim()
+        : null
 
     let complaintText = validated.text || ''
 
@@ -108,6 +134,8 @@ export async function POST(request: NextRequest) {
         customer_name: validated.customer_name,
         product_name: product.name,
         complaint_text: complaintText,
+        sentiment_score: nlpResult.sentiment_score,
+        nlp_latency_ms: nlpResult.latency_ms,
       })
     } catch (genAIError) {
       console.error('GenAI error:', genAIError)
@@ -125,8 +153,8 @@ export async function POST(request: NextRequest) {
       escalation_required: genAIResult?.escalation_required || false,
       customer_response: genAIResult?.customer_communication,
       customer_name: validated.customer_name,
-      customer_email: validated.customer_email || null,
-      customer_phone: validated.customer_phone || null,
+      customer_email: customerEmailTrimmed,
+      customer_phone: validated.customer_phone?.trim() || null,
       product_id: validated.product_id,
     }
 
@@ -141,10 +169,13 @@ export async function POST(request: NextRequest) {
     if (complaint?.id) {
       await admin.from('complaint_timeline').insert({
         complaint_id: complaint.id,
-        status_from: 'new',
-        status_to: 'new',
-        changed_by: 'System',
-        notes: 'Complaint created and classified as ' + complaint.category + ' with priority ' + complaint.priority,
+        action: 'Complaint created and classified',
+        performed_by: 'System',
+        metadata: {
+          category: complaint.category,
+          priority: complaint.priority,
+          status: complaint.status,
+        },
       })
     }
 
@@ -166,6 +197,26 @@ export async function POST(request: NextRequest) {
       })
     }
 
+    if (
+      complaint &&
+      (validated.source === 'email' || validated.source === 'walkin') &&
+      customerEmailTrimmed
+    ) {
+      try {
+        const mail = await sendCustomerSuggestionEmail(customerEmailTrimmed, {
+          customerName: validated.customer_name.trim(),
+          complaintId: complaint.id,
+          customerResponse: (complaint.customer_response as string | null) || '',
+          productName: product.name,
+        })
+        if (!mail.success) {
+          console.error('Customer suggestion email failed:', mail.error)
+        }
+      } catch (mailErr) {
+        console.error('Customer suggestion email error:', mailErr)
+      }
+    }
+
     return NextResponse.json(complaint, { status: 201 })
   } catch (error) {
     console.error('Error creating complaint:', error)
@@ -175,9 +226,7 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       )
     }
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    )
+    if (isSupabaseUnreachableError(error)) return supabaseUnavailableResponse()
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }

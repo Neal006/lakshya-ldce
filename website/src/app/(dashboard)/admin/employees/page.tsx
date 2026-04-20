@@ -2,8 +2,7 @@
 
 import { useEffect, useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sidebar } from '@/components/dashboard/Sidebar';
-import { Card, Button, Input, Badge } from '@/components/ui';
+import { Card, Button, Input } from '@/components/ui';
 import { apiClient } from '@/lib/api-client';
 import { Users, Plus, Trash2, Edit2, X } from 'lucide-react';
 
@@ -20,7 +19,13 @@ export default function EmployeesPage() {
   const [employees, setEmployees] = useState<Employee[]>([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
-  const [formData, setFormData] = useState({ name: '', email: '', password: '', role: 'call_center' as const, department: '' });
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    role: 'call_center' as 'admin' | 'operational' | 'call_center' | 'quality_assurance',
+    department: '',
+  });
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
 
@@ -67,13 +72,12 @@ export default function EmployeesPage() {
     admin: 'bg-red-100 text-red-700',
     operational: 'bg-blue-100 text-blue-700',
     call_center: 'bg-green-100 text-green-700',
+    quality_assurance: 'bg-purple-100 text-purple-800',
   };
 
   return (
-    <div className="flex min-h-screen bg-[var(--color-background)]">
-      <Sidebar role="admin" />
-      
-      <main className="flex-1 p-8">
+    <div className="min-h-[calc(100vh-5rem)]">
+      <div className="p-4 sm:p-8 max-w-6xl mx-auto">
         <motion.div 
           className="mb-8 flex justify-between items-center"
           initial={{ opacity: 0, y: -20 }}
@@ -113,9 +117,10 @@ export default function EmployeesPage() {
                       onChange={e => setFormData({...formData, role: e.target.value as any})}
                       className="input appearance-none cursor-pointer"
                     >
-                      <option value="call_center">Call Center</option>
-                      <option value="operational">Operational</option>
-                      <option value="admin">Admin</option>
+                      <option value="admin">Support executive (admin)</option>
+                      <option value="call_center">Caller intake (call center)</option>
+                      <option value="operational">Operations manager</option>
+                      <option value="quality_assurance">Quality assurance</option>
                     </select>
                   </div>
                   <Input placeholder="Department (optional)" value={formData.department} onChange={e => setFormData({...formData, department: e.target.value})} />
@@ -171,7 +176,7 @@ export default function EmployeesPage() {
             ))}
           </div>
         )}
-      </main>
+      </div>
     </div>
   );
 }

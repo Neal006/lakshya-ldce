@@ -1,5 +1,5 @@
 """
-Main ablation study runner for TS-14.
+Main ablation study runner for SOLV.ai.
 AI-Powered Complaint Classification & Resolution Recommendation Engine.
 
 Runs all 12 test cases across all 8 models, evaluates each response,
@@ -70,7 +70,7 @@ def run_ablation():
     models_to_run = _get_selected_models()
 
     print("=" * 72)
-    print("  TS-14 – Complaint Classification & Resolution Ablation Study")
+    print("  SOLV.ai – Complaint Classification & Resolution Ablation Study")
     print("=" * 72)
     print(f"  Models  : {len(models_to_run)}")
     print(f"  Tests   : {len(test_cases)}  (4 scenarios × 3 tasks)")

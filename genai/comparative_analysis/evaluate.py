@@ -1,5 +1,5 @@
 """
-Evaluation metrics for TS-14 ablation study.
+Evaluation metrics for SOLV.ai ablation study.
 Scores each model response on five dimensions relevant to the complaint
 classification and resolution recommendation use case.
 

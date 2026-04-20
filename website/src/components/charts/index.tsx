@@ -20,8 +20,6 @@ import {
   Area,
   AreaChart,
 } from 'recharts';
-import { Card } from '@/components/ui';
-
 // Custom tooltip with dark theme styling
 const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
@@ -80,31 +78,28 @@ export function TrendChart({ data, title }: TrendChartProps) {
 
   return (
     <div ref={containerRef}>
-      <Card>
-        {title && <h3 className="text-lg font-bold text-white uppercase tracking-wider mb-4">{title}</h3>}
-        <ResponsiveContainer width="100%" height={250}>
-          <AreaChart data={data}>
-            <defs>
-              <linearGradient id="colorComplaints" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor={CHART_COLORS.primary} stopOpacity={0.4} />
-                <stop offset="95%" stopColor={CHART_COLORS.primary} stopOpacity={0} />
-              </linearGradient>
-            </defs>
-            <CartesianGrid strokeDasharray="3 3" stroke={CHART_COLORS.grid} />
-            <XAxis dataKey="date" tick={{ fontSize: 12, fill: CHART_COLORS.text }} />
-            <YAxis tick={{ fontSize: 12, fill: CHART_COLORS.text }} />
-            <Tooltip content={<CustomTooltip />} />
-            <Area
-              type="monotone"
-              dataKey="complaints"
-              stroke={CHART_COLORS.primary}
-              strokeWidth={3}
-              fillOpacity={1}
-              fill="url(#colorComplaints)"
-            />
-          </AreaChart>
-        </ResponsiveContainer>
-      </Card>
+      <ResponsiveContainer width="100%" height={250}>
+        <AreaChart data={data}>
+          <defs>
+            <linearGradient id="colorComplaints" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor={CHART_COLORS.primary} stopOpacity={0.4} />
+              <stop offset="95%" stopColor={CHART_COLORS.primary} stopOpacity={0} />
+            </linearGradient>
+          </defs>
+          <CartesianGrid strokeDasharray="3 3" stroke={CHART_COLORS.grid} />
+          <XAxis dataKey="date" tick={{ fontSize: 12, fill: CHART_COLORS.text }} />
+          <YAxis tick={{ fontSize: 12, fill: CHART_COLORS.text }} />
+          <Tooltip content={<CustomTooltip />} />
+          <Area
+            type="monotone"
+            dataKey="complaints"
+            stroke={CHART_COLORS.primary}
+            strokeWidth={3}
+            fillOpacity={1}
+            fill="url(#colorComplaints)"
+          />
+        </AreaChart>
+      </ResponsiveContainer>
     </div>
   );
 }
@@ -140,32 +135,29 @@ export function CategoryChart({ data, title }: CategoryChartProps) {
 
   return (
     <div ref={containerRef}>
-      <Card>
-        {title && <h3 className="text-lg font-bold text-white uppercase tracking-wider mb-4">{title}</h3>}
-        <ResponsiveContainer width="100%" height={250}>
-          <PieChart>
-            <Pie
-              data={data}
-              cx="50%"
-              cy="50%"
-              innerRadius={60}
-              outerRadius={90}
-              paddingAngle={4}
-              dataKey="value"
-            >
-              {data.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={entry.color} />
-              ))}
-            </Pie>
-            <Tooltip content={<CustomTooltip />} />
-            <Legend 
-              verticalAlign="bottom" 
-              height={36}
-              formatter={(value) => <span style={{ color: '#fff' }}>{value}</span>}
-            />
-          </PieChart>
-        </ResponsiveContainer>
-      </Card>
+      <ResponsiveContainer width="100%" height={250}>
+        <PieChart>
+          <Pie
+            data={data}
+            cx="50%"
+            cy="50%"
+            innerRadius={60}
+            outerRadius={90}
+            paddingAngle={4}
+            dataKey="value"
+          >
+            {data.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={entry.color} />
+            ))}
+          </Pie>
+          <Tooltip content={<CustomTooltip />} />
+          <Legend 
+            verticalAlign="bottom" 
+            height={36}
+            formatter={(value) => <span style={{ color: '#fff' }}>{value}</span>}
+          />
+        </PieChart>
+      </ResponsiveContainer>
     </div>
   );
 }
@@ -201,22 +193,19 @@ export function PriorityChart({ data, title }: PriorityChartProps) {
 
   return (
     <div ref={containerRef}>
-      <Card>
-        {title && <h3 className="text-lg font-bold text-white uppercase tracking-wider mb-4">{title}</h3>}
-        <ResponsiveContainer width="100%" height={250}>
-          <BarChart data={data} layout="vertical">
-            <CartesianGrid strokeDasharray="3 3" stroke={CHART_COLORS.grid} />
-            <XAxis type="number" tick={{ fontSize: 12, fill: CHART_COLORS.text }} />
-            <YAxis dataKey="name" type="category" tick={{ fontSize: 12, fill: CHART_COLORS.text }} width={80} />
-            <Tooltip content={<CustomTooltip />} />
-            <Bar dataKey="value" radius={[0, 8, 8, 0]}>
-              {data.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={entry.color} />
-              ))}
-            </Bar>
-          </BarChart>
-        </ResponsiveContainer>
-      </Card>
+      <ResponsiveContainer width="100%" height={250}>
+        <BarChart data={data} layout="vertical">
+          <CartesianGrid strokeDasharray="3 3" stroke={CHART_COLORS.grid} />
+          <XAxis type="number" tick={{ fontSize: 12, fill: CHART_COLORS.text }} />
+          <YAxis dataKey="name" type="category" tick={{ fontSize: 12, fill: CHART_COLORS.text }} width={80} />
+          <Tooltip content={<CustomTooltip />} />
+          <Bar dataKey="value" radius={[0, 8, 8, 0]}>
+            {data.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={entry.color} />
+            ))}
+          </Bar>
+        </BarChart>
+      </ResponsiveContainer>
     </div>
   );
 }
@@ -251,22 +240,19 @@ export function ProductChart({ data, title }: ProductChartProps) {
 
   return (
     <div ref={containerRef}>
-      <Card>
-        {title && <h3 className="text-lg font-bold text-white uppercase tracking-wider mb-4">{title}</h3>}
-        <ResponsiveContainer width="100%" height={300}>
-          <BarChart data={data}>
-            <CartesianGrid strokeDasharray="3 3" stroke={CHART_COLORS.grid} />
-            <XAxis dataKey="name" tick={{ fontSize: 10, fill: CHART_COLORS.text }} angle={-45} textAnchor="end" height={80} />
-            <YAxis tick={{ fontSize: 12, fill: CHART_COLORS.text }} />
-            <Tooltip content={<CustomTooltip />} />
-            <Bar dataKey="total_complaints" fill={CHART_COLORS.primary} radius={[8, 8, 0, 0]} />
-            <Bar dataKey="high_priority" fill={CHART_COLORS.high} radius={[8, 8, 0, 0]} />
-            <Legend 
-              formatter={(value) => <span style={{ color: '#fff' }}>{value}</span>}
-            />
-          </BarChart>
-        </ResponsiveContainer>
-      </Card>
+      <ResponsiveContainer width="100%" height={300}>
+        <BarChart data={data}>
+          <CartesianGrid strokeDasharray="3 3" stroke={CHART_COLORS.grid} />
+          <XAxis dataKey="name" tick={{ fontSize: 10, fill: CHART_COLORS.text }} angle={-45} textAnchor="end" height={80} />
+          <YAxis tick={{ fontSize: 12, fill: CHART_COLORS.text }} />
+          <Tooltip content={<CustomTooltip />} />
+          <Bar dataKey="total_complaints" fill={CHART_COLORS.primary} radius={[8, 8, 0, 0]} />
+          <Bar dataKey="high_priority" fill={CHART_COLORS.high} radius={[8, 8, 0, 0]} />
+          <Legend 
+            formatter={(value) => <span style={{ color: '#fff' }}>{value}</span>}
+          />
+        </BarChart>
+      </ResponsiveContainer>
     </div>
   );
 }
@@ -301,21 +287,18 @@ export function MultiLineChart({ data, title }: MultiLineChartProps) {
 
   return (
     <div ref={containerRef}>
-      <Card>
-        {title && <h3 className="text-lg font-bold text-white uppercase tracking-wider mb-4">{title}</h3>}
-        <ResponsiveContainer width="100%" height={250}>
-          <LineChart data={data}>
-            <CartesianGrid strokeDasharray="3 3" stroke={CHART_COLORS.grid} />
-            <XAxis dataKey="date" tick={{ fontSize: 12, fill: CHART_COLORS.text }} />
-            <YAxis tick={{ fontSize: 12, fill: CHART_COLORS.text }} />
-            <Tooltip content={<CustomTooltip />} />
-            <Legend formatter={(value) => <span style={{ color: '#fff' }}>{value}</span>} />
-            <Line type="monotone" dataKey="high" stroke={CHART_COLORS.high} strokeWidth={3} dot={{ r: 4 }} />
-            <Line type="monotone" dataKey="medium" stroke={CHART_COLORS.medium} strokeWidth={3} dot={{ r: 4 }} />
-            <Line type="monotone" dataKey="low" stroke={CHART_COLORS.low} strokeWidth={3} dot={{ r: 4 }} />
-          </LineChart>
-        </ResponsiveContainer>
-      </Card>
+      <ResponsiveContainer width="100%" height={250}>
+        <LineChart data={data}>
+          <CartesianGrid strokeDasharray="3 3" stroke={CHART_COLORS.grid} />
+          <XAxis dataKey="date" tick={{ fontSize: 12, fill: CHART_COLORS.text }} />
+          <YAxis tick={{ fontSize: 12, fill: CHART_COLORS.text }} />
+          <Tooltip content={<CustomTooltip />} />
+          <Legend formatter={(value) => <span style={{ color: '#fff' }}>{value}</span>} />
+          <Line type="monotone" dataKey="high" stroke={CHART_COLORS.high} strokeWidth={3} dot={{ r: 4 }} />
+          <Line type="monotone" dataKey="medium" stroke={CHART_COLORS.medium} strokeWidth={3} dot={{ r: 4 }} />
+          <Line type="monotone" dataKey="low" stroke={CHART_COLORS.low} strokeWidth={3} dot={{ r: 4 }} />
+        </LineChart>
+      </ResponsiveContainer>
     </div>
   );
 }

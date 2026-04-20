@@ -1,4 +1,4 @@
--- TS-14 Complaint Management System Schema
+-- SOLV.ai — complaint management system schema
 -- Run this in the Supabase SQL Editor
 
 -- Enable UUID extension

@@ -89,7 +89,7 @@ async def lifespan(app: FastAPI):
     yield
 
 app = FastAPI(
-    title="Complaint Text Classifier API",
+    title="SOLV.ai — Complaint Text Classifier API",
     description="Fastest possible inference server for complaint classification (ONNX + CUDA)",
     version="1.0.0",
     lifespan=lifespan,

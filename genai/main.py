@@ -115,7 +115,7 @@ async def lifespan(app: FastAPI):
 # ─── FastAPI App ────────────────────────────────────────────────────
 
 app = FastAPI(
-    title="GenAI Complaint Resolution Service",
+    title="SOLV.ai — GenAI Complaint Resolution Service",
     description=(
         "AI-powered resolution recommendation engine for customer complaints. "
         "Consumes classified complaints from the NLP text_classifier and generates "

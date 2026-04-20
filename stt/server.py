@@ -73,7 +73,7 @@ async def lifespan(app: FastAPI):
     engine = None
     print("STT Engine shut down.")
 
-app = FastAPI(title="STT Inference Server", version="1.0.0", lifespan=lifespan)
+app = FastAPI(title="SOLV.ai — STT Inference Server", version="1.0.0", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,

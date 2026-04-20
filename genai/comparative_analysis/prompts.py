@@ -1,5 +1,5 @@
 """
-System and user prompts for TS-14:
+System and user prompts for SOLV.ai:
 AI-Powered Complaint Classification & Resolution Recommendation Engine.
 Domain: wellness products company (supplements, vitamins, omega-3, etc.)
 """

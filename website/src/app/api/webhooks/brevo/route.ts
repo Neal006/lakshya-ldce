@@ -60,6 +60,8 @@ export async function POST(request: NextRequest) {
         customer_name: senderName,
         product_name: defaultProduct.name,
         complaint_text: complaintText,
+        sentiment_score: nlpResult.sentiment_score,
+        nlp_latency_ms: nlpResult.latency_ms,
       })
     } catch {
       console.error('GenAI resolution failed for Brevo webhook')
@@ -116,10 +118,12 @@ export async function POST(request: NextRequest) {
     if (complaint?.id) {
       await admin.from('complaint_timeline').insert({
         complaint_id: complaint.id,
-        status_from: 'new',
-        status_to: 'new',
-        changed_by: 'System',
-        notes: 'Complaint created via Brevo email webhook from ' + senderEmail + (emailSent ? '. Acknowledgment email sent.' : ''),
+        action: 'Complaint created via email (Brevo webhook)',
+        performed_by: 'System',
+        metadata: {
+          sender: senderEmail,
+          acknowledgment_email_sent: emailSent,
+        },
       })
     }
 

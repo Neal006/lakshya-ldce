@@ -2,7 +2,6 @@
 
 import { useEffect, useState, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sidebar } from '@/components/dashboard/Sidebar';
 import { Card, Button, Input, Badge } from '@/components/ui';
 import { apiClient } from '@/lib/api-client';
 import { 
@@ -31,7 +30,8 @@ interface Product {
 export default function CallCenterPage() {
   const [source, setSource] = useState<Source>('walkin');
   const [customerName, setCustomerName] = useState('');
-  const [customerContact, setCustomerContact] = useState('');
+  const [customerEmail, setCustomerEmail] = useState('');
+  const [customerPhone, setCustomerPhone] = useState('');
   const [selectedProduct, setSelectedProduct] = useState('');
   const [complaintText, setComplaintText] = useState('');
   const [audioFile, setAudioFile] = useState<File | null>(null);
@@ -53,7 +53,7 @@ export default function CallCenterPage() {
       setAudioFile(file);
       setIsProcessingAudio(true);
       try {
-        const result = await (await import('@/lib/stt-client')).transcribeAudio(file);
+        const result = await apiClient.transcribeAudio(file);
         setComplaintText(result.text);
       } catch (err) {
         console.error('STT failed:', err);
@@ -71,17 +71,15 @@ export default function CallCenterPage() {
     setSubmitResult(null);
 
     try {
-      const payload: any = {
+      const payload = {
         source,
         product_id: selectedProduct,
         customer_name: customerName,
         text: complaintText,
-      };
-
-      if (source === 'email') {
-        payload.customer_email = customerContact;
-      } else {
-        payload.customer_phone = customerContact;
+        ...(source === 'email' || source === 'walkin'
+          ? { customer_email: customerEmail.trim() }
+          : {}),
+        ...(source === 'call' && customerPhone.trim() ? { customer_phone: customerPhone.trim() } : {}),
       }
 
       const result = await apiClient.createComplaint(payload);
@@ -91,7 +89,8 @@ export default function CallCenterPage() {
       setTimeout(() => {
         setIsSuccess(false);
         setCustomerName('');
-        setCustomerContact('');
+        setCustomerEmail('');
+        setCustomerPhone('');
         setSelectedProduct('');
         setComplaintText('');
         setAudioFile(null);
@@ -105,10 +104,8 @@ export default function CallCenterPage() {
   };
 
   return (
-    <div className="flex min-h-screen bg-[var(--color-background)]">
-      <Sidebar role="call_center" />
-      
-      <main className="flex-1 p-8">
+    <div className="min-h-[calc(100vh-5rem)]">
+      <div className="p-4 sm:p-8 max-w-4xl mx-auto">
         <motion.div 
           className="mb-8"
           initial={{ opacity: 0, y: -20 }}
@@ -142,6 +139,11 @@ export default function CallCenterPage() {
                 </h2>
                 <p className="text-gray-500 mb-6">
                   Complaint has been classified and is being processed.
+                  {(source === 'email' || source === 'walkin') && (
+                    <span className="block mt-2 text-gray-600">
+                      The personalised AI response has been emailed to the customer.
+                    </span>
+                  )}
                 </p>
                 <div className="grid grid-cols-3 gap-4 mt-6">
                   <div className="card-pressed p-4 text-center">
@@ -238,24 +240,46 @@ export default function CallCenterPage() {
                         />
                       </div>
                     </div>
-                    <div>
-                      <label className="block text-sm font-medium text-[var(--color-secondary)] mb-2">Contact (Email/Phone)</label>
-                      <div className="relative">
-                        {source === 'email' ? (
+                    {(source === 'email' || source === 'walkin') && (
+                      <div>
+                        <label className="block text-sm font-medium text-[var(--color-secondary)] mb-2">
+                          Customer email <span className="text-red-500">*</span>
+                        </label>
+                        <div className="relative">
                           <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
-                        ) : (
-                          <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
-                        )}
-                        <input
-                          type="text"
-                          value={customerContact}
-                          onChange={(e) => setCustomerContact(e.target.value)}
-                          placeholder={source === 'email' ? "customer@email.com" : "+1 234 567 8900"}
-                          className="input pl-12"
-                          required
-                        />
+                          <input
+                            type="email"
+                            autoComplete="email"
+                            value={customerEmail}
+                            onChange={(e) => setCustomerEmail(e.target.value)}
+                            placeholder="customer@email.com"
+                            className="input pl-12"
+                            required
+                          />
+                        </div>
+                        <p className="mt-1.5 text-xs text-gray-500">
+                          They receive the AI-written message saved on the complaint — the same as voice chat, not NLP labels.
+                        </p>
                       </div>
-                    </div>
+                    )}
+                    {source === 'call' && (
+                      <div>
+                        <label className="block text-sm font-medium text-[var(--color-secondary)] mb-2">
+                          Customer phone <span className="text-gray-400 font-normal">(optional)</span>
+                        </label>
+                        <div className="relative">
+                          <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+                          <input
+                            type="tel"
+                            autoComplete="tel"
+                            value={customerPhone}
+                            onChange={(e) => setCustomerPhone(e.target.value)}
+                            placeholder="+1 234 567 8900"
+                            className="input pl-12"
+                          />
+                        </div>
+                      </div>
+                    )}
                   </div>
 
                   <div className="mb-6">
@@ -370,7 +394,7 @@ export default function CallCenterPage() {
             )}
           </AnimatePresence>
         </div>
-      </main>
+      </div>
     </div>
   );
 }

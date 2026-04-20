@@ -1,4 +1,4 @@
-# Lakshya — AI-Powered Voice Complaint Management System
+# SOLV.ai — AI-Powered Voice Complaint Management System
 
 A lightweight, edge-deployable multi-agent voice complaint system that handles phone calls, classifies complaints, generates resolution steps, and creates tickets — all running locally on 4GB RAM with no internet dependency.
 
@@ -356,4 +356,4 @@ python tests/test_phase5_6.py # Edge hardening, LLM routing, FMCG
 
 ## License
 
-Internal project — Lakshya LDCE.
+Internal project — SOLV.ai (LDCE).

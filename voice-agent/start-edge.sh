@@ -6,7 +6,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
 
 echo "=========================================="
-echo "  Lakshya Voice - EDGE MODE (Offline)"
+echo "  SOLV.ai Voice - EDGE MODE (Offline)"
 echo "=========================================="
 echo ""
 
@@ -18,7 +18,7 @@ until curl -sf http://localhost:11434/api/tags > /dev/null 2>&1; do
     echo "  Waiting for Ollama..."
     sleep 5
 done
-docker exec lakshya-ollama ollama pull phi3.5:latest 2>/dev/null || echo "  Model pull may need manual setup"
+docker exec solv-ollama ollama pull phi3.5:latest 2>/dev/null || echo "  Model pull may need manual setup"
 
 echo ""
 echo "Starting all services in offline mode..."

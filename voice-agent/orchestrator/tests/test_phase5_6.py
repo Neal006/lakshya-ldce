@@ -227,7 +227,7 @@ async def test_resource_summary():
 
 async def main():
     print("=" * 60)
-    print("  Lakshya Voice Agent - Phase 5+6 Integration Tests")
+    print("  SOLV.ai Voice Agent - Phase 5+6 Integration Tests")
     print("  Edge Hardening + Full Integration Testing")
     print("=" * 60)
 

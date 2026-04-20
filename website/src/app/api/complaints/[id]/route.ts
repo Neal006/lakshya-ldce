@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createAdminClient } from '@/lib/supabase-client'
+import { auth } from '@/lib/auth'
+import { isSupabaseUnreachableError, supabaseUnavailableResponse } from '@/lib/supabase-http'
 
 export async function GET(
   request: NextRequest,
@@ -22,6 +24,7 @@ export async function GET(
     return NextResponse.json(complaint)
   } catch (error) {
     console.error('Error fetching complaint:', error)
+    if (isSupabaseUnreachableError(error)) return supabaseUnavailableResponse()
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }
@@ -31,6 +34,9 @@ export async function PUT(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const session = await auth()
+    const actor = session?.user?.email || session?.user?.name || 'Agent'
+
     const { id } = await params
     const body = await request.json()
     const { status, complaint_text, category, priority, immediate_action, assigned_team, escalation_required, customer_response } = body
@@ -57,6 +63,8 @@ export async function PUT(
     if (escalation_required !== undefined) updateData.escalation_required = escalation_required
     if (customer_response) updateData.customer_response = customer_response
     updateData.updated_at = new Date().toISOString()
+    // Note: set `resolved_at` only after running supabase/migrations/004_add_resolved_at_complaints.sql
+    // so PostgREST schema includes the column; otherwise PATCH fails with PGRST204.
 
 const { data: complaint, error } = await admin
       .from('complaints')
@@ -70,16 +78,40 @@ const { data: complaint, error } = await admin
     if (status && status !== existing.status) {
       await admin.from('complaint_timeline').insert({
         complaint_id: id,
-        status_from: existing.status,
-        status_to: status,
-        changed_by: 'System',
-        notes: `Status changed from ${existing.status} to ${status}`,
+        action: `Status changed from ${existing.status} to ${status}`,
+        performed_by: actor,
+        metadata: { from: existing.status, to: status },
+      })
+    }
+    if (complaint_text && complaint_text !== existing.complaint_text) {
+      await admin.from('complaint_timeline').insert({
+        complaint_id: id,
+        action: 'Complaint text updated',
+        performed_by: actor,
+        metadata: { source: 'text_edit' },
+      })
+    }
+    if (category && category !== existing.category) {
+      await admin.from('complaint_timeline').insert({
+        complaint_id: id,
+        action: `Category updated to ${category}`,
+        performed_by: actor,
+        metadata: { from: existing.category, to: category },
+      })
+    }
+    if (priority && priority !== existing.priority) {
+      await admin.from('complaint_timeline').insert({
+        complaint_id: id,
+        action: `Priority updated to ${priority}`,
+        performed_by: actor,
+        metadata: { from: existing.priority, to: priority },
       })
     }
 
     return NextResponse.json(complaint)
   } catch (error) {
     console.error('Error updating complaint:', error)
+    if (isSupabaseUnreachableError(error)) return supabaseUnavailableResponse()
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }
@@ -100,6 +132,7 @@ export async function DELETE(
     return NextResponse.json({ success: true })
   } catch (error) {
     console.error('Error deleting complaint:', error)
+    if (isSupabaseUnreachableError(error)) return supabaseUnavailableResponse()
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }
