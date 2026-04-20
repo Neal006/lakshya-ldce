@@ -1,12 +1,3 @@
-"""
-run_server.py — Launch the inference server.
-
-Usage:
-    python run_server.py                  # default: 0.0.0.0:8000
-    python run_server.py --port 5000      # custom port
-    python run_server.py --host 127.0.0.1 # localhost only
-"""
-
 import argparse
 import uvicorn
 

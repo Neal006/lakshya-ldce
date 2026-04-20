@@ -213,3 +213,4 @@ skills/
 stt/models/*
 
 text_classifier/models/*
+text_classifier/data/*
