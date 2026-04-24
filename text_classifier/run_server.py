@@ -3,18 +3,16 @@ import uvicorn
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Complaint Classifier Inference Server")
+    parser = argparse.ArgumentParser(description="Classifier Inference Server")
     parser.add_argument("--host", default="0.0.0.0", help="Bind host (default: 0.0.0.0)")
     parser.add_argument("--port", type=int, default=8002, help="Bind port (default: 8002)")
     parser.add_argument("--reload", action="store_true", help="Enable auto-reload (dev only)")
     args = parser.parse_args()
 
-    print(f"\n{'='*50}")
-    print(f"  Complaint Classifier — Inference Server")
+    print(f"  Classifier — Inference Server")
     print(f"  http://{args.host}:{args.port}")
     print(f"  Docs: http://{args.host}:{args.port}/docs")
-    print(f"{'='*50}\n")
-
+    
     uvicorn.run(
         "server:app",
         host=args.host,
